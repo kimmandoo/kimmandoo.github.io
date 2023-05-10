@@ -10,8 +10,6 @@ tags: [android, kotlin]
 
 ---
 
-마지막 수정: 2023-05-10
-
 > 출처:
 > 
 > https://medium.com/huawei-developers/kotlin-lateinit-vs-by-lazy-initialization-example-tutorial-c19d84216480https://medium.com/huawei-developers/kotlin-lateinit-vs-by-lazy-initialization-example-tutorial-c19d84216480
