@@ -1,5 +1,5 @@
 ---
-categories: [android]
+categories: [Android]
 tags: [android, kotlin]
 
 ---
