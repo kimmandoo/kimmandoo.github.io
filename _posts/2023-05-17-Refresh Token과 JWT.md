@@ -3,8 +3,6 @@ categories: [Web]
 tags: [json, jwt, web]
 ---
 
-# Refresh Token과 JWT
-
 [지난 게시물](https://kimmandoo.github.io/posts/JWT-%EC%95%8C%EC%95%84%EB%B3%B4%EA%B8%B0/)에서 JWT에 대해 전체적으로 알아봤다. Access Token 역할에 대해서만 알아봤는데, 이제 Refresh Token 측면에서 살펴보겠다. 서버 메모리에 따로 저장되지 않고 토큰 그 자체로만 검증해 사용자 인증을 하는 Access Token은 토큰이 만료되기 전에는 토큰을 획득한 누구나 권한을 가질 수 있다.
 
 JWT를 사용할 때 삭제가 안되기 때문에 토큰에 유효시간을 부여하는 식으로 수명관리를 하는데, 이때 Refresh Token을 사용하면 토큰의 유효기간을 짧게 가져가면서 로그인 횟수를 줄이는 방식이기 때문에 수명관리를 효율적으로 할 수 있다.
