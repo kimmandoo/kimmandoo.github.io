@@ -20,7 +20,7 @@ fun App() {
         Column(
             modifier = Modifier
                 .fillMaxWidth()
-                .padding(16.dp),
+                .padding(horizontal = 200.dp),
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
             // 개인 정보 섹션
@@ -28,20 +28,22 @@ fun App() {
 
             Spacer(modifier = Modifier.height(16.dp))
 
-            // 경력 섹션
-            SectionTitle("Experiences")
-            ExperienceSection()
-
-            Spacer(modifier = Modifier.height(16.dp))
-
             // 학력 섹션
-            SectionTitle("Educate")
+            SectionTitle("Education & Certificate")
             EducationSection()
 
             Spacer(modifier = Modifier.height(16.dp))
+            // 경력 섹션
+            SectionTitle("Project")
+            ProjectSection()
+            Spacer(modifier = Modifier.height(16.dp))
+
+            SectionTitle("Honors & Awards")
+            HonorSection()
+            Spacer(modifier = Modifier.height(16.dp))
 
             // 기술 스택 섹션
-            SectionTitle("Skills")
+            SectionTitle("Skills And Other")
             SkillsSection()
         }
     }
@@ -58,15 +60,31 @@ fun PersonalInfoSection() {
               modifier = Modifier.size(100.dp),
               contentDescription = "Profile Picture"
         )
-        Text(text = "홍길동", style = MaterialTheme.typography.h5)
-        Text(text = "소프트웨어 엔지니어", style = MaterialTheme.typography.body1)
-        Text(text = "email@example.com", style = MaterialTheme.typography.body2)
-        Text(text = "+82 10-1234-5678", style = MaterialTheme.typography.body2)
+        Text(text = "Mingyu Kim", style = MaterialTheme.typography.h2)
+        Text(text = "Android Developer", style = MaterialTheme.typography.body1)
+        Text(text = "mingyu5675@gmail.com", style = MaterialTheme.typography.body2)
     }
 }
 
 @Composable
-fun ExperienceSection() {
+fun ProjectSection() {
+    Column(modifier = Modifier.fillMaxWidth()) {
+        // 경력 1
+        Text(text = "회사 A", style = MaterialTheme.typography.h6)
+        Text(text = "2020 - 현재", style = MaterialTheme.typography.body2)
+        Text(text = "Android 앱 개발 및 유지보수 담당", style = MaterialTheme.typography.body2)
+
+        Spacer(modifier = Modifier.height(8.dp))
+
+        // 경력 2
+        Text(text = "회사 B", style = MaterialTheme.typography.h6)
+        Text(text = "2018 - 2020", style = MaterialTheme.typography.body2)
+        Text(text = "웹 애플리케이션 개발", style = MaterialTheme.typography.body2)
+    }
+}
+
+@Composable
+fun HonorSection() {
     Column(modifier = Modifier.fillMaxWidth()) {
         // 경력 1
         Text(text = "회사 A", style = MaterialTheme.typography.h6)
@@ -86,9 +104,9 @@ fun ExperienceSection() {
 fun EducationSection() {
     Column(modifier = Modifier.fillMaxWidth()) {
         // 학력 1
-        Text(text = "대학교 A", style = MaterialTheme.typography.h6)
+        Text(text = "Suwon Univ.", style = MaterialTheme.typography.h6)
         Text(text = "컴퓨터 공학과", style = MaterialTheme.typography.body2)
-        Text(text = "졸업: 2018", style = MaterialTheme.typography.body2)
+        Text(text = "Graduation: 2024", style = MaterialTheme.typography.body2)
     }
 }
 

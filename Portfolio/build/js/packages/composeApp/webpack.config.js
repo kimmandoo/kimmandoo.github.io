@@ -42,8 +42,8 @@ config.ignoreWarnings = [
 config.devServer = {
   "open": true,
   "static": [
-    "/Users/mingyukim/Documents/Android/kimmandoo.github.io",
-    "/Users/mingyukim/Documents/Android/kimmandoo.github.io/composeApp"
+    "/Users/mingyukim/Documents/Android/kimmandoo.github.io/Portfolio",
+    "/Users/mingyukim/Documents/Android/kimmandoo.github.io/Portfolio/composeApp"
   ]
 };
 
