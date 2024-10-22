@@ -27,22 +27,22 @@ fun App() {
         ) {
             // 개인 정보 섹션
             PersonalInfoSection()
-            Spacer(modifier = Modifier.height(16.dp))
-            RowDivider()
+            Spacer(modifier = Modifier.height(32.dp))
             // 학력 섹션
             SectionTitle("Education & Certificate")
-            EducationSection()
-            Spacer(modifier = Modifier.height(16.dp))
             RowDivider()
+            EducationSection()
+            Spacer(modifier = Modifier.height(32.dp))
             // 경력 섹션
             SectionTitle("Project")
-            ProjectSection()
-            Spacer(modifier = Modifier.height(16.dp))
             RowDivider()
+            ProjectSection()
+            Spacer(modifier = Modifier.height(32.dp))
             // 수상
             SectionTitle("Honors & Awards")
+            RowDivider()
             HonorSection()
-            Spacer(modifier = Modifier.height(16.dp))
+            Spacer(modifier = Modifier.height(32.dp))
             RowDivider()
             // 기술 스택 섹션
             SectionTitle("Skills And Other")
@@ -57,7 +57,7 @@ fun RowDivider(){
         color = Color.Gray, // 원하는 색상으로 변경
         thickness = 1.dp,   // 두께를 1.dp로 설정하여 얇은 Divider 생성
         modifier = Modifier
-            .fillMaxWidth() // 가로로 채움
+            .fillMaxWidth().padding(bottom = 8.dp) // 가로로 채움
     )
 }
 
@@ -133,7 +133,7 @@ fun SkillsSection() {
 fun SectionTitle(title: String) {
     Text(
         text = title,
-        style = MaterialTheme.typography.h4,
+        style = MaterialTheme.typography.h5,
         modifier = Modifier
             .fillMaxWidth()
             .padding(bottom = 8.dp)
