@@ -149,6 +149,32 @@
     },
     "dc1104bb9668c8621d1a864ff2062228": {
       "src": "/Users/mingyukim/.gradle/caches/modules-2/files-2.1/io.ktor/ktor-client-logging-wasm-js/3.0.0/815cfd9547ab951863416b565f9a709cf11200a0/ktor-client-logging-wasm-js-3.0.0.klib"
+    },
+    "fda847b689b46d8dbf4e7423598a5205": {
+      "src": "C:\\Users\\mingy\\.gradle\\caches\\modules-2\\files-2.1\\io.github.qdsfdhvh\\image-loader-wasm-js\\1.9.0\\669ee67df5d23ec90cc7e2f07e3ece485f39d00c\\image-loader-singleton-wasm-js-1.9.0.klib",
+      "target": "image-loader-wasm-js\\1.9.0"
+    },
+    "e65129ac929563b2451489987222cc2a": {
+      "src": "C:\\Users\\mingy\\.gradle\\caches\\modules-2\\files-2.1\\io.github.qdsfdhvh\\image-loader-extension-ktor-network-wasm-js\\1.9.0\\b7beccc1ef8b7426ebbdff5e2ec0686125559422\\ktor-network-wasm-js-1.9.0.klib"
+    },
+    "6e5c0724db00384fab9f3076a3d56650": {
+      "src": "C:\\Users\\mingy\\.gradle\\caches\\modules-2\\files-2.1\\io.github.qdsfdhvh\\image-loader-core-wasm-js\\1.9.0\\8a0fe1f7f5a71f8d0515c0fb4eccddcdc0048a39\\image-loader-wasm-js-1.9.0.klib",
+      "target": "image-loader-core-wasm-js\\1.9.0"
+    },
+    "29b238aa98d8680a710b8ec2fed106a5": {
+      "src": "C:\\Users\\mingy\\.gradle\\caches\\modules-2\\files-2.1\\com.squareup.okio\\okio-wasm-js\\3.9.1\\a0da976116303b5b2252926133f67335a71beebd\\okio-wasm-js-3.9.1.klib"
+    },
+    "200799a040d197d84b2b3efc7f711c23": {
+      "src": "C:\\Users\\mingy\\.gradle\\caches\\modules-2\\files-2.1\\com.eygraber\\uri-kmp-wasm-js\\0.0.18\\69724e13b0b43f4747095b5ff7a338399ba643d5\\uri-wasm-js-0.0.18.klib"
+    },
+    "22a61bf7664ae8b41349685e1473e9fd": {
+      "src": "C:\\Users\\mingy\\.gradle\\caches\\modules-2\\files-2.1\\dev.drewhamilton.poko\\poko-annotations-wasm-js\\0.16.0\\4eca3d8853db38b9c22b0bd6b25265dd2b0db570\\poko-annotations-wasm-js-0.16.0.klib"
+    },
+    "cd35c5a4914f2514642bb649fe21cd95": {
+      "src": "C:\\Users\\mingy\\.gradle\\caches\\modules-2\\files-2.1\\io.ktor\\ktor-client-js-wasm-js\\3.0.0-rc-1\\39b70ce1b05bcef318de7d4d4cffe327fe0fc437\\ktor-client-js-wasm-js-3.0.0-rc-1.klib"
+    },
+    "af9674b448036f8247840b4c2709ef48": {
+      "src": "C:\\Users\\mingy\\.gradle\\caches\\modules-2\\files-2.1\\io.github.qdsfdhvh\\image-loader-extension-svg-wasm-js\\1.9.0\\88297a69b5d04663367f4b8b9893729522864a8c\\svg-wasm-js-1.9.0.klib"
     }
   }
 }

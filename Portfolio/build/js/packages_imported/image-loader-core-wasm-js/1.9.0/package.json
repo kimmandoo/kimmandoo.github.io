@@ -1,0 +1,10 @@
+{
+  "name": "image-loader-core-wasm-js",
+  "version": "1.9.0",
+  "customFields": {},
+  "devDependencies": {},
+  "dependencies": {},
+  "peerDependencies": {},
+  "optionalDependencies": {},
+  "bundledDependencies": []
+}

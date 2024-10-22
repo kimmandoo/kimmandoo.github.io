@@ -44,6 +44,7 @@ kotlin {
             implementation(libs.androidx.activity.compose)
         }
         commonMain.dependencies {
+            api("io.github.qdsfdhvh:image-loader:1.9.0")
             implementation(libs.ktor.client.logging)
             implementation(compose.runtime)
             implementation(compose.foundation)
