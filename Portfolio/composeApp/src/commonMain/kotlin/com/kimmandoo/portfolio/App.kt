@@ -2,11 +2,13 @@ package com.kimmandoo.portfolio
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.*
+import androidx.compose.material.Divider
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 import org.jetbrains.compose.resources.painterResource
 import org.jetbrains.compose.ui.tooling.preview.Preview
@@ -25,28 +27,38 @@ fun App() {
         ) {
             // 개인 정보 섹션
             PersonalInfoSection()
-
             Spacer(modifier = Modifier.height(16.dp))
-
+            RowDivider()
             // 학력 섹션
             SectionTitle("Education & Certificate")
             EducationSection()
-
             Spacer(modifier = Modifier.height(16.dp))
+            RowDivider()
             // 경력 섹션
             SectionTitle("Project")
             ProjectSection()
             Spacer(modifier = Modifier.height(16.dp))
-
+            RowDivider()
+            // 수상
             SectionTitle("Honors & Awards")
             HonorSection()
             Spacer(modifier = Modifier.height(16.dp))
-
+            RowDivider()
             // 기술 스택 섹션
             SectionTitle("Skills And Other")
             SkillsSection()
         }
     }
+}
+
+@Composable
+fun RowDivider(){
+    Divider(
+        color = Color.Gray, // 원하는 색상으로 변경
+        thickness = 1.dp,   // 두께를 1.dp로 설정하여 얇은 Divider 생성
+        modifier = Modifier
+            .fillMaxWidth() // 가로로 채움
+    )
 }
 
 @Composable
@@ -60,7 +72,7 @@ fun PersonalInfoSection() {
               modifier = Modifier.size(100.dp),
               contentDescription = "Profile Picture"
         )
-        Text(text = "Mingyu Kim", style = MaterialTheme.typography.h2)
+        Text(text = "Mingyu Kim", style = MaterialTheme.typography.h3)
         Text(text = "Android Developer", style = MaterialTheme.typography.body1)
         Text(text = "mingyu5675@gmail.com", style = MaterialTheme.typography.body2)
     }
@@ -113,7 +125,7 @@ fun EducationSection() {
 @Composable
 fun SkillsSection() {
     Column(modifier = Modifier.fillMaxWidth()) {
-        Text(text = "Kotlin, Java, Python, Git, Docker, CI/CD", style = MaterialTheme.typography.body2)
+        Text(text = "Kotlin, Android, Java, Python, Git, Docker, CI/CD", style = MaterialTheme.typography.body2)
     }
 }
 
@@ -121,7 +133,7 @@ fun SkillsSection() {
 fun SectionTitle(title: String) {
     Text(
         text = title,
-        style = MaterialTheme.typography.h6,
+        style = MaterialTheme.typography.h4,
         modifier = Modifier
             .fillMaxWidth()
             .padding(bottom = 8.dp)
