@@ -2,6 +2,8 @@ package com.kimmandoo.portfolio
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.rememberScrollState
+import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.Divider
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Text
@@ -22,7 +24,8 @@ fun App() {
         Column(
             modifier = Modifier
                 .fillMaxWidth()
-                .padding(horizontal = 200.dp),
+                .padding(horizontal = 200.dp)
+                .verticalScroll(rememberScrollState()),
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
             // 개인 정보 섹션
@@ -69,7 +72,7 @@ fun PersonalInfoSection() {
     ) {
         // 이름 및 사진
         Image(painterResource(Res.drawable.compose_multiplatform),
-              modifier = Modifier.size(100.dp),
+              modifier = Modifier.size(120.dp),
               contentDescription = "Profile Picture"
         )
         Text(text = "Mingyu Kim", style = MaterialTheme.typography.h3)
