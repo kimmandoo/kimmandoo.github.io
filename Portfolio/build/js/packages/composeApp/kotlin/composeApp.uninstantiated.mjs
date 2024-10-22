@@ -131,6 +131,7 @@ export async function instantiate(imports={}, runInitializer=true) {
         'org.jetbrains.skiko.w3c.performance_$external_prop_getter' : (_this) => _this.performance,
         'org.jetbrains.skiko.w3c.requestAnimationFrame_$external_fun' : (_this, p0) => _this.requestAnimationFrame(p0),
         'org.jetbrains.skiko.w3c.__convertKotlinClosureToJsClosure_((Double)->Unit)' : (f) => getCachedJsObject(f, (p0) => wasmExports['__callFunction_((Double)->Unit)'](f, p0)),
+        'org.jetbrains.skiko.w3c.open_$external_fun' : (_this, p0, p1) => _this.open(p0, p1),
         'org.jetbrains.skiko.w3c.window_$external_object_getInstance' : () => window,
         'org.jetbrains.skiko.w3c.now_$external_fun' : (_this, ) => _this.now(),
         'org.jetbrains.skiko.w3c.width_$external_prop_getter' : (_this) => _this.width,
