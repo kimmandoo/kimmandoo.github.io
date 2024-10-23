@@ -200,21 +200,23 @@ fun SectionText(
             modifier = Modifier.padding(bottom = 2.dp)
         )
         Text(
-            text = "- $description",
-            style = MaterialTheme.typography.body2,
+            text = "• $description",
+            style = MaterialTheme.typography.body2.copy(fontWeight = FontWeight.Bold),
             modifier = Modifier.padding(bottom = 4.dp)
         )
-        Row(
-            modifier = Modifier.fillMaxWidth().padding(bottom = 4.dp),
-            horizontalArrangement = Arrangement.SpaceBetween
-        ) {
-            Text(text = "Role: $role", style = MaterialTheme.typography.body2)
-            Text(text = date, style = MaterialTheme.typography.body2)
+        Column(modifier = Modifier.fillMaxWidth().padding(horizontal = 8.dp)) {
+            Row(
+                modifier = Modifier.fillMaxWidth().padding(bottom = 4.dp),
+                horizontalArrangement = Arrangement.SpaceBetween
+            ) {
+                Text(text = "Role: $role", style = MaterialTheme.typography.body2)
+                Text(text = date, style = MaterialTheme.typography.body2)
+            }
+            Text(text = "Skills: $skills", style = MaterialTheme.typography.body2, modifier = Modifier.padding(bottom = 4.dp))
+            Text(text = "Achievements: $achievement", style = MaterialTheme.typography.body2, modifier = Modifier.padding(bottom = 4.dp))
+            Spacer(modifier = Modifier.height(12.dp))
+            DottedRowDivider(modifier = modifier.padding(horizontal = 20.dp).padding(bottom = 8.dp))
         }
-        Text(text = "Skills: $skills", style = MaterialTheme.typography.body2, modifier = Modifier.padding(bottom = 4.dp))
-        Text(text = "Achievements: $achievement", style = MaterialTheme.typography.body2, modifier = Modifier.padding(bottom = 4.dp))
-        Spacer(modifier = Modifier.height(12.dp))
-        DottedRowDivider(modifier = modifier.padding(horizontal = 20.dp).padding(bottom = 8.dp))
     }
 }
 

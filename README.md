@@ -4,5 +4,6 @@
 
 ```
 // build는 아래 명령어로
+./gradlew clean wasmJsBrowserProductionRun
 ./gradlew wasmJsBrowserDistribution
 ```
