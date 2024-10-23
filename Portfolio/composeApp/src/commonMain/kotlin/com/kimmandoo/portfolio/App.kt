@@ -255,6 +255,14 @@ fun ProjectSection() {
             skills = "Android Development, REST API, Git Branch Strategy, Multi-module, Hilt",
             achievement = "First experience using multi-module and Hilt for dependency injection",
             role = "Android Developer",
+        )
+        SectionText(
+            title = "수슐랭 SuChelin",
+            description = "Developed an app showcasing nearby restaurants and cafes through a list and map view",
+            date = "Jan. 2022 – Oct. 2022, Oct. 2023 - Nov. 2023",
+            skills = "Android Development, Firebase Tools, ComposeView, Jsoup",
+            achievement = "Achieved 200 users within the campus",
+            role = "Android Developer, PM, Design",
             modifier = Modifier.size(0.dp)
         )
     }
