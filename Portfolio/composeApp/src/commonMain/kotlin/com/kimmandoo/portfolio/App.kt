@@ -126,7 +126,7 @@ fun PersonalInfoSection() {
         Text(text = "Mingyu Kim, 김민규", style = MaterialTheme.typography.h5)
         Text(text = "Android Developer", style = MaterialTheme.typography.h6,  modifier = Modifier.padding(bottom = 8.dp))
         Row(modifier = Modifier.padding(bottom = 8.dp)){
-            Text(text = "mingyu5675@gmail.com", style = MaterialTheme.typography.subtitle2, modifier = Modifier.padding(horizontal = 8.dp))
+            HyperlinkText("mingyu5675@gmail.com","mailto:mingyu5675@gmail.com", modifier = Modifier.padding(horizontal = 8.dp))
             HyperlinkText(input = "@github", "https://github.com/kimmandoo", modifier = Modifier.padding(horizontal = 8.dp))
             HyperlinkText(input = "@linkedin", "https://www.linkedin.com/in/mingyu-kim-400891193/", modifier = Modifier.padding(horizontal = 8.dp))
         }
@@ -147,7 +147,7 @@ fun HyperlinkText(input: String , uri: String, modifier: Modifier = Modifier) {
     ClickableText(
         modifier = modifier,
         text = AnnotatedString(input),
-        style = MaterialTheme.typography.subtitle2,
+        style = MaterialTheme.typography.subtitle2.copy(color = Color.Gray),
         onClick = { uriHandler.openUri(uri) } // 여기에 링크 넣기
     )
 }
@@ -194,24 +194,25 @@ fun SectionText(
     modifier: Modifier = Modifier
 ) {
     Column {
-        Text(
-            text = title,
-            style = MaterialTheme.typography.subtitle1.copy(fontWeight = FontWeight.Bold),
-            modifier = Modifier.padding(bottom = 2.dp)
-        )
+        Row(
+            modifier = Modifier.fillMaxWidth().padding(bottom = 4.dp),
+            horizontalArrangement = Arrangement.SpaceBetween
+        ) {
+            Text(
+                text = title,
+                style = MaterialTheme.typography.subtitle1.copy(fontWeight = FontWeight.Bold),
+                modifier = Modifier.padding(bottom = 2.dp)
+            )
+            Text(text = date, style = MaterialTheme.typography.body2)
+        }
+
         Text(
             text = "• $description",
             style = MaterialTheme.typography.body2.copy(fontWeight = FontWeight.Bold),
             modifier = Modifier.padding(bottom = 4.dp)
         )
         Column(modifier = Modifier.fillMaxWidth().padding(horizontal = 8.dp)) {
-            Row(
-                modifier = Modifier.fillMaxWidth().padding(bottom = 4.dp),
-                horizontalArrangement = Arrangement.SpaceBetween
-            ) {
-                Text(text = "Role: $role", style = MaterialTheme.typography.body2)
-                Text(text = date, style = MaterialTheme.typography.body2)
-            }
+            Text(text = "Role: $role", style = MaterialTheme.typography.body2, modifier = Modifier.fillMaxWidth().padding(bottom = 4.dp))
             Text(text = "Skills: $skills", style = MaterialTheme.typography.body2, modifier = Modifier.padding(bottom = 4.dp))
             Text(text = "Achievements: $achievement", style = MaterialTheme.typography.body2, modifier = Modifier.padding(bottom = 4.dp))
             Spacer(modifier = Modifier.height(12.dp))
@@ -224,23 +225,23 @@ fun SectionText(
 fun ProjectSection() {
     Column(modifier = Modifier.fillMaxWidth().padding(horizontal = 20.dp)) {
         SectionText(
-            title = "DRTAA",
+            title = "다타 DRTAA",
             description = "Smart Tour Service Application Using Autonomous Vehicles",
             date = "2 Sep. 2024 – 11 Oct. 2024",
             skills = "Android Development, Wakeword detection ML model (Tensorflow 1D CNN), CI/CD (GitLab Runner), Unit Testing",
-            achievement = "Awarded 2nd place in Samsung SW Academy project",
+            achievement = "Awarded 2nd prize in Samsung SW Academy project",
             role = "Android Development Lead, AI Model Building, Presentation"
         )
         SectionText(
-            title = "Colorpl",
+            title = "컬러플 Colorpl",
             description = "Show Reservation, Management, Community Integration Platform Application",
             date = "8 Jul. 2024 – 16 Aug. 2024",
             skills = "Android Development, Image2Text with Vision API, OCR with MLKit",
-            achievement = "Reduced OpenAI token cost by 30.69%, Awarded 2nd place in Samsung SW Academy project",
+            achievement = "Reduced OpenAI token cost by 30.69%, Awarded 2nd prize in Samsung SW Academy project",
             role = "Android Developer"
         )
         SectionText(
-            title = "Ping",
+            title = "핑 Ping",
             description = "Gathering Management App with Location and Map Integration",
             date = "11 May. 2024 – 24 May. 2024",
             skills = "Android Development, Google Recommended App Architecture, Firebase Tools, Cloud Function, Unit Testing",
@@ -248,7 +249,7 @@ fun ProjectSection() {
             role = "Android Development Lead, UI/UX Design"
         )
         SectionText(
-            title = "ShyPolarBear",
+            title = "부끄북극 ShyPolarBear",
             description = "Quiz App Focused on Global Warming Awareness",
             date = "Jul. 2023 – Oct. 2023",
             skills = "Android Development, REST API, Git Branch Strategy, Multi-module, Hilt",
