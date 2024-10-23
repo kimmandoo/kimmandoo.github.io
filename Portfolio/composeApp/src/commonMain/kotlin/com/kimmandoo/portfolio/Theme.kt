@@ -39,7 +39,7 @@ fun PortfolioTheme(content: @Composable () -> Unit) {
             h5 = TextStyle(fontFamily = fontIBMPlex, fontWeight = FontWeight.Bold, fontSize = 24.sp ),
             subtitle1 = TextStyle(fontFamily = fontIBMPlex, fontWeight = FontWeight.Bold, fontSize = 18.sp),
             subtitle2 = TextStyle(fontFamily = fontIBMPlex, fontWeight = FontWeight.Bold, fontSize = 16.sp),
-            body2 = TextStyle(fontSize = 16.sp)
+            body2 = TextStyle(fontFamily = fontIBMPlex, fontSize = 16.sp)
         ),
         shapes = Shapes(
             medium = RoundedCornerShape(8.dp)

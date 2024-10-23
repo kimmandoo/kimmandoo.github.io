@@ -13,7 +13,7 @@ let config = {
 
 // entry
 config.entry = {
-    main: [require('path').resolve(__dirname, "kotlin\\composeApp.mjs")]
+    main: [require('path').resolve(__dirname, "kotlin/composeApp.mjs")]
 };
 config.output = {
     filename: (chunkData) => {
@@ -25,7 +25,7 @@ config.output = {
     libraryTarget: "umd",
     globalObject: "globalThis"
 };
-config.output.path = require('path').resolve(__dirname, "..\\..\\..\\..\\composeApp\\build\\kotlin-webpack\\wasmJs\\productionExecutable")
+config.output.path = require('path').resolve(__dirname, "../../../../composeApp/build/kotlin-webpack/wasmJs/productionExecutable")
 // source maps
 config.module.rules.push({
         test: /\.m?js$/,
@@ -42,8 +42,8 @@ config.ignoreWarnings = [
 config.devServer = {
   "open": true,
   "static": [
-    "C:\\Users\\SSAFY\\Documents\\kimmandoo.github.io\\Portfolio",
-    "C:\\Users\\SSAFY\\Documents\\kimmandoo.github.io\\Portfolio\\composeApp"
+    "/Users/mingyukim/Documents/Android/kimmandoo.github.io/Portfolio",
+    "/Users/mingyukim/Documents/Android/kimmandoo.github.io/Portfolio/composeApp"
   ]
 };
 

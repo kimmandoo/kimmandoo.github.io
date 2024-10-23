@@ -3,6 +3,7 @@ package com.kimmandoo.portfolio
 import androidx.compose.foundation.*
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.CircleShape
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.text.ClickableText
 import androidx.compose.material.Divider
 import androidx.compose.material.MaterialTheme
@@ -12,6 +13,9 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.draw.shadow
+import androidx.compose.ui.geometry.Rect
+import androidx.compose.ui.geometry.RoundRect
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalUriHandler
 import androidx.compose.ui.text.AnnotatedString
@@ -20,6 +24,7 @@ import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 import com.seiko.imageloader.rememberImagePainter
 import org.jetbrains.compose.resources.painterResource
 import org.jetbrains.compose.ui.tooling.preview.Preview
@@ -40,7 +45,6 @@ fun App() {
             ) {
                 // 개인 정보 섹션
                 PersonalInfoSection()
-                Spacer(modifier = Modifier.height(32.dp))
                 // 학력 섹션
                 SectionTitle("Education & Certificate")
                 RowDivider(Modifier)
@@ -113,31 +117,61 @@ fun DottedRowDivider(modifier: Modifier, color: Color = Color.Gray) {
 
 @Composable
 fun PersonalInfoSection() {
-    Column(
-        modifier = Modifier.fillMaxWidth(),
-        horizontalAlignment = Alignment.CenterHorizontally
+    Row(
+        modifier = Modifier
+            .fillMaxWidth()
+            .padding(horizontal = 20.dp).padding(bottom = 8.dp),
+        horizontalArrangement = Arrangement.SpaceBetween
     ) {
-        val painter = rememberImagePainter("https://avatars.githubusercontent.com/u/46841652?v=4")
-        Image(
-            painter = painter,
-            contentDescription = "image",
-            Modifier.clip(CircleShape).size(140.dp)
-        )
-        Text(text = "Mingyu Kim, 김민규", style = MaterialTheme.typography.h5)
-        Text(text = "Android Developer", style = MaterialTheme.typography.h6,  modifier = Modifier.padding(bottom = 8.dp))
-        Row(modifier = Modifier.padding(bottom = 8.dp)){
-            HyperlinkText("mingyu5675@gmail.com","mailto:mingyu5675@gmail.com", modifier = Modifier.padding(horizontal = 8.dp))
-            HyperlinkText(input = "@github", "https://github.com/kimmandoo", modifier = Modifier.padding(horizontal = 8.dp))
-            HyperlinkText(input = "@linkedin", "https://www.linkedin.com/in/mingyu-kim-400891193/", modifier = Modifier.padding(horizontal = 8.dp))
+        // Left section (Profile image and basic info)
+        Column(
+            modifier = Modifier.align(Alignment.CenterVertically),
+            horizontalAlignment = Alignment.CenterHorizontally
+        ) {
+            val painter = rememberImagePainter("https://avatars.githubusercontent.com/u/46841652?v=4")
+            Image(
+                painter = painter,
+                contentDescription = "image",
+                Modifier
+                    .clip(CircleShape)
+                    .size(140.dp)
+            )
+            Text(
+                text = "Mingyu Kim, 김민규",
+                style = MaterialTheme.typography.h5
+            )
+            Text(
+                text = "Android Developer",
+                style = MaterialTheme.typography.h6,
+                modifier = Modifier.padding(bottom = 8.dp)
+            )
+            Row() {
+                HyperlinkText("mingyu5675@gmail.com", "mailto:mingyu5675@gmail.com", modifier = Modifier.padding(horizontal = 8.dp))
+                HyperlinkText(input = "@github", "https://github.com/kimmandoo", modifier = Modifier.padding(horizontal = 8.dp))
+                HyperlinkText(input = "@linkedin", "https://www.linkedin.com/in/mingyu-kim-400891193/", modifier = Modifier.padding(horizontal = 8.dp))
+            }
         }
-        Text(text="- I am an Android developer with a passion for continuous growth and development. \n" +
-                  "- I focus on creating interactive services for users and enjoy exploring new technologies. \n" +
-                  "- I actively collaborate with my team to solve challenges and prioritize tasks efficiently. \n" +
-                  "- I document my experiences with new technologies to share insights, and I regularly attend conferences to stay up to date with the latest trends. \n" +
-                  "- Recently, I’ve been focusing on learning Jetpack Compose, CI/CD and writing test code.",
-             style = MaterialTheme.typography.body2,
-             modifier = Modifier.padding(horizontal = 20.dp)
-        )
+
+        Column(
+            modifier = Modifier
+                .fillMaxSize()
+                .padding(12.dp)
+                .shadow(4.dp, RoundedCornerShape(16.dp))
+                .clip(RoundedCornerShape(16.dp))
+                .background(color = Color(0xFFfef7e6))
+                .padding(20.dp)
+                .align(Alignment.CenterVertically)
+                .weight(1f)
+        ) {
+            Text(
+                text =  "I am an Android developer with a passion for continuous growth and development. \n" +
+                        "I focus on creating interactive services for users and enjoy exploring new technologies. \n" +
+                        "I actively collaborate with my team to solve challenges and prioritize tasks efficiently. \n" +
+                        "I document my experiences with new technologies to share insights, and I regularly attend conferences to stay up to date with the latest trends. \n" +
+                        "Recently, I’ve been focusing on learning Jetpack Compose, CI/CD and writing test code.",
+                style = MaterialTheme.typography.body2.copy(fontSize = 15.sp),
+            )
+        }
     }
 }
 
@@ -157,8 +191,8 @@ fun EducationSection() {
     Column(modifier = Modifier.fillMaxWidth().padding(horizontal = 20.dp)) {
         Text(text = "Suwon University, Republic of Korea", style = MaterialTheme.typography.subtitle2.copy(fontWeight = FontWeight.Bold), modifier = Modifier.padding(bottom = 4.dp))
         Text(text = "Bachelor’s in Information Security (2018.02 ~ 2024.02)", style = MaterialTheme.typography.body2, modifier = Modifier.padding(bottom = 4.dp))
-        Text(text = "- GPA: 4.06 / 4.5", style = MaterialTheme.typography.body2)
-        Text(text = "- Major GPA: 3.98 / 4.5", style = MaterialTheme.typography.body2, modifier = Modifier.padding(bottom = 4.dp))
+        Text(text = "• GPA: 4.06 / 4.5", style = MaterialTheme.typography.body2)
+        Text(text = "• Major GPA: 3.98 / 4.5", style = MaterialTheme.typography.body2, modifier = Modifier.padding(bottom = 4.dp))
         Text(
             text = "Industrial Engineer Information Security - certificated by Korea Communications Agency, KCA",
             style = MaterialTheme.typography.subtitle2,
@@ -286,8 +320,8 @@ fun Prize(title: String, detail: String, date: String){
 @Composable
 fun HonorSection() {
     Column(modifier = Modifier.fillMaxWidth()) {
-        Prize("Samsung Software Academy For Youth(SSAFY) - Colorpl","• 2nd Prize in Common Project - Hosted by Samsung Electronics","16 Aug. 2024")
-        Prize("Samsung Software Academy For Youth(SSAFY) - DRTAA","• 2nd Prize in Specify Project - Hosted by Samsung Electronics","11 Oct. 2024")
+        Prize("Samsung Software Academy For Youth - Colorpl","• 2nd Prize in \"Common Project\" - Hosted by Samsung Electronics","16 Aug. 2024")
+        Prize("Samsung Software Academy For Youth - DRTAA","• 2nd Prize in \"Specialized Project\" - Hosted by Samsung Electronics","11 Oct. 2024")
     }
 }
 
