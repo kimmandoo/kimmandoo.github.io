@@ -42,8 +42,8 @@ config.ignoreWarnings = [
 config.devServer = {
   "open": true,
   "static": [
-    "C:\\pjt\\kimmandoo.github.io\\Portfolio",
-    "C:\\pjt\\kimmandoo.github.io\\Portfolio\\composeApp"
+    "C:\\Users\\SSAFY\\Documents\\kimmandoo.github.io\\Portfolio",
+    "C:\\Users\\SSAFY\\Documents\\kimmandoo.github.io\\Portfolio\\composeApp"
   ]
 };
 

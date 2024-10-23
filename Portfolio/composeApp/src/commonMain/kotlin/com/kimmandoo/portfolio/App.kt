@@ -123,7 +123,7 @@ fun PersonalInfoSection() {
             contentDescription = "image",
             Modifier.clip(CircleShape).size(140.dp)
         )
-        Text(text = "Mingyu Kim", style = MaterialTheme.typography.h5.copy(fontWeight = FontWeight.Bold, fontFamily = FontFamily.Monospace ))
+        Text(text = "Mingyu Kim, 김민규", style = MaterialTheme.typography.h5)
         Text(text = "Android Developer", style = MaterialTheme.typography.h6,  modifier = Modifier.padding(bottom = 8.dp))
         Row(modifier = Modifier.padding(bottom = 8.dp)){
             Text(text = "mingyu5675@gmail.com", style = MaterialTheme.typography.subtitle2, modifier = Modifier.padding(horizontal = 8.dp))

@@ -90,7 +90,17 @@ export async function instantiate(imports={}, runInitializer=true) {
         'kotlin.wasm.internal.newJsArray' : () => [],
         'kotlin.wasm.internal.jsArrayPush' : (array, element) => { array.push(element); },
         'kotlin.wasm.internal.getCachedJsObject_$external_fun' : (p0, p1) => getCachedJsObject(p0, p1),
+        'kotlin.js.jsCatch' : (f) => { 
+            let result = null;
+            try { 
+                f();
+            } catch (e) {
+               result = e;
+            }
+            return result;
+             },
         'kotlin.js.__convertKotlinClosureToJsClosure_(()->Unit)' : (f) => getCachedJsObject(f, () => wasmExports['__callFunction_(()->Unit)'](f, )),
+        'kotlin.js.jsThrow' : (e) => { throw e; },
         'kotlin.io.printError' : (error) => console.error(error),
         'kotlin.io.printlnImpl' : (message) => console.log(message),
         'kotlin.js.jsArrayGet' : (array, index) => array[index],
@@ -188,8 +198,10 @@ export async function instantiate(imports={}, runInitializer=true) {
         'org.w3c.dom.item_$external_fun' : (_this, p0) => _this.item(p0),
         'org.khronos.webgl.getMethodImplForUint8Array' : (obj, index) => { return obj[index]; },
         'org.khronos.webgl.slice_$external_fun' : (_this, p0, p1, isDefault0) => _this.slice(p0, isDefault0 ? undefined : p1, ),
-        'org.khronos.webgl.Uint8Array_$external_fun' : (p0, p1, p2, isDefault0, isDefault1) => new Uint8Array(p0, isDefault0 ? undefined : p1, isDefault1 ? undefined : p2, ),
+        'org.khronos.webgl.Int8Array_$external_fun' : (p0, p1, p2, isDefault0, isDefault1) => new Int8Array(p0, isDefault0 ? undefined : p1, isDefault1 ? undefined : p2, ),
         'org.khronos.webgl.length_$external_prop_getter' : (_this) => _this.length,
+        'org.khronos.webgl.Uint8Array_$external_fun' : (p0, p1, p2, isDefault0, isDefault1) => new Uint8Array(p0, isDefault0 ? undefined : p1, isDefault1 ? undefined : p2, ),
+        'org.khronos.webgl.length_$external_prop_getter_1' : (_this) => _this.length,
         'org.khronos.webgl.buffer_$external_prop_getter' : (_this) => _this.buffer,
         'org.khronos.webgl.byteOffset_$external_prop_getter' : (_this) => _this.byteOffset,
         'org.khronos.webgl.byteLength_$external_prop_getter' : (_this) => _this.byteLength,
@@ -229,6 +241,7 @@ export async function instantiate(imports={}, runInitializer=true) {
         'org.w3c.dom.devicePixelRatio_$external_prop_getter' : (_this) => _this.devicePixelRatio,
         'org.w3c.dom.requestAnimationFrame_$external_fun' : (_this, p0) => _this.requestAnimationFrame(p0),
         'org.w3c.dom.matchMedia_$external_fun' : (_this, p0) => _this.matchMedia(p0),
+        'org.w3c.dom.fetch_$external_fun' : (_this, p0, p1, isDefault0) => _this.fetch(p0, isDefault0 ? undefined : p1, ),
         'org.w3c.dom.body_$external_prop_getter' : (_this) => _this.body,
         'org.w3c.dom.createElement_$external_fun' : (_this, p0, p1, isDefault0) => _this.createElement(p0, isDefault0 ? undefined : p1, ),
         'org.w3c.dom.hasFocus_$external_fun' : (_this, ) => _this.hasFocus(),
@@ -260,9 +273,11 @@ export async function instantiate(imports={}, runInitializer=true) {
         'org.w3c.dom.code_$external_prop_getter' : (_this) => _this.code,
         'org.w3c.dom.reason_$external_prop_getter' : (_this) => _this.reason,
         'org.w3c.fetch.status_$external_prop_getter' : (_this) => _this.status,
+        'org.w3c.fetch.ok_$external_prop_getter' : (_this) => _this.ok,
         'org.w3c.fetch.statusText_$external_prop_getter' : (_this) => _this.statusText,
         'org.w3c.fetch.headers_$external_prop_getter' : (_this) => _this.headers,
         'org.w3c.fetch.body_$external_prop_getter' : (_this) => _this.body,
+        'org.w3c.fetch.blob_$external_fun' : (_this, ) => _this.blob(),
         'org.w3c.fetch.get_$external_fun' : (_this, p0) => _this.get(p0),
         'org.w3c.fetch.Companion_$external_object_getInstance' : () => ({}),
         'io.ktor.utils.io.js.decode' : (decoder, buffer) => { try { return decoder.decode(buffer) } catch(e) { return null } },
@@ -335,7 +350,13 @@ export async function instantiate(imports={}, runInitializer=true) {
         'io.ktor.client.utils.setObjectField' : (obj, name, value) => obj[name]=value,
         'io.ktor.client.utils.makeJsNew' : (ctor) => new ctor(),
         'io.ktor.client.utils.makeJsCall' : (func, arg) => func.apply(null, arg),
-        'io.ktor.client.utils.toJsArrayImpl' : (x) => new Uint8Array(x)
+        'io.ktor.client.utils.toJsArrayImpl' : (x) => new Uint8Array(x),
+        'org.jetbrains.compose.resources.jsExportBlobAsArrayBuffer' : (blob) => blob.arrayBuffer(),
+        'org.jetbrains.compose.resources.jsExportInt8ArrayToWasm' :  (src, size, dstAddr) => {
+                const mem8 = new Int8Array(wasmExports.memory.buffer, dstAddr, size);
+                mem8.set(src);
+            }
+        
     }
     
     // Placed here to give access to it from externals (js_code)
