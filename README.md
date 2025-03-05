@@ -1,4 +1,4 @@
-## Kotlin으로 CV한번 만들어보자
+## Compose Multiplatform으로 블로그 만들기
 
 도전도전
 
