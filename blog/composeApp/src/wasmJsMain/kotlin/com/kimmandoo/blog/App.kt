@@ -8,6 +8,8 @@ import androidx.compose.foundation.Image
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.layout.Arrangement.Center
+import androidx.compose.foundation.rememberScrollState
+import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.Button
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Text
@@ -35,6 +37,7 @@ import kotlinx.coroutines.delay
 @Composable
 fun App() {
     var currentRoute: Route by remember { mutableStateOf(getCurrentRouteFromUrl()) }
+    val scrollState = rememberScrollState()
 
     LaunchedEffect(Unit) {
         if (window.location.hash.isEmpty()) { // hash비어있으면 BLOG를 기준으로
@@ -48,7 +51,7 @@ fun App() {
 
     BlogTheme {
         Column(
-            modifier = Modifier.fillMaxSize().padding(horizontal = 100.dp),
+            modifier = Modifier.fillMaxSize().padding(horizontal = 100.dp).verticalScroll(scrollState), // 스크롤 가능하도록 설정,
             horizontalAlignment = Alignment.CenterHorizontally) {
             Title()
             TopNavigationBar(selectedRoute = currentRoute) { newRoute ->

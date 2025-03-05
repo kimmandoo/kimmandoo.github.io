@@ -46,7 +46,6 @@ fun Title() {
         modifier = Modifier.padding(vertical = 20.dp),
         text = messages[currentIndex],
         color = Color.Black.copy(alpha = alpha),
-        style = MaterialTheme.typography.h2
+        style = MaterialTheme.typography.h1
     )
-    Spacer(modifier = Modifier.height(1.dp).background(Color.Gray))
 }
