@@ -6,4 +6,6 @@
 // build는 아래 명령어로
 ./gradlew clean wasmJsBrowserProductionRun
 ./gradlew wasmJsBrowserDistribution
+// 배포 폴더
+/blog/composeApp/build/dist/wasmJs/developmentExecutable
 ```
