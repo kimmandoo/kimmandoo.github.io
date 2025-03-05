@@ -43,7 +43,7 @@ fun BlogTheme(content: @Composable () -> Unit) {
             h4 = TextStyle(fontFamily = font, fontSize = 18.sp, fontWeight = FontWeight.Medium),
             h5 = TextStyle(fontFamily = font, fontSize = 16.sp, fontWeight = FontWeight.Normal),
             h6 = TextStyle(fontFamily = font, fontSize = 14.sp, fontWeight = FontWeight.Light),
-            body1 = TextStyle(fontFamily = font, fontSize = 16.sp),
+            body1 = TextStyle(fontFamily = font, fontSize = 16.sp, fontWeight = FontWeight.Medium),
             body2 = TextStyle(fontFamily = font, fontSize = 14.sp),
             subtitle1 = TextStyle(fontFamily = font, fontSize = 16.sp, fontWeight = FontWeight.SemiBold),
             subtitle2 = TextStyle(fontFamily = font, fontSize = 14.sp, fontWeight = FontWeight.Medium),

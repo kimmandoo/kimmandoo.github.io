@@ -13,6 +13,7 @@ import androidx.compose.material.Text
 import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
+import com.kimmandoo.blog.markdown.MarkdownText
 import com.kimmandoo.blog.readFileToString
 
 @Composable
@@ -25,10 +26,11 @@ fun AboutScreen() {
 
     Box(modifier = Modifier.fillMaxSize()){
         SelectionContainer {
-            Text(
-                text = markdownContent,
-                style = MaterialTheme.typography.body1
-            )
+            MarkdownText(markdown = markdownContent.trimIndent())
+//            Text(
+//                text = markdownContent,
+//                style = MaterialTheme.typography.body1
+//            )
         }
     }
 }
