@@ -28,19 +28,32 @@ import com.kimmandoo.blog.component.TopNavigationBar
 import com.kimmandoo.blog.screen.AboutScreen
 import com.kimmandoo.blog.screen.BlogScreen
 import com.kimmandoo.blog.screen.PortfolioScreen
+import kotlinx.browser.window
 import kotlinx.coroutines.delay
 
 
 @Composable
 fun App() {
-    var currentRoute:Route by remember { mutableStateOf(Route.BLOG) }
+    var currentRoute: Route by remember { mutableStateOf(getCurrentRouteFromUrl()) }
+
+    LaunchedEffect(Unit) {
+        if (window.location.hash.isEmpty()) { // hash비어있으면 BLOG를 기준으로
+            window.location.hash = Route.BLOG.route
+            currentRoute = Route.BLOG
+        }
+        window.onhashchange = {
+            currentRoute = getCurrentRouteFromUrl()
+        }
+    }
+
     BlogTheme {
         Column(
             modifier = Modifier.fillMaxSize().padding(horizontal = 100.dp),
             horizontalAlignment = Alignment.CenterHorizontally) {
             Title()
-            TopNavigationBar(selectedRoute = currentRoute) {
-                currentRoute = it
+            TopNavigationBar(selectedRoute = currentRoute) { newRoute ->
+                window.location.hash = newRoute.route // url업뎃하기
+                currentRoute = newRoute
             }
             Spacer(modifier = Modifier.height(16.dp))
             when (currentRoute) {
@@ -50,4 +63,9 @@ fun App() {
             }
         }
     }
+}
+
+fun getCurrentRouteFromUrl(): Route {
+    val hash = window.location.hash.removePrefix("#")
+    return Route.entries.find { it.name.lowercase() == hash } ?: Route.BLOG
 }
