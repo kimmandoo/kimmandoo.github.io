@@ -16,33 +16,32 @@ import kotlinx.coroutines.delay
 import kotlin.reflect.KProperty
 
 @Composable
-fun Title(){
-    val messages =
-        listOf(
-            "Hello.", "안녕하세요.", "Hola.", "Bonjour.", "こんにちは。", "Guten Tag.", "Ciao."
-        )
+fun Title() {
+    val messages = listOf(
+        "Hello.", "안녕하세요.", "Hola.", "Bonjour.", "こんにちは。", "Guten Tag.", "Ciao."
+    )
 
     var currentIndex by remember { mutableIntStateOf(0) }
+    var visible by remember { mutableStateOf(true) }
 
-    LaunchedEffect(Unit) {
-        while (true) {
-            delay(3000L)
+    // alpha 애니메이션 설정 (페이드 인 -> 페이드 아웃)
+    val alpha by animateFloatAsState(
+        targetValue = if (visible) 1f else 0f,
+        animationSpec = tween(2000), // 1.5초 동안 페이드 인/아웃
+        label = "FadeAnimation"
+    )
+
+    LaunchedEffect(visible) {
+        if (!visible) {
+            delay(2000) // 텍스트 변경 전 약간의 대기 시간 (자연스러운 전환)
             currentIndex = (currentIndex + 1) % messages.size
+            visible = true // 다시 페이드 인
+        } else {
+            delay(2000) // 페이드 인 지속 시간만큼 대기
+            visible = false // 페이드 아웃 시작
         }
     }
 
-    val transition = rememberInfiniteTransition(label = "")
-    val alpha by transition.animateFloat(
-        initialValue = 0f,
-        targetValue = 1f,
-        animationSpec =
-            InfiniteRepeatableSpec(
-                animation = tween(1500), // tween 이니까 한 텍스트에 6초
-                RepeatMode.Reverse,
-                StartOffset(0, StartOffsetType.FastForward),
-            ),
-        label = "FloatAnimation",
-    )
     Text(
         modifier = Modifier.padding(vertical = 20.dp),
         text = messages[currentIndex],
