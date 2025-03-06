@@ -47,18 +47,6 @@ fun MarkdownText(markdown: String, modifier: Modifier = Modifier) {
                 line.startsWith("- ") -> {
                     ListItem(line.removePrefix("- "))
                 }
-//                line.matches(Regex("\\|.*\\|")) -> {
-//                    MarkdownTable(line)
-//                }
-//                line.startsWith("```") -> {
-//                    CodeBlock(line)
-//                }
-//                line.contains("`") -> {
-//                    InlineCode(line)
-//                }
-//                Regex("\\[.*?]\\(.*?\\)").containsMatchIn(line) -> {
-//                    MarkdownLink(line)
-//                }
                 line.startsWith("> ") -> {
                     Quote(line.removePrefix("> "))
                 }
@@ -72,40 +60,3 @@ fun MarkdownText(markdown: String, modifier: Modifier = Modifier) {
         }
     }
 }
-
-
-
-@Composable
-fun MarkdownLink(line: String) {
-    val pattern = Regex("\\[(.*?)]\\((.*?)\\)")
-    val annotatedString = buildAnnotatedString {
-        var currentIndex = 0
-        pattern.findAll(line).forEach { result ->
-            append(line.substring(currentIndex, result.range.first))
-            val text = result.groupValues[1]
-            val url = result.groupValues[2]
-
-            pushStringAnnotation(tag = "URL", annotation = url)
-            withStyle(SpanStyle(color = Color.Blue, textDecoration = TextDecoration.Underline)) {
-                append(text)
-            }
-            pop()
-
-            currentIndex = result.range.last + 1
-        }
-        if (currentIndex < line.length) {
-            append(line.substring(currentIndex))
-        }
-    }
-
-    Text(
-        text = annotatedString,
-        modifier = Modifier.clickable {
-            annotatedString.getStringAnnotations("URL", 0, annotatedString.length)
-                .firstOrNull()?.let { annotation ->
-                    println("Opening URL: ${annotation.item}")
-                }
-        }
-    )
-}
-

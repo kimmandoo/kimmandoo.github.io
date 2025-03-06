@@ -38,6 +38,13 @@ import kotlinx.coroutines.delay
 fun App() {
     var currentRoute: Route by remember { mutableStateOf(getCurrentRouteFromUrl()) }
     val scrollState = rememberScrollState()
+    var paddingSize by remember { mutableStateOf((window.innerWidth * 0.05).dp) } // 화면 너비의 5%를 패딩으로 설정
+
+    LaunchedEffect(Unit) {
+        window.addEventListener("resize", {
+            paddingSize = (window.innerWidth * 0.05).dp
+        })
+    }
 
     LaunchedEffect(Unit) {
         if (window.location.hash.isEmpty()) { // hash비어있으면 BLOG를 기준으로
@@ -51,7 +58,7 @@ fun App() {
 
     BlogTheme {
         Column(
-            modifier = Modifier.fillMaxSize().padding(horizontal = 100.dp).verticalScroll(scrollState), // 스크롤 가능하도록 설정,
+            modifier = Modifier.fillMaxSize().padding(horizontal = paddingSize).verticalScroll(scrollState), // 스크롤 가능하도록 설정,
             horizontalAlignment = Alignment.CenterHorizontally) {
             Title()
             TopNavigationBar(selectedRoute = currentRoute) { newRoute ->
@@ -60,7 +67,7 @@ fun App() {
             }
             Spacer(modifier = Modifier.height(16.dp))
             when (currentRoute) {
-                Route.BLOG -> BlogScreen()
+                Route.BLOG -> BlogScreen(padding = paddingSize)
                 Route.ABOUT -> AboutScreen()
                 Route.PORTFOLIO -> PortfolioScreen()
             }

@@ -26,7 +26,7 @@ return /******/ (() => { // webpackBootstrap
   \********************************/
 /***/ ((module, __unused_webpack_exports, __webpack_require__) => {
 
-module.exports = __webpack_require__.p + "88d24fef424614b157fc.wasm";
+module.exports = __webpack_require__.p + "021a7f24cb1e620b463e.wasm";
 
 /***/ }),
 

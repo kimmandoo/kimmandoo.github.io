@@ -7,10 +7,11 @@ import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Text
 import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.unit.Dp
 import com.kimmandoo.blog.readFileToString
 
 @Composable
-fun BlogScreen() {
+fun BlogScreen(padding: Dp) {
     Box(modifier = Modifier.fillMaxSize()){
         SelectionContainer{
             Text(
