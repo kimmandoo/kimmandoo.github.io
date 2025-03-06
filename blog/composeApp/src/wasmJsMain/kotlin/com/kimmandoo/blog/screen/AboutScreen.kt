@@ -30,7 +30,7 @@ fun AboutScreen() {
     var markdownContent by remember { mutableStateOf("") }
 
     LaunchedEffect(Unit){
-        markdownContent = readFileToString("/md/aboutme.md").trimIndent()
+        markdownContent = readFileToString("/about/aboutme.md").trimIndent()
         println(markdownContent)
     }
 

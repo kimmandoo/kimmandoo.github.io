@@ -28,7 +28,7 @@ import com.kimmandoo.blog.component.Title
 import com.kimmandoo.blog.component.TopMenuBarText
 import com.kimmandoo.blog.component.TopNavigationBar
 import com.kimmandoo.blog.screen.AboutScreen
-import com.kimmandoo.blog.screen.BlogScreen
+import com.kimmandoo.blog.screen.blog.BlogScreen
 import com.kimmandoo.blog.screen.PortfolioScreen
 import kotlinx.browser.window
 import kotlinx.coroutines.delay
@@ -76,7 +76,7 @@ fun App() {
             }
             Spacer(modifier = Modifier.height(16.dp))
             when (currentRoute) {
-                Route.BLOG -> BlogScreen(padding = paddingSize)
+                Route.BLOG -> BlogScreen()
                 Route.ABOUT -> AboutScreen()
                 Route.PORTFOLIO -> PortfolioScreen()
             }
