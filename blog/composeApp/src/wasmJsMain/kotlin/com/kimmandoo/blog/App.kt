@@ -38,22 +38,19 @@ import kotlinx.coroutines.delay
 fun App() {
     var currentRoute: Route by remember { mutableStateOf(getCurrentRouteFromUrl()) }
     val scrollState = rememberScrollState()
-    var windowWidth by remember { mutableStateOf(window.innerWidth) }
     var paddingSize by remember { mutableStateOf(
-        if (windowWidth > 1000){
-            (windowWidth * 0.2).dp
+        if (window.innerWidth > 1000){
+            (window.innerWidth * 0.2).dp
         }else{
-            (windowWidth * 0.05).dp
+            (window.innerWidth * 0.05).dp
         })
     } // 화면 너비의 5%를 패딩으로 설정
-    println("window Witdh: "+window.innerWidth+" , paddingSize "+ paddingSize)
     LaunchedEffect(Unit) {
         window.addEventListener("resize", {
-            windowWidth = window.innerWidth
-            if (windowWidth > 1000){
-                paddingSize = (windowWidth * 0.2).dp
+            if (window.innerWidth > 1000){
+                paddingSize = (window.innerWidth * 0.2).dp
             }else{
-                paddingSize = (windowWidth * 0.05).dp
+                paddingSize = (window.innerWidth * 0.05).dp
             }
         })
     }
