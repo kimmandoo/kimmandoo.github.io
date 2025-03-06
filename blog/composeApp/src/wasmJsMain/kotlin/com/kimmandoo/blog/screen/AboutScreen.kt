@@ -22,6 +22,7 @@ fun AboutScreen() {
 
     LaunchedEffect(Unit){
         markdownContent = readFileToString("/md/aboutme.md")
+        println(markdownContent)
     }
 
     Box(modifier = Modifier.fillMaxSize()){
