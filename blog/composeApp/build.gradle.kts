@@ -40,6 +40,8 @@ kotlin {
             implementation(compose.components.uiToolingPreview)
             implementation(libs.androidx.lifecycle.viewmodel)
             implementation(libs.androidx.lifecycle.runtime.compose)
+            implementation("com.mikepenz:multiplatform-markdown-renderer-m2:0.31.0")
+            implementation("com.mikepenz:multiplatform-markdown-renderer-code:0.31.0")
         }
     }
 }
