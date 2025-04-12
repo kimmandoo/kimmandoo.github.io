@@ -49,7 +49,7 @@ Theme도 설정해준다.
     <style name="Theme.TV" parent="@style/Theme.Leanback" />
 </resources>
 ```
-Theme을 설정해주지 않으면, Leanback 컴포넌트를 빌드할 때, xml단에서 오류가 발생한다. Leanback의 Theme을 기본 테마로 넣고, 이걸 manifest에서 지정해줘야 오류가 나지않는다.
+Theme을 설정해주지 않으면 Leanback 컴포넌트를 빌드할 때 xml단에서 오류가 발생한다. Leanback의 Theme을 기본 테마로 넣고 이걸 manifest에서 지정해줘야 오류가 나지않는다.
 
 ```xml
 <?xml version="1.0" encoding="utf-8"?>
@@ -87,7 +87,7 @@ Theme을 설정해주지 않으면, Leanback 컴포넌트를 빌드할 때, xml�
 </manifest>
 ```
 
-매니페스트를 작성해준다. 물론 그 전에 MainAcitivity를 만들어두고, 레이아웃 파일까지는 만들어놓자.
+매니페스트를 작성해준다. 물론 그 전에 MainAcitivity를 만들어두고 레이아웃 파일까지는 만들어놓자.
 
 ```xml
     <uses-feature
@@ -106,7 +106,7 @@ Theme을 설정해주지 않으면, Leanback 컴포넌트를 빌드할 때, xml�
 
 배너또한 중요하다. 배너의 역할은 앱을 홈화면에서 노출시켜줄 수 있는 것 인데, 앱 로고라고 생각하면 편하다. 위 사진과 같이 노출되려면 배너를 꼭 넣어줘야한다.
 
-![img](https://file.notion.so/f/f/f50a2473-33af-4512-be58-ea90d754edbc/8139045e-69de-49cd-ac2b-b80f5f650c73/image.png?table=block&id=1d2d41b8-11d4-803a-8ce8-cc0177275d28&spaceId=f50a2473-33af-4512-be58-ea90d754edbc&expirationTimestamp=1744502400000&signature=q6NXQUBm2n_FtG-I6a5zzeuZE9OEw75Ju6SlwXqMakg&downloadName=image.png)
+![img](https://private-user-images.githubusercontent.com/46841652/433059826-a01e3465-1af8-40d1-83fc-bc6f7f854832.png?jwt=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJnaXRodWIuY29tIiwiYXVkIjoicmF3LmdpdGh1YnVzZXJjb250ZW50LmNvbSIsImtleSI6ImtleTUiLCJleHAiOjE3NDQ0NzQ0MDEsIm5iZiI6MTc0NDQ3NDEwMSwicGF0aCI6Ii80Njg0MTY1Mi80MzMwNTk4MjYtYTAxZTM0NjUtMWFmOC00MGQxLTgzZmMtYmM2ZjdmODU0ODMyLnBuZz9YLUFtei1BbGdvcml0aG09QVdTNC1ITUFDLVNIQTI1NiZYLUFtei1DcmVkZW50aWFsPUFLSUFWQ09EWUxTQTUzUFFLNFpBJTJGMjAyNTA0MTIlMkZ1cy1lYXN0LTElMkZzMyUyRmF3czRfcmVxdWVzdCZYLUFtei1EYXRlPTIwMjUwNDEyVDE2MDgyMVomWC1BbXotRXhwaXJlcz0zMDAmWC1BbXotU2lnbmF0dXJlPWY5ZGEwYmJjZjRkOGU1M2YyNDRjMzc4YmY4NThmYjQzNmVhYjA4NzkxNjhhNzRlZmVkYmI5YTk0ZTM1NGNkMWUmWC1BbXotU2lnbmVkSGVhZGVycz1ob3N0In0.SJHop1-F7yUz_eqCc7WUw7f_opeJ9ZL8qfPSUDB_Aq4)
 
 이제 화면을 구성해보자.
 
@@ -153,9 +153,12 @@ class MainActivity : FragmentActivity() {
 
 그래서 `FragmentActivity`로 만들어야한다. tv에서 실행할꺼니까 edgeToEdge 날리고, view padding 세팅 다 날리고 FragmentActivity로 바꿔주면 된다.
 
+![d](https://private-user-images.githubusercontent.com/46841652/433059814-c26dccae-7207-4cee-b57a-3aa7ec7301a3.png?jwt=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJnaXRodWIuY29tIiwiYXVkIjoicmF3LmdpdGh1YnVzZXJjb250ZW50LmNvbSIsImtleSI6ImtleTUiLCJleHAiOjE3NDQ0NzQ0MDEsIm5iZiI6MTc0NDQ3NDEwMSwicGF0aCI6Ii80Njg0MTY1Mi80MzMwNTk4MTQtYzI2ZGNjYWUtNzIwNy00Y2VlLWI1N2EtM2FhN2VjNzMwMWEzLnBuZz9YLUFtei1BbGdvcml0aG09QVdTNC1ITUFDLVNIQTI1NiZYLUFtei1DcmVkZW50aWFsPUFLSUFWQ09EWUxTQTUzUFFLNFpBJTJGMjAyNTA0MTIlMkZ1cy1lYXN0LTElMkZzMyUyRmF3czRfcmVxdWVzdCZYLUFtei1EYXRlPTIwMjUwNDEyVDE2MDgyMVomWC1BbXotRXhwaXJlcz0zMDAmWC1BbXotU2lnbmF0dXJlPThhZGMwNDY0Y2Y2YTFkZTMxNWViYjg1YzdmM2YxZGIwMWQwMmQwYzE5MTY3NjEzNDZkMDQ4NzIwNmFkNzhkZjImWC1BbXotU2lnbmVkSGVhZGVycz1ob3N0In0.sklAOyRcSS-xcJ-xd_GTWlpMb31GMgGSOH3s_EpeQV8)
+그러면 위와 같이 잘 나온다.
+
 BrowseSupportFragment는 아래 사진과 같은 구성으로 되어있다.
 
-![dd](https://file.notion.so/f/f/f50a2473-33af-4512-be58-ea90d754edbc/461366bb-de12-46b7-a2e8-f8ba00bfdbba/image.png?table=block&id=1d2d41b8-11d4-8001-901d-ef24c7e142cb&spaceId=f50a2473-33af-4512-be58-ea90d754edbc&expirationTimestamp=1744502400000&signature=0jJtevvOiKM1xrCUoVGhPyBgjINphbFCTOUgYdJmA0c&downloadName=image.png)
+![dd](https://private-user-images.githubusercontent.com/46841652/433059801-2e8a37b7-b029-4170-953f-fa517e543271.png?jwt=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJnaXRodWIuY29tIiwiYXVkIjoicmF3LmdpdGh1YnVzZXJjb250ZW50LmNvbSIsImtleSI6ImtleTUiLCJleHAiOjE3NDQ0NzQ0MDEsIm5iZiI6MTc0NDQ3NDEwMSwicGF0aCI6Ii80Njg0MTY1Mi80MzMwNTk4MDEtMmU4YTM3YjctYjAyOS00MTcwLTk1M2YtZmE1MTdlNTQzMjcxLnBuZz9YLUFtei1BbGdvcml0aG09QVdTNC1ITUFDLVNIQTI1NiZYLUFtei1DcmVkZW50aWFsPUFLSUFWQ09EWUxTQTUzUFFLNFpBJTJGMjAyNTA0MTIlMkZ1cy1lYXN0LTElMkZzMyUyRmF3czRfcmVxdWVzdCZYLUFtei1EYXRlPTIwMjUwNDEyVDE2MDgyMVomWC1BbXotRXhwaXJlcz0zMDAmWC1BbXotU2lnbmF0dXJlPTIyNTAwNGE4NjJkZWI3MzVhYThkMTZkMzYwZjNhMDFiZjYzMmY3YTAwZTUwNTljODc4ODcxZDRkOWVmZmNhN2MmWC1BbXotU2lnbmVkSGVhZGVycz1ob3N0In0.Mk6FT4nxNX9eB_j5UfTLKzAkYgGNkPQWrifW5OP0F6w)
 
 BrowseSupportFragment는 Headers와 Rows로 나뉘어져있다. Headers에서는 Drawer처럼 메뉴가 있고, Rows는 Detail화면이라고 보면 될 것 같다.
 
@@ -192,7 +195,7 @@ class MainFragment: BrowseSupportFragment() {
 }
 ```
 
-![dd](https://file.notion.so/f/f/f50a2473-33af-4512-be58-ea90d754edbc/79a2ca8b-8fd3-4801-97be-b6532bccc8f6/image.png?table=block&id=1d2d41b8-11d4-807a-8d23-fec730162055&spaceId=f50a2473-33af-4512-be58-ea90d754edbc&expirationTimestamp=1744502400000&signature=sOByk5ZbKTBMqpEADb-An8VoB-lXmj37AlvxjuCuwJk&downloadName=image.png)
+![dd](https://private-user-images.githubusercontent.com/46841652/433059774-4de6fb8d-d596-4370-aaa5-646d5826b5ff.png?jwt=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJnaXRodWIuY29tIiwiYXVkIjoicmF3LmdpdGh1YnVzZXJjb250ZW50LmNvbSIsImtleSI6ImtleTUiLCJleHAiOjE3NDQ0NzQ0MDEsIm5iZiI6MTc0NDQ3NDEwMSwicGF0aCI6Ii80Njg0MTY1Mi80MzMwNTk3NzQtNGRlNmZiOGQtZDU5Ni00MzcwLWFhYTUtNjQ2ZDU4MjZiNWZmLnBuZz9YLUFtei1BbGdvcml0aG09QVdTNC1ITUFDLVNIQTI1NiZYLUFtei1DcmVkZW50aWFsPUFLSUFWQ09EWUxTQTUzUFFLNFpBJTJGMjAyNTA0MTIlMkZ1cy1lYXN0LTElMkZzMyUyRmF3czRfcmVxdWVzdCZYLUFtei1EYXRlPTIwMjUwNDEyVDE2MDgyMVomWC1BbXotRXhwaXJlcz0zMDAmWC1BbXotU2lnbmF0dXJlPWJlMzQ1MGY1M2E2ZTI1NGIwMmM4MTMyNGYwZmQ1ZWNkMjdlNGE5MTNhOGUyMTgyMGQzN2Y5NGY2MDQ4ZTg2NmQmWC1BbXotU2lnbmVkSGVhZGVycz1ob3N0In0.hm4YFKxMPaFpgYMVwhtFrarChsXWGQBgc0CTBbwfOhQ)
 
 
 brandColor로 색상을 넣어주면, 사이드바에 색이 들어간다. 
