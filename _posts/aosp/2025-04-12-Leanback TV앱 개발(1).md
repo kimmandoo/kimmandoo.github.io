@@ -36,8 +36,8 @@ leanback = "1.0.0"
 
 [libraries]
 androidx-leanback = { group = "androidx.leanback", name = "leanback", version.ref = "leanback" }
-
-# dependency
+```
+```gradle
 implementation(libs.androidx.leanback)
 ```
 
