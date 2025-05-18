@@ -1,12 +1,14 @@
 ---
 categories: [Android]
-tags: [android, 일퀘]
+tags: [android, kotlin, 일퀘]
 mermaid: true
 ---
 
 # CompletableDeferred
 
 CompletableDeferred는 비동기 콜백 작업을 코루틴 스타일로 처리할 때 자주 사용되는 클래스다. Deferred(값을 나중에 반환하는 Future 역할)에서 파생되었다.
+
+외부에서 “완료 시점”을 직접 제어하거나, 여러 콜백에서 완료/실패 신호를 합쳐야 할 때 쓴다.
 
 ```kotlin
 public interface CompletableDeferred<T> : Deferred<T> {
@@ -33,7 +35,7 @@ suspend fun fetchDataFromServer(): Data {
 }
 ```
 
-CompletableDeferred클래스로 객체를 하나 만들고, 비동기 작업 블록안에 이 변수를 넣어주면 제어할 수 있게된다. 해당 블록의 작업이 모두 끝나면 complete가 불리고, 그 안에 담긴 값을 deffered.await()로 꺼내 쓸 수 있다.
+CompletableDeferred클래스로 객체를 하나 만들고, 비동기 작업 블록안에 이 변수를 넣어주면 제어할 수 있게된다. 해당 블록의 작업이 모두 끝나면 complete가 불리고, 그 안에 담긴 값을 defered.await()로 꺼내 쓸 수 있다.
 
 이전에 그냥 사용하던 suspendable coroutine(async(얘도 반환값이 Deferred라서 await가 가능하다), delay같은) 것 과 차이점이 바로 보인다면 코루틴 마스터라고 할 수 있겠다. 일반적으로 사용하던 async 같은건 바깥에 있던 변수로 내부 코루틴을 제어하는 것이 불가능했다. 그런데 이 코드를 보면, 비동기 작업을 할 코루틴 스코프 바깥에 객체를 선언해서 값을 감시하며 결과값도 가져온다는 차이점을 볼 수 있다.
 
@@ -73,7 +75,7 @@ val deferred2 = viewModelScope.async { fetchData2() }
 
 # suspendCancellableCoroutine
 
-앞서 얘기한 ComletableDeferred와 거의 동일한 개념이다. 차이점으로는 suspendCancellableCoroutine이 코루틴 빌더라는 것이다.
+앞서 얘기한 CompletableDeferred와 거의 동일한 개념이다. 차이점으로는 suspendCancellableCoroutine이 코루틴 빌더라는 것이다.
 
 ```kotlin
 suspend fun <T> suspendCancellableCoroutine(
@@ -168,3 +170,43 @@ async는 "내가 시킨 작업"을 비동기로 돌릴 때, CompletableDeferred�
 - 특정 비동기 신호가 들어올 때까지 기다렸다가 값 반환
 
 이런 콜백 형태로 만들어진 패턴에서 무작정 async로 처리하면 안 되고, 반드시 CompletableDeferred로 명확하게 값을 컨트롤해야 동기화가 꼬이지 않는다.
+
+나는 이번 사이드 프로젝트에 Firebase를 사용할 건데, 근데 문제는 파이어베이스가 저 세개 모두에 속한다는 것이다.
+
+주로 사용하게 될 Realtime Database, Firestore, FCM은 이벤트가 발생할 때마다 콜백으로 데이터를 전달한다. 즉, 실시간 데이터 변경이나, 메시지 수신, 인증 상태 변경 등 “알림 기반 이벤트”가 들어올 때 콜백이 호출된다.
+
+인증부분을 이번 포스팅에서 정리한 코루틴 메서드를 활용해서 구현해보겠다.
+
+```kotlin
+FirebaseAuth.getInstance().signInWithEmailAndPassword(email, pw)
+    .addOnCompleteListener { task ->
+        if (task.isSuccessful) { 
+            // 인증성공
+        } else { 
+            // 실패
+        }
+    }
+```
+
+이게 FirebaseAuth의 기본 구조다. 구글 로그인을 붙이면 코드가 훨씬 길어지는데, 일단 api만 보겠다.
+
+`suspendCancellableCoroutine`을 사용해 suspend함수로 바꿔보자.
+
+`suspendCancellableCoroutine`은 구조적으로 함수가 끝나면 continuation이 자동으로 닫히기 때문에 중복 완료를 신경 쓸 필요가 없다. 그래서 콜백 → suspend(단일 콜백, 단일 결과)로 바꿀 땐 굳이 객체를 만들 필요가 없으니까 `suspendCancellableCoroutine`이 더 적합하다 생각했다.
+
+```kotlin
+suspend fun signInSuspend(email: String, pw: String): AuthResult = suspendCancellableCoroutine { continuation ->
+    val task = FirebaseAuth.getInstance().signInWithEmailAndPassword(email, pw)
+    task.addOnCompleteListener { t ->
+        if (t.isSuccessful) {
+            continuation.resume(t.result!!)
+        } else {
+            continuation.resumeWithException(t.exception ?: Exception("Unknown error"))
+        }
+    }
+}
+```
+
+하나 고민인 건 이렇게 단일 이벤트가 아닌, RealtimeDB, Firestore같은 여러 번 반복적으로 오는 콜백 처리를 어떻게 할지다.
+
+이 부분은 실제 프로젝트에 적용하면서 개선해보겠다.
