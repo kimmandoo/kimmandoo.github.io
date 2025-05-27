@@ -4,6 +4,8 @@ tags: [android, kotlin]
 mermaid: true
 ---
 
+## SideEffect, LaunchedEffect, DisposableEffect 알아보기
+
 ```kotlin
 @Composable
 @NonRestartableComposable
@@ -21,11 +23,7 @@ DB 업데이트나 API 호출처럼 실제 외부 상태를 변경하는 동작�
 
 특히, 비동기 작업은 SideEffect가 아니라 LaunchedEffect에서 해야 한다.
 
-공식문서에서 번역을 부수효과라고 해놨는데 그냥 SideEffect가 더 낫다.
-
-동작원리에 대해 알아보기 전에, SideEffect는 순수함수 개념과 같이 돌아다니는데 이걸 먼저 짚고 가자. 
-
-같은 입력에 대해 항상 같은 출력을 생성하고 SideEffect가 없는 걸 순수함수라고 한다. 그게 Composable인데, 아래 코드를 보자. 
+공식문서에서 번역을 부수효과라고 해놨는데 그냥 SideEffect가 더 낫다. 동작원리에 대해 알아보기 전에, SideEffect는 순수함수 개념과 같이 돌아다니는데 이걸 먼저 짚고 가자. 같은 입력에 대해 항상 같은 출력을 생성하고 SideEffect가 없는 걸 순수함수라고 한다. 그게 Composable인데, 아래 코드를 보자. 
 
 ```kotlin
 @Composable
@@ -190,9 +188,7 @@ fun DisposableEffect(
 }
 ```
 
-effect가 DisposableEffectScope로 감싸져있기 때문에, onDispose안에서 작업을 수행하며 onRemember에서 컴포지션에 들어올 때 호출된다.
-
-DisposableEffectScope를 좀 더 봐야된다.
+effect가 DisposableEffectScope로 감싸져있기 때문에, onDispose안에서 작업을 수행하며 onRemember에서 컴포지션에 들어올 때 호출된다. DisposableEffectScope를 좀 더 봐야된다.
 
 ```kotlin
 class DisposableEffectScope {
@@ -210,9 +206,7 @@ class DisposableEffectScope {
 }
 ```
 
-crossline 키워드를 써서, 람다가 비지역 리턴을 사용하지 못하도록 해서 dispose 로직의 안정성을 보장한다.
-
-crossline은 inline 키워드랑 같이 볼 때 의미가 있는데, 아래 코드로 이해해보자.
+crossline 키워드를 써서, 람다가 비지역 리턴을 사용하지 못하도록 해서 dispose 로직의 안정성을 보장한다. crossline은 inline 키워드랑 같이 볼 때 의미가 있는데, 아래 코드로 이해해보자.
 
 ```kotlin
 inline fun unsafeOperation(callback: () -> Unit) {
@@ -369,9 +363,7 @@ fun BackHandler(enabled: Boolean = true, onBack: () -> Unit) {
 
 현재 액티비티의 context를 가져와서 dispatcher를 제어하기 때문에 callback을 설정하고 해제해주는 작업이 필수적이다.
 
-그래서 위 코드를 보면 key로 enable, dispatcher 두개를 받아 설정하는데 핸들러가 enabled 값을 외부에서 받아 on/off되는 거 하나랑 외부에서 생성한 dispatcher를 주입받아 사용하는 거 하나다.
-
-트리거로 사용할 key가 그래서 enabled 하나고, dispatcher는 crossline 때문에 DisposableEffect 내부에서 생성해서 반환하지 못하니까 주입하는 방식으로 이해하면되겠다.
+그래서 위 코드를 보면 key로 enable, dispatcher 두개를 받아 설정하는데 핸들러가 enabled 값을 외부에서 받아 on/off되는 거 하나랑 외부에서 생성한 dispatcher를 주입받아 사용하는 거 하나다. 트리거로 사용할 key가 그래서 enabled 하나고, dispatcher는 crossline 때문에 DisposableEffect 내부에서 생성해서 반환하지 못하니까 주입하는 방식으로 이해하면되겠다.
 
 주의할 점으로 DisposableEffect의 onDispose에서 최신 콜백/값을 참조하고 싶으면 rememberUpdatedState를 반드시 써야 한다는 것이다. 그렇지 않으면 effect 선언 당시의 오래된 값을 캡처할 수 있다.
 
