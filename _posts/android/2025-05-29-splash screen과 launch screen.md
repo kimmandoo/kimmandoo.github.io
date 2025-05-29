@@ -86,7 +86,7 @@ ios에서는 splash screen을 launch screen이라고 부른다. kmp프로젝트�
 
 ios는 역시 까탈스럽게 뭔가 많다. 먼저 아까 만들던 로고 규격보다 훨씬 크게 만들어서 png로 뽑아준다. 1080x1080으로 했다.
 
-![img](/assets/img/post/0529/1.png)
+<img src="/assets/img/post/0529/1.png" alt="Screenshot 2025-05-28 at 22.50.07" style="zoom:50%;" />
 
 먼저 Asset의 New Image set을 추가하고, single scale과 mode 선택을 해준다. 디자이너가 있다면 각 조합 9개의 모든 디자인을 다 다르게 할 수도 있겠지만 1인 개발은 그런거 없다.
 
