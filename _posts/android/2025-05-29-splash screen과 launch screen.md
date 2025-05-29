@@ -4,7 +4,7 @@ tags: [android, kotlin, kmp]
 mermaid: true
 ---
 
-# Splash Screen, Launch Screen 
+# Splash Screen, Launch Screen
 
 사이드를 안드로이드로만 할까~ 하다가 KMP로 틀었다. 어차피 혼자 진행하는 프로젝트이기도 하고, 매번 똑같은 작업만 반복하기 보다는 요즘 급부상중인 Compose Multi Platform을 제대로 해보고 싶었기 때문이다.
 
@@ -14,7 +14,7 @@ composeApp을 중심으로 ios, android 모두 jetpack compose로 ui를 그리�
 
 kmp프로젝트는 아직 android studio에서 완전히 지원하지않아서, jetbrain에서 제공하는 wizard를 써야된다. spring이 생각나는 구조다.
 
-> https://kmp.jetbrains.com/?android=true&ios=true&iosui=compose&includeTests=true
+https://kmp.jetbrains.com/?android=true&ios=true&iosui=compose&includeTests=true
 
 ## Splash Screen - Android
 
@@ -26,7 +26,7 @@ splash-screen = { module = "androidx.core:core-splashscreen" , version.ref ="1.0
 
 splash screen을 디자인할 때는, 240x240의 정사각형 틀과, 그 안에 160x160의 원을 기준으로 만들면 된다. 
 
-> https://developer.android.com/develop/ui/views/launch/splash-screen?hl=ko
+https://developer.android.com/develop/ui/views/launch/splash-screen?hl=ko
 
 적용방법은 간단하다. splash를 위한 style파일을 만들고, 그걸 매니페스트에 선언하고, LaunchActivity가 onCreate되기전에 install해주면 된다.
 
@@ -86,7 +86,7 @@ ios에서는 splash screen을 launch screen이라고 부른다. kmp프로젝트�
 
 ios는 역시 까탈스럽게 뭔가 많다. 먼저 아까 만들던 로고 규격보다 훨씬 크게 만들어서 png로 뽑아준다. 1080x1080으로 했다.
 
-<img src="/assets/img/post/0529/1.png" alt="Screenshot 2025-05-28 at 22.50.07" style="zoom:50%;" />
+![img](/assets/img/post/0529/1.png)
 
 먼저 Asset의 New Image set을 추가하고, single scale과 mode 선택을 해준다. 디자이너가 있다면 각 조합 9개의 모든 디자인을 다 다르게 할 수도 있겠지만 1인 개발은 그런거 없다.
 
