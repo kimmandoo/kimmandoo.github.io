@@ -112,7 +112,6 @@ Background는 system background로 하면 알아서 흰색 검은색 지원이 �
 
 아까 만든 launch screen을 Target 세팅에서도 연결해준다. 진짜 끝이없다.
 
-뭔가 이상하지않은가? storyboard를 만든적이 없는데 storyboard라고 되어있다. 이렇게 되면 LaunchScreen이 제대로 동작하지않는다. 
-LaunchScreen.storyboard가 아니라 그냥 LaunchScreen으로만 남겨주자.
+확장자까지 들어가있어서 `.storyboard`라고 되어있다. 이렇게 되면 LaunchScreen이 제대로 동작하지않는다. LaunchScreen.storyboard가 아니라 그냥 LaunchScreen으로만 남겨주자.
 
 이러면 splash screen, launch screen 세팅이 끝난다. 뭐 하지도 않았는데 진빠지는 시간이었다.
