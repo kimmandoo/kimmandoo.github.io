@@ -207,3 +207,11 @@ compse multiplatform 버전이 1.8.0으로 올라가면서, UI 프레임워크�
 `kotlin.native.cacheKind=none`
 
 아직은 임시방편이라 나중에 수정되는 걸 기다려야겠다. 사용하는 라이브러리가 K2컴파일러로 빌드되는 과정에서 뭔가 문제가 발생하는 걸로 추정중이다...
+
+KMP, 특히 Kotlin/Native(iOS, Desktop 등)는 라이브러리(.klib) 바이너리 간의 심볼/메타데이터 호환성이 중요하다. K2에서 빌드된 .klib 파일과 K1에서 빌드된 .klib 파일은 내부 구조가 다른데, 그래서 서로 다른 컴파일러에서 나온 .klib을 합치려고 하면 링커나 빌드 도중에 심볼을 못 찾거나 메타데이터가 달라서 충돌이 난다.
+
+이게 실제로 undefined symbol, duplicate symbol, linker failed 같은 에러로 나타난다. 위에서 ios빌드과정중에 발생한 linker failed가 그 대표적인 예시다... 어떻게 보면 라이브러리 문제가 맞지만 그거뿐의 문제는 아니라는 뜻이다. 
+
+kotlin.native.cacheKind=none을 gradle.properties에 넣으면, Kotlin/Native가 라이브러리 캐시를 안 쓴다. 원래는 의존성마다 미리 빌드된 바이너리(.klib 캐시)를 저장해서 컴파일 속도를 높이는데 K2, K1 캐시가 섞이면 위에서 말한 심볼/메타데이터 충돌이 훨씬 잘나게 되는 것이다.
+
+그래서 캐시를 꺼서 임시방편으로 이 문제를 막는 건데, 컴파일 속도가 심각하게 느려지는 부작용이 있다...
