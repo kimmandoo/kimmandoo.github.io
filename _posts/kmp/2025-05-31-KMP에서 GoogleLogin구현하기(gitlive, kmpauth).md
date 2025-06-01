@@ -138,14 +138,13 @@ PRODUCT_BUNDLE_IDENTIFIER=com.kimmandoo.nutrisport.nutri-sport$(TEAM_ID)
 
 ![img](assets/img/post/0531/5.png){: width="400" height="400" }
 
-ios용 패키지를 받아준다. 그러면 이제 아래처럼 코드를 작성할 수 있다.
+ios용 패키지를 받아준다. 그러면 이제 아래처럼 코드를 작성할 수 있다. 패키지를 받을 때, firebase 관련 패키지들을 직접 iosApp에 달아줘야 오류를 막을 수 있다.
 
 ```swift
-import SwiftUI
-import GoogleSignIn
-
 @main
 struct iOSApp: App {
+    @UIApplicationDelegateAdaptor(AppDelegate.self) var delegate
+    
     var body: some Scene {
         WindowGroup {
             ContentView().onOpenURL(perform: { url in
@@ -156,29 +155,76 @@ struct iOSApp: App {
 }
 
 class AppDelegate: NSObject, UIApplicationDelegate {
+    
     func application(
-      _ app: UIApplication,
-      open url: URL,
-      options: [UIApplication.OpenURLOptionsKey : Any] = [:]
+        _ app: UIApplication,
+        didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]? = nil
     ) -> Bool {
-      var handled: Bool
-
-      handled = GIDSignIn.sharedInstance.handle(url)
-      if handled {
+        FirebaseApp.configure()
         return true
-      }
-
-      // Handle other custom URL types.
-
-      // If not handled by this app, return false.
-      return false
     }
+// GIDSignIn에서 처리를 해주기 때문에 굳이 필요없어졌다.
+//    func application(
+//      _ app: UIApplication,
+//      open url: URL,
+//      options: [UIApplication.OpenURLOptionsKey : Any] = [:]
+//    ) -> Bool {
+//      var handled: Bool
+//
+//      handled = GIDSignIn.sharedInstance.handle(url)
+//      if handled {
+//        return true
+//      }
+//
+//      // Handle other custom URL types.
+//
+//      // If not handled by this app, return false.
+//      return false
+//    }
 }
 ```
 
 onOpenURL 부분을 통해 url내에서 이벤트 처리가 가능해졌다. swift와 ios개발은 아예 하나도 몰라서 이 부분은 다시 공부해봐야한다.
 
-이제 여기서부터는 내가 native로 코드를 완성시켜야할 것 같다.
+```xml
+<key>GIDServerClientID</key>
+<string>YOUR_SERVER_CLIENT_ID</string>
+
+<key>GIDClientID</key>
+<string>YOUR_IOS_CLIENT_ID</string>
+<key>CFBundleURLTypes</key>
+<array>
+  <dict>
+    <key>CFBundleURLSchemes</key>
+    <array>
+      <string>YOUR_DOT_REVERSED_IOS_CLIENT_ID</string>
+    </array>
+  </dict>
+</array>
+```
+
+plist를 입력할 때, 입력을 아무리 해도 빈칸으로 들어갈 때가 있을 것이다. 그럴 땐 그냥 안드로이드 스튜디오에서 편집하거나 하면 된다.
+위에서 구현한 코드는 SwiftUI와 Firebase연동에서 발생하는 초기화 타이밍 문제가 있었다. 이걸 해결하기 위해서는 AppDelegate의 init에서 FirebaseApp.configure()를 처리하면 되는데, 간단하다.
+
+```swift
+class AppDelegate: NSObject, UIApplicationDelegate {
+    
+    override init() {
+        super.init()
+        FirebaseApp.configure()
+    }
+    
+    func application(
+        _ app: UIApplication,
+        didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]? = nil
+    ) -> Bool {
+//        FirebaseApp.configure()
+        return true
+    }
+}
+```
+
+@UIApplicationDelegateAdaptor를 써도 View가 delegate보다 먼저 초기화될 수 있는데, 그때 AppDelegate가 완료되기 전에 Firebase 관련 메서드에 접근하면 바로 에러난다. 또한 SwiftUI가 앱 라이프사이클을 UIKit처럼 1:1로 맞춰주지 않기 때문에, 위에 코드처럼 아예 init블록에서 처리되게 하면 안전하다.
 
 ```text
 Undefined symbol: _kfun:androidx.compose.material3#androidx_compose_material3_MaterialTheme$stableprop_getter$artificial(){}kotlin.Int
@@ -210,8 +256,8 @@ compse multiplatform 버전이 1.8.0으로 올라가면서, UI 프레임워크�
 
 KMP, 특히 Kotlin/Native(iOS, Desktop 등)는 라이브러리(.klib) 바이너리 간의 심볼/메타데이터 호환성이 중요하다. K2에서 빌드된 .klib 파일과 K1에서 빌드된 .klib 파일은 내부 구조가 다른데, 그래서 서로 다른 컴파일러에서 나온 .klib을 합치려고 하면 링커나 빌드 도중에 심볼을 못 찾거나 메타데이터가 달라서 충돌이 난다.
 
-이게 실제로 undefined symbol, duplicate symbol, linker failed 같은 에러로 나타난다. 위에서 ios빌드과정중에 발생한 linker failed가 그 대표적인 예시다... 어떻게 보면 라이브러리 문제가 맞지만 그거뿐의 문제는 아니라는 뜻이다. 
+이게 실제로 undefined symbol, duplicate symbol, linker failed 같은 에러로 나타난다. 위에서 ios빌드과정중에 발생한 linker failed가 그 대표적인 예시다. 어떻게 보면 라이브러리 문제가 맞지만 그거뿐의 문제는 아니라는 뜻이다.
 
 kotlin.native.cacheKind=none을 gradle.properties에 넣으면, Kotlin/Native가 라이브러리 캐시를 안 쓴다. 원래는 의존성마다 미리 빌드된 바이너리(.klib 캐시)를 저장해서 컴파일 속도를 높이는데 K2, K1 캐시가 섞이면 위에서 말한 심볼/메타데이터 충돌이 훨씬 잘나게 되는 것이다.
 
-그래서 캐시를 꺼서 임시방편으로 이 문제를 막는 건데, 컴파일 속도가 심각하게 느려지는 부작용이 있다...
+그래서 캐시를 꺼서 임시방편으로 이 문제를 막는 건데, 컴파일 속도가 심각하게 느려지는 부작용이 있다.
