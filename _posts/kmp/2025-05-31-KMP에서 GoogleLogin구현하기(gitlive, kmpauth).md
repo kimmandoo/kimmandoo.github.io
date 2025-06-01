@@ -185,3 +185,25 @@ Undefined symbol: _kfun:androidx.compose.material3#androidx_compose_material3_Ma
 ```
 
 이런 로그가 발생했는데, 아무리 봐도 서드파티 라이브러리 때문인 것 같다!
+
+## fix: 20250601
+
+원인을 찾았다. 답은 stackoverflow에 있었다.
+
+https://stackoverflow.com/questions/79616622/xcode-fails-to-run-kotlin-multiplatform-project-after-upgrading-compose-to-1-8-0
+
+```text
+Starting with Compose Multiplatform 1.8.0, the UI framework fully transitioned to the K2 compiler. So, to share UI code using the latest Compose Multiplatform you should:
+
+use at least Kotlin 2.1.0 for your projects,
+
+depend on libraries based on Compose Multiplatform only if they are compiled against at least Kotlin 2.1.0.
+
+As a workaround until all dependencies are updated, you may turn off Gradle cache by adding kotlin.native.cacheKind=none to your gradle.properties file. This will increase compilation time.
+```
+
+compse multiplatform 버전이 1.8.0으로 올라가면서, UI 프레임워크가 K2컴파일러로 전환됐는데 이거 때문에 sharedUI환경에서 오류가 발생하는 것이었다. gradle 캐싱과정중에 문제가 발생하는 것으로 보이는데, 아래 코드를 gradle.properties파일에 추가하면 해결되는 문제다.
+
+`kotlin.native.cacheKind=none`
+
+아직은 임시방편이라 나중에 수정되는 걸 기다려야겠다. 사용하는 라이브러리가 K2컴파일러로 빌드되는 과정에서 뭔가 문제가 발생하는 걸로 추정중이다...
