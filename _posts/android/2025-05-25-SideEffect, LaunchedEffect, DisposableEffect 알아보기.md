@@ -1,6 +1,6 @@
 ---
 categories: [Android]
-tags: [android, kotlin]
+tags: [android, kotlin, compose]
 mermaid: true
 ---
 
