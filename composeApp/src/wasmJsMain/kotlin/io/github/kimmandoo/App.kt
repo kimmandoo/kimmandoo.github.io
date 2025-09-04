@@ -10,7 +10,7 @@ import androidx.compose.ui.layout.Layout
 import androidx.compose.ui.layout.Measurable
 import androidx.compose.ui.layout.Placeable
 import androidx.compose.ui.unit.Constraints
-import io.github.kimmandoo.screen.MainScreen
+import io.github.kimmandoo.screen.main.MainScreen
 import io.github.kimmandoo.ui.MandooTheme
 import io.github.kimmandoo.ui.adaptive.LocalScreenSize
 import io.github.kimmandoo.ui.adaptive.LocalThemeMode
