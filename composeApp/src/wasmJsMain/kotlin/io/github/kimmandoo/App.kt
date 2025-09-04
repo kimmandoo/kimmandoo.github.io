@@ -1,47 +1,77 @@
 package io.github.kimmandoo
 
-import androidx.compose.animation.AnimatedVisibility
-import androidx.compose.foundation.Image
-import androidx.compose.foundation.background
-import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.safeContentPadding
-import androidx.compose.material3.Button
-import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.Text
 import androidx.compose.runtime.*
-import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import org.jetbrains.compose.resources.painterResource
-
-import kimmandoo_porfolio.composeapp.generated.resources.Res
-import kimmandoo_porfolio.composeapp.generated.resources.compose_multiplatform
+import io.github.kimmandoo.ui.adaptive.ScreenSize
+import io.github.kimmandoo.ui.adaptive.ThemeMode
+import androidx.compose.ui.layout.Layout
+import androidx.compose.ui.layout.Measurable
+import androidx.compose.ui.layout.Placeable
+import androidx.compose.ui.unit.Constraints
+import io.github.kimmandoo.screen.MainScreen
+import io.github.kimmandoo.ui.MandooTheme
+import io.github.kimmandoo.ui.adaptive.LocalScreenSize
+import io.github.kimmandoo.ui.adaptive.LocalThemeMode
 
 @Composable
 fun App() {
-    MaterialTheme {
-        var showContent by remember { mutableStateOf(false) }
-        Column(
-            modifier = Modifier
-                .background(MaterialTheme.colorScheme.primaryContainer)
-                .safeContentPadding()
-                .fillMaxSize(),
-            horizontalAlignment = Alignment.CenterHorizontally,
-        ) {
-            Button(onClick = { showContent = !showContent }) {
-                Text("하늘에 서겠다")
+    val isSystemInDarkTheme = isSystemInDarkTheme()
+    var themeMode by remember { mutableStateOf(if (isSystemInDarkTheme) ThemeMode.Dark else ThemeMode.Light) }
+    var screenSize by remember { mutableStateOf(ScreenSize()) }
+
+    Layout(
+        content = {
+            AppContent(
+                screenSize = screenSize,
+                themeMode = themeMode,
+                onThemeChanged = { mode -> themeMode = mode },
+            )
+        },
+        measurePolicy = { measurables, constraints ->
+            val width = constraints.maxWidth
+            val height = constraints.maxHeight
+
+            screenSize = ScreenSize(width, height)
+
+            val placeables = measurePlaceables(measurables, constraints)
+
+            layout(width, height) {
+                placePlaceables(placeables)
             }
-            AnimatedVisibility(showContent) {
-                val greeting = remember { Greeting().greet() }
-                Column(
-                    modifier = Modifier.fillMaxWidth(),
-                    horizontalAlignment = Alignment.CenterHorizontally,
-                ) {
-                    Image(painterResource(Res.drawable.compose_multiplatform), null)
-                    Text("아이젠: $greeting")
-                }
-            }
+        },
+    )
+}
+
+fun measurePlaceables(
+    measurables: List<Measurable>,
+    constraints: Constraints,
+): List<Placeable> = measurables.map { measurable -> measurable.measure(constraints) }
+
+fun Placeable.PlacementScope.placePlaceables(placeables: List<Placeable>) {
+    var yPosition = 0
+    placeables.forEach { placeable ->
+        placeable.placeRelative(x = 0, y = yPosition)
+        yPosition += placeable.height
+    }
+}
+
+@Composable
+fun AppContent(
+    screenSize: ScreenSize,
+    themeMode: ThemeMode,
+    onThemeChanged: (ThemeMode) -> Unit,
+) {
+    CompositionLocalProvider(
+        LocalScreenSize provides screenSize,
+        LocalThemeMode provides themeMode,
+    ) {
+        MandooTheme(isDarkTheme = themeMode == ThemeMode.Light) {
+            MainScreen(
+                modifier = Modifier.fillMaxSize(),
+                onThemeChanged = onThemeChanged,
+            )
         }
     }
 }
