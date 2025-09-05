@@ -37,7 +37,7 @@ fun GreetingAnimation() {
     LaunchedEffect(currentGreetingIndex) {
         // Step 1: 글자 나타나기 (Fade In)
         visible = true
-        delay(5000) // 3초 동안 글자를 보여줌
+        delay(5000)
 
         // Step 2: 글자 사라지기 (Fade Out)
         visible = false
@@ -48,9 +48,15 @@ fun GreetingAnimation() {
     }
 
     Box(
-        modifier = Modifier.width(300.dp),
         contentAlignment = Alignment.Center // 2. 내용물(Text)을 중앙에 정렬합니다.
     ){
+        Column(modifier = Modifier.alpha(0f)) {
+            Text(
+                text = greetings.last(),
+                fontSize = 48.sp,
+                modifier = Modifier.padding(8.dp)
+            )
+        }
         Text(
             text = greetings[currentGreetingIndex],
             fontSize = 48.sp,
