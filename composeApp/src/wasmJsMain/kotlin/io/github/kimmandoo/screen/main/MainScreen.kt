@@ -17,6 +17,7 @@ import androidx.compose.ui.platform.LocalLayoutDirection
 import androidx.compose.ui.unit.LayoutDirection
 import androidx.compose.ui.unit.dp
 import io.github.kimmandoo.model.Section
+import io.github.kimmandoo.screen.home.HomeScreen
 import io.github.kimmandoo.screen.main.TopBar
 import io.github.kimmandoo.screen.main.component.GreetingAnimation
 import io.github.kimmandoo.ui.adaptive.DeviceState
@@ -107,21 +108,7 @@ fun MainContent(
                 )
             },
         ) { innerPadding ->
-            Row(modifier = modifier.then(Modifier.padding(innerPadding).fillMaxSize().padding(8.dp)),
-                horizontalArrangement = Arrangement.Center,
-                verticalAlignment = Alignment.CenterVertically
-            ) {
-                GreetingAnimation()
-                Box(modifier = Modifier.size(80.dp)){
-                    Image(
-                        modifier = Modifier.fillMaxHeight(),
-                        painter = painterResource(
-                            resource = Res.drawable.ic_android,
-                        ),
-                        contentDescription = "버그로이드"
-                    )
-                }
-            }
+            HomeScreen(onSectionClicked = onSectionClicked)
 //            LazyColumn(
 //                state = listState,
 //                modifier =
@@ -133,7 +120,7 @@ fun MainContent(
 //                    ),
 //                horizontalAlignment = Alignment.CenterHorizontally,
 //            ) {
-//                item { HomeSection(onSectionClicked = onSectionClicked) }
+//                item { HomeScreen(onSectionClicked = onSectionClicked) }
 //                item { AboutSection() }
 //                item { CareerSection() }
 //                item { ProjectSection(onSectionClicked = onSectionClicked) }

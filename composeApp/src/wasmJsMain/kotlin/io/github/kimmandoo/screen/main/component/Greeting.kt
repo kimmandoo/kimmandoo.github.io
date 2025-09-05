@@ -8,12 +8,17 @@ import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.alpha
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import io.github.kimmandoo.ui.adaptive.rememberDeviceState
+import io.github.kimmandoo.ui.adaptive.titleFontSize
 import kotlinx.coroutines.delay
 
 @Composable
 fun GreetingAnimation() {
+    val deviceState = rememberDeviceState()
+
     val greetings = remember {
         listOf(
             "안녕하세요",   // Korean
@@ -48,20 +53,20 @@ fun GreetingAnimation() {
     }
 
     Box(
-        contentAlignment = Alignment.Center // 2. 내용물(Text)을 중앙에 정렬합니다.
+        contentAlignment = Alignment.CenterEnd // 2. 내용물(Text)을 중앙에 정렬합니다.
     ){
         Column(modifier = Modifier.alpha(0f)) {
             Text(
                 text = greetings.last(),
-                fontSize = 48.sp,
-                modifier = Modifier.padding(8.dp)
+                fontSize = deviceState.titleFontSize(),
+                fontWeight = FontWeight.Bold,
             )
         }
         Text(
             text = greetings[currentGreetingIndex],
-            fontSize = 48.sp,
+            fontSize = deviceState.titleFontSize(),
+            fontWeight = FontWeight.Bold,
             modifier = Modifier
-                .padding(8.dp)
                 .alpha(animatedAlpha) // 애니메이션이 적용된 alpha 값 사용
         )
     }
