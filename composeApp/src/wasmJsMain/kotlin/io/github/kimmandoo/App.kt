@@ -67,7 +67,7 @@ fun AppContent(
         LocalScreenSize provides screenSize,
         LocalThemeMode provides themeMode,
     ) {
-        MandooTheme(isDarkTheme = themeMode == ThemeMode.Light) {
+        MandooTheme(isDarkTheme = themeMode == ThemeMode.Dark) {
             MainScreen(
                 modifier = Modifier.fillMaxSize(),
                 onThemeChanged = onThemeChanged,

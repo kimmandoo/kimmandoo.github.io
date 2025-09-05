@@ -23,7 +23,7 @@ import io.github.kimmandoo.ui.adaptive.DeviceState
 import io.github.kimmandoo.ui.adaptive.ThemeMode
 import io.github.kimmandoo.ui.adaptive.rememberDeviceState
 import kimmandoo_porfolio.composeapp.generated.resources.Res
-import kimmandoo_porfolio.composeapp.generated.resources.img_android
+import kimmandoo_porfolio.composeapp.generated.resources.ic_android
 import kotlinx.coroutines.launch
 import org.jetbrains.compose.resources.painterResource
 
@@ -38,27 +38,48 @@ fun MainScreen(
     val scope = rememberCoroutineScope()
 
     CompositionLocalProvider(LocalLayoutDirection provides LayoutDirection.Rtl) {
-        MainContent(
-            listState = listState,
-            deviceState = deviceState,
-            modifier = modifier,
-            onThemeChanged = onThemeChanged,
-            onTitleClick = {
-                scope.launch {
-                    listState.animateScrollToItem(Section.Home.ordinal)
-                }
+        ModalNavigationDrawer(
+            gesturesEnabled = false,
+            drawerContent = {
+                // 내부에 표시될 컨텐츠
+                HomeDrawer(
+                    onClickItem = {
+                        scope.launch {
+                            drawerState.close()
+                            listState.animateScrollToItem(it.ordinal)
+                        }
+                    },
+                    onDismissRequest = {
+                        scope.launch {
+                            drawerState.close()
+                        }
+                    },
+                )
             },
-            onSectionClicked = { section ->
-                scope.launch {
-                    listState.animateScrollToItem(section.ordinal)
-                }
-            },
-            onMenuClick = {
-                scope.launch {
-                    drawerState.open()
-                }
-            },
-        )
+            drawerState = drawerState,
+            ) {
+            MainContent(
+                listState = listState,
+                deviceState = deviceState,
+                modifier = modifier,
+                onThemeChanged = onThemeChanged,
+                onTitleClick = {
+                    scope.launch {
+                        listState.animateScrollToItem(Section.Home.ordinal)
+                    }
+                },
+                onSectionClicked = { section ->
+                    scope.launch {
+                        listState.animateScrollToItem(section.ordinal)
+                    }
+                },
+                onMenuClick = {
+                    scope.launch {
+                        drawerState.open()
+                    }
+                },
+            )
+        }
     }
 }
 
@@ -86,18 +107,20 @@ fun MainContent(
                 )
             },
         ) { innerPadding ->
-            Row(modifier = modifier.then(Modifier.padding(innerPadding).fillMaxSize()),
+            Row(modifier = modifier.then(Modifier.padding(innerPadding).fillMaxSize().padding(8.dp)),
                 horizontalArrangement = Arrangement.Center,
                 verticalAlignment = Alignment.CenterVertically
             ) {
                 GreetingAnimation()
-                Image(
-                    modifier = Modifier.height(100.dp),
-                    painter = painterResource(
-                        resource = Res.drawable.img_android,
-                    ),
-                    contentDescription = "버그로이드"
-                )
+                Box(modifier = Modifier.size(80.dp)){
+                    Image(
+                        modifier = Modifier.fillMaxHeight(),
+                        painter = painterResource(
+                            resource = Res.drawable.ic_android,
+                        ),
+                        contentDescription = "버그로이드"
+                    )
+                }
             }
 //            LazyColumn(
 //                state = listState,

@@ -16,6 +16,7 @@ import io.github.kimmandoo.ui.adaptive.ThemeMode
 import org.jetbrains.compose.resources.painterResource
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.unit.sp
+import io.github.kimmandoo.HEADER_HEIGHT
 import org.jetbrains.compose.resources.stringResource
 
 @Composable
@@ -130,5 +131,3 @@ fun DesktopTopBar(
         }
     }
 }
-
-const val HEADER_HEIGHT = 72
