@@ -16,7 +16,7 @@ import io.github.kimmandoo.ui.adaptive.titleFontSize
 import kotlinx.coroutines.delay
 
 @Composable
-fun GreetingAnimation() {
+fun GreetingAnimation(contentAlignment: Alignment = Alignment.Center) {
     val deviceState = rememberDeviceState()
 
     val greetings = remember {
@@ -53,7 +53,7 @@ fun GreetingAnimation() {
     }
 
     Box(
-        contentAlignment = Alignment.CenterEnd // 2. 내용물(Text)을 중앙에 정렬합니다.
+        contentAlignment = contentAlignment // 2. 내용물(Text)을 중앙에 정렬합니다.
     ){
         Column(modifier = Modifier.alpha(0f)) {
             Text(

@@ -105,21 +105,18 @@ private fun HomeMobileSection(
             horizontalAlignment = Alignment.CenterHorizontally,
             verticalArrangement = Arrangement.Center,
         ) {
-            Row(modifier = Modifier.height(maxOf(MOBILE_CONTENT_MIN_HEIGHT, screenSize.height).dp / 3f,),
-                horizontalArrangement = Arrangement.Center,
-                verticalAlignment = Alignment.CenterVertically
+            Column(modifier = Modifier.height(maxOf(MOBILE_CONTENT_MIN_HEIGHT, screenSize.height).dp / 3f,),
+               horizontalAlignment = Alignment.CenterHorizontally,
+               verticalArrangement = Arrangement.Bottom
             ) {
+                Image(
+                    modifier = Modifier.height(80.dp),
+                    painter = painterResource(
+                        resource = Res.drawable.ic_android,
+                    ),
+                    contentDescription = "버그로이드"
+                )
                 GreetingAnimation()
-                Spacer(modifier = Modifier.size(16.dp))
-                Box(modifier = Modifier.size(80.dp)){
-                    Image(
-                        modifier = Modifier.fillMaxHeight(),
-                        painter = painterResource(
-                            resource = Res.drawable.ic_android,
-                        ),
-                        contentDescription = "버그로이드"
-                    )
-                }
             }
 
             Text(
@@ -174,23 +171,20 @@ private fun HomeTabletSection(
             horizontalAlignment = Alignment.CenterHorizontally,
             verticalArrangement = Arrangement.Center,
         ) {
-            Row(modifier = Modifier.height(maxOf(MOBILE_CONTENT_MIN_HEIGHT, screenSize.height).dp / 3f,),
-                horizontalArrangement = Arrangement.Center,
-                verticalAlignment = Alignment.CenterVertically
+            Column(modifier = Modifier.height(maxOf(MOBILE_CONTENT_MIN_HEIGHT, screenSize.height).dp / 3f,),
+                   horizontalAlignment = Alignment.CenterHorizontally,
+                   verticalArrangement = Arrangement.Bottom
             ) {
+                Image(
+                    modifier = Modifier.height(100.dp),
+                    painter = painterResource(
+                        resource = Res.drawable.ic_android,
+                    ),
+                    contentDescription = "버그로이드"
+                )
                 GreetingAnimation()
-                Spacer(modifier = Modifier.size(16.dp))
-                Box(modifier = Modifier.size(80.dp)){
-                    Image(
-                        modifier = Modifier.fillMaxHeight(),
-                        painter = painterResource(
-                            resource = Res.drawable.ic_android,
-                        ),
-                        contentDescription = "버그로이드"
-                    )
-                }
             }
-
+            Spacer(modifier = Modifier.size(16.dp))
             Text(
                 text = nicknameString,
                 lineHeight = 76.sp,
@@ -236,24 +230,21 @@ private fun HomeDesktopSection(
                     .padding(horizontal = 120.dp),
             ),
     ) {
-        Row(modifier = Modifier
-                    .width(DESKTOP_CONTENT_WIDTH.dp / 2)
-                    .align(Alignment.CenterStart),
-            horizontalArrangement = Arrangement.End,
-            verticalAlignment = Alignment.CenterVertically
-        ) {
-            GreetingAnimation()
-            Spacer(modifier = Modifier.size(16.dp))
-            Box(modifier = Modifier.size(200.dp)){
+        Box(modifier = Modifier.width(DESKTOP_CONTENT_WIDTH.dp / 2).align(Alignment.CenterStart),
+            contentAlignment = Alignment.CenterEnd
+        ){
+            Column(horizontalAlignment = Alignment.CenterHorizontally) {
                 Image(
-                    modifier = Modifier.fillMaxHeight(),
+                    modifier = Modifier.height(100.dp),
                     painter = painterResource(
                         resource = Res.drawable.ic_android,
-                    ),
+                        ),
                     contentDescription = "버그로이드"
                 )
+                GreetingAnimation()
             }
         }
+
 
         Column(
             modifier =
@@ -328,7 +319,7 @@ private fun BlogButton(modifier: Modifier = Modifier) {
         contentPadding = PaddingValues(vertical = 12.dp, horizontal = 24.dp),
     ) {
         Icon(
-            painter = painterResource(Res.drawable.ic_open_in_new),
+            painter = painterResource(Res.drawable.ic_medium),
             contentDescription = null,
             modifier = Modifier.size(24.dp),
         )

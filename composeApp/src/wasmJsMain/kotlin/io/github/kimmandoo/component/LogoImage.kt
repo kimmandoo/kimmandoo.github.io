@@ -9,7 +9,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import kimmandoo_porfolio.composeapp.generated.resources.Res
-import kimmandoo_porfolio.composeapp.generated.resources.ic_android
+import kimmandoo_porfolio.composeapp.generated.resources.ic_logo
 import org.jetbrains.compose.resources.painterResource
 
 @Composable
@@ -22,7 +22,7 @@ fun LogoImage(
         modifier = modifier.height(48.dp),
     ) {
         Icon(
-            painter = painterResource(Res.drawable.ic_android),
+            painter = painterResource(Res.drawable.ic_logo),
             contentDescription = null,
             modifier = Modifier.fillMaxHeight(),
             tint = MaterialTheme.colorScheme.onSecondaryContainer,
