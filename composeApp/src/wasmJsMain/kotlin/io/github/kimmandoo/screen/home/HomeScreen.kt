@@ -121,7 +121,7 @@ private fun HomeMobileSection(
 
             Text(
                 text = nicknameString,
-                lineHeight = 76.sp,
+                lineHeight = 64.sp,
                 textAlign = TextAlign.Center,
             )
 
