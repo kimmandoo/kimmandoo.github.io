@@ -109,24 +109,24 @@ fun MainContent(
             },
         ) { innerPadding ->
             HomeScreen(onSectionClicked = onSectionClicked)
-//            LazyColumn(
-//                state = listState,
-//                modifier =
-//                    modifier.then(
-//                        Modifier
-//                            .padding(innerPadding)
-//                            .background(color = MaterialTheme.colorScheme.primaryContainer)
-//                            .fillMaxSize(),
-//                    ),
-//                horizontalAlignment = Alignment.CenterHorizontally,
-//            ) {
-//                item { HomeScreen(onSectionClicked = onSectionClicked) }
+            LazyColumn(
+                state = listState,
+                modifier =
+                    modifier.then(
+                        Modifier
+                            .padding(innerPadding)
+                            .background(color = MaterialTheme.colorScheme.primaryContainer)
+                            .fillMaxSize(),
+                    ),
+                horizontalAlignment = Alignment.CenterHorizontally,
+            ) {
+                item { HomeScreen(onSectionClicked = onSectionClicked) }
 //                item { AboutSection() }
 //                item { CareerSection() }
 //                item { ProjectSection(onSectionClicked = onSectionClicked) }
 //                item { ExperienceSection() }
 //                item { ContactSection() }
-//            }
+            }
         }
     }
 }
