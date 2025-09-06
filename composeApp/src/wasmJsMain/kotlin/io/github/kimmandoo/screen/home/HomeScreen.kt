@@ -77,7 +77,7 @@ private fun buildNicknameString(deviceState: DeviceState): AnnotatedString =
             withStyle(SpanStyle(color = MaterialTheme.colorScheme.primary)) {
                 append(stringResource(Res.string.blue_chip))
             }
-
+            if(deviceState.value == Device.MOBILE) append("\n")
             withStyle(SpanStyle(color = MaterialTheme.colorScheme.onPrimaryContainer)) {
                 append(stringResource(Res.string.kimmingyu))
             }
@@ -121,7 +121,7 @@ private fun HomeMobileSection(
 
             Text(
                 text = nicknameString,
-                lineHeight = 64.sp,
+                lineHeight = 40.sp,
                 textAlign = TextAlign.Center,
             )
 
