@@ -1,12 +1,10 @@
 package io.github.kimmandoo.screen.main
 
-import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.LazyListState
 import androidx.compose.foundation.lazy.rememberLazyListState
-import androidx.compose.foundation.onClick
 import androidx.compose.material3.*
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.CompositionLocalProvider
@@ -15,18 +13,13 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalLayoutDirection
 import androidx.compose.ui.unit.LayoutDirection
-import androidx.compose.ui.unit.dp
 import io.github.kimmandoo.model.Section
+import io.github.kimmandoo.screen.about.AboutScreen
 import io.github.kimmandoo.screen.home.HomeScreen
-import io.github.kimmandoo.screen.main.TopBar
-import io.github.kimmandoo.screen.main.component.GreetingAnimation
 import io.github.kimmandoo.ui.adaptive.DeviceState
 import io.github.kimmandoo.ui.adaptive.ThemeMode
 import io.github.kimmandoo.ui.adaptive.rememberDeviceState
-import kimmandoo_porfolio.composeapp.generated.resources.Res
-import kimmandoo_porfolio.composeapp.generated.resources.ic_android
 import kotlinx.coroutines.launch
-import org.jetbrains.compose.resources.painterResource
 
 @Composable
 fun MainScreen(
@@ -121,7 +114,7 @@ fun MainContent(
                 horizontalAlignment = Alignment.CenterHorizontally,
             ) {
                 item { HomeScreen(onSectionClicked = onSectionClicked) }
-//                item { AboutSection() }
+                item { AboutScreen() }
 //                item { CareerSection() }
 //                item { ProjectSection(onSectionClicked = onSectionClicked) }
 //                item { ExperienceSection() }

@@ -230,28 +230,12 @@ private fun HomeDesktopSection(
                     .padding(horizontal = 120.dp),
             ),
     ) {
-        Box(modifier = Modifier.width(DESKTOP_CONTENT_WIDTH.dp / 2).align(Alignment.CenterStart),
-            contentAlignment = Alignment.CenterEnd
-        ){
-            Column(horizontalAlignment = Alignment.CenterHorizontally) {
-                Image(
-                    modifier = Modifier.height(100.dp),
-                    painter = painterResource(
-                        resource = Res.drawable.ic_android,
-                        ),
-                    contentDescription = "버그로이드"
-                )
-                GreetingAnimation()
-            }
-        }
-
-
         Column(
             modifier =
                 Modifier
                     .width((DESKTOP_CONTENT_WIDTH.dp / 1.5f))
-                    .align(Alignment.CenterEnd),
-            horizontalAlignment = Alignment.Start,
+                    .align(Alignment.CenterStart),
+            horizontalAlignment = Alignment.CenterHorizontally,
             verticalArrangement = Arrangement.Center,
         ) {
             Text(text = nicknameString, lineHeight = 92.sp)
@@ -263,7 +247,7 @@ private fun HomeDesktopSection(
                 color = MaterialTheme.colorScheme.onPrimaryContainer.copy(alpha = 0.5f),
                 fontSize = 16.sp,
                 lineHeight = 24.sp,
-                textAlign = TextAlign.Start,
+                textAlign = TextAlign.Center,
             )
 
             Spacer(modifier = Modifier.height(36.dp))
@@ -276,6 +260,30 @@ private fun HomeDesktopSection(
                 BlogButton()
             }
         }
+
+        Box(modifier = Modifier.width(DESKTOP_CONTENT_WIDTH.dp / 2).align(Alignment.CenterEnd),
+            contentAlignment = Alignment.Center
+        ){
+            Column(horizontalAlignment = Alignment.CenterHorizontally) {
+                Image(
+                    modifier = Modifier.height(100.dp),
+                    painter = painterResource(
+                        resource = Res.drawable.ic_android,
+                    ),
+                    contentDescription = "버그로이드"
+                )
+                GreetingAnimation()
+            }
+        }
+
+        AnimatedArrow(
+            modifier =
+                Modifier
+                    .size(128.dp)
+                    .align(Alignment.BottomCenter)
+                    .padding(bottom = 24.dp),
+            onClick = { onSectionClicked(Section.About) },
+        )
     }
 }
 
