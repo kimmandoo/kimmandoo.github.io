@@ -1,10 +1,7 @@
 package io.github.kimmandoo.screen.about
 
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.FolderCopy
-import androidx.compose.material.icons.filled.Info
-import androidx.compose.material.icons.filled.PermDeviceInformation
-import androidx.compose.material.icons.filled.Rocket
+import androidx.compose.material.icons.filled.*
 import androidx.compose.ui.graphics.vector.ImageVector
 import kimmandoo_porfolio.composeapp.generated.resources.Res
 import kimmandoo_porfolio.composeapp.generated.resources.about_me_description1
@@ -23,12 +20,12 @@ enum class AboutMe(
     CONTENT1(
         titleRes = Res.string.about_me_title1,
         descriptionRes = Res.string.about_me_description1,
-        iconsRes = Icons.Default.Info,
+        iconsRes = Icons.Default.PsychologyAlt,
     ),
     CONTENT2(
         titleRes = Res.string.about_me_title2,
         descriptionRes = Res.string.about_me_description2,
-        iconsRes = Icons.Default.FolderCopy,
+        iconsRes = Icons.Default.ElectricBolt,
     ),
     CONTENT3(
         titleRes = Res.string.about_me_title3,
