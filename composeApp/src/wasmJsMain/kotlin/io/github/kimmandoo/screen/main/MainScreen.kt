@@ -15,6 +15,7 @@ import androidx.compose.ui.platform.LocalLayoutDirection
 import androidx.compose.ui.unit.LayoutDirection
 import io.github.kimmandoo.model.Section
 import io.github.kimmandoo.screen.about.AboutScreen
+import io.github.kimmandoo.screen.carex.CareerExperienceScreen
 import io.github.kimmandoo.screen.home.HomeScreen
 import io.github.kimmandoo.ui.adaptive.DeviceState
 import io.github.kimmandoo.ui.adaptive.ThemeMode
@@ -115,7 +116,7 @@ fun MainContent(
             ) {
                 item { HomeScreen(onSectionClicked = onSectionClicked) }
                 item { AboutScreen() }
-//                item { CareerSection() }
+                item { CareerExperienceScreen() }
 //                item { ProjectSection(onSectionClicked = onSectionClicked) }
 //                item { ExperienceSection() }
 //                item { ContactSection() }

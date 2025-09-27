@@ -18,7 +18,8 @@ import io.github.kimmandoo.ui.adaptive.LocalThemeMode
 @Composable
 fun App() {
     val isSystemInDarkTheme = isSystemInDarkTheme()
-    var themeMode by remember { mutableStateOf(if (isSystemInDarkTheme) ThemeMode.Dark else ThemeMode.Light) }
+//    var themeMode by remember { mutableStateOf(if (isSystemInDarkTheme) ThemeMode.Dark else ThemeMode.Light) } // 시스템모드 자동일때
+    var themeMode by remember { mutableStateOf(ThemeMode.Light) }
     var screenSize by remember { mutableStateOf(ScreenSize()) }
 
     Layout(

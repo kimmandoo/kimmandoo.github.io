@@ -2,7 +2,8 @@
     <!-- Section -->
     <string name="section_home">Home</string>
     <string name="section_about">About</string>
-    <string name="section_career">Career</string>
+    <string name="section_career">Career &amp; Experience</string>
+    <string name="career">Career</string>
     <string name="section_experience">Experience</string>
     <string name="section_project">Project</string>
 
@@ -24,16 +25,23 @@
 
     <!--Career-->
     <string name="android_developer">Android Developer</string>
+    <string name="software_engineer">Software Engineer</string>
     <string name="flutter_developer">Flutter Developer</string>
     <string name="mobile_developer">Mobile Developer</string>
 
-    <string name="career_paytalab">페이타랩</string>
-    <string name="career_paytalab_period">2025.07 - ing</string>
+    <string name="career_marusys">마르시스 Marusys Co., Ltd</string>
+    <string name="career_marusys_intro">Android TV 기반 셋톱박스 개발</string>
+    <string name="career_marusys_period">2025.04.01 - Current</string>
 
-    <string name="career_paytalab_project1_title">패스오더 '선물하기' 기능 개발</string>
-    <string name="career_paytalab_project1_period">2025.07 - ing</string>
-    <string name="career_paytalab_project1_tech_stack">Android, Kotlin, Jetpack Compose</string>
-    <string name="career_paytalab_project1_contributions">- 선물하기 프로모션 기능 설계 및 구현\n- 선물하기 UI 개선 및 사용자 경험 향상</string>
+    <string name="career_marusys_project1_title">일본향 셋톱박스(STB) 로그 분석 솔루션 유지 보수 및 기능 개선</string>
+    <string name="career_marusys_project1_period">2025.04 - Current</string>
+    <string name="career_marusys_project1_tech_stack">Android, Kotlin, Java, AWS, MQTT</string>
+    <string name="career_marusys_project1_contributions">- 솔루션 DB 마이그레이션 작업(SQLite → MySQL) 수행\n- MQTT프로토콜 기반 신규 기능 개발\n\t- MediaProjection을 활용한 원격 화면 제어 기능 개발\n\t- Web ADB shell 개발</string>
+
+    <string name="career_marusys_project2_title">TV Input Framework 관련 유지 보수, PoC 개발</string>
+    <string name="career_marusys_project2_period">2025.08 - Current</string>
+    <string name="career_marusys_project2_tech_stack">Android, Java, C++, AOSP</string>
+    <string name="career_marusys_project2_contributions">- AndroidTV 기반 TvInputFramework 유지 보수 및 개발\n\t- AmLogic 보드 기반 STB PoC 개발\n\t- Broadcom 보드 기반 STB 유지 보수 및 펌웨어 이슈 테스트</string>
 
 
     <string name="career_lio">리오(lio)</string>
