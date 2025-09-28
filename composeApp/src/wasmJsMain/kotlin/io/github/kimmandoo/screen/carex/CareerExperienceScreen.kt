@@ -52,6 +52,7 @@ fun CareerExperienceScreen(modifier: Modifier = Modifier) {
             stringResource(Res.string.section_career),
             color = MaterialTheme.colorScheme.onPrimaryContainer,
             fontWeight = FontWeight.ExtraBold,
+            lineHeight = 36.sp,
             fontSize = 36.sp,
         )
 
