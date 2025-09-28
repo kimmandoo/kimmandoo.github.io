@@ -58,7 +58,7 @@
 
     <string name="contribute_kaigi">Droid Kaigi Conference App 2025</string>
     <string name="contribute_kaigi_subtitle">일본 최대 안드로이드 컨퍼런스 Droid Kaigi 2025 앱</string>
-    <string name="contribute_kaigi_desc">북마크 state가 검색 결과 화면에 반영되지않는 Issue 기여</string>
+    <string name="contribute_kaigi_desc">- 북마크 state가 검색 결과 화면에 반영되지않는 Issue 기여</string>
     <string name="contribute_kaigi_period">2025.08</string>
     <string name="contribute_kaigi_pr_link">https:\/\/github.com\/DroidKaigi\/conference-app-2025\/pull\/265</string>
 
