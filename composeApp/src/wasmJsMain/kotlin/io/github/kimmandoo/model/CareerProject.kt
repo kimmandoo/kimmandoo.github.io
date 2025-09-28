@@ -1,7 +1,6 @@
 package io.github.kimmandoo.model
 
 import kimmandoo_porfolio.composeapp.generated.resources.Res
-import kimmandoo_porfolio.composeapp.generated.resources.career_lio_project3_period
 import kimmandoo_porfolio.composeapp.generated.resources.*
 import org.jetbrains.compose.resources.StringResource
 
@@ -26,38 +25,6 @@ data class CareerProject(
                     periodRes = Res.string.career_marusys_project2_period,
                     techStackRes = Res.string.career_marusys_project2_tech_stack,
                     contributionsRes = Res.string.career_marusys_project2_contributions,
-                ),
-            )
-
-        val LIO_PROJECTS =
-            listOf(
-                CareerProject(
-                    titleRes = Res.string.career_lio_project3_title,
-                    periodRes = Res.string.career_lio_project3_period,
-                    techStackRes = Res.string.career_lio_project3_tech_stack,
-                    contributionsRes = Res.string.career_lio_project3_contributions,
-                ),
-                CareerProject(
-                    titleRes = Res.string.career_lio_project2_title,
-                    periodRes = Res.string.career_lio_project2_period,
-                    techStackRes = Res.string.career_lio_project2_tech_stack,
-                    contributionsRes = Res.string.career_lio_project2_contributions,
-                ),
-                CareerProject(
-                    titleRes = Res.string.career_lio_project1_title,
-                    periodRes = Res.string.career_lio_project1_period,
-                    techStackRes = Res.string.career_lio_project1_tech_stack,
-                    contributionsRes = Res.string.career_lio_project1_contributions,
-                ),
-            )
-
-        val MATRIOS_PROJECTS =
-            listOf(
-                CareerProject(
-                    titleRes = Res.string.career_matrios_project1_title,
-                    periodRes = Res.string.career_matrios_project1_period,
-                    techStackRes = Res.string.career_matrios_project1_tech_stack,
-                    contributionsRes = Res.string.career_matrios_project1_contributions,
                 ),
             )
     }

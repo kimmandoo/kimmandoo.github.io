@@ -30,7 +30,7 @@ enum class Project(
 //        techStackRes = Res.string.project_junjange_dev_techStack,
 //        links =
 //            listOf(
-//                Res.string.github to "https://github.com/junjange/junjange.github.io",
+//                Res.string.f to "https://github.com/junjange/junjange.github.io",
 //            ),
 //        contributionsRes = Res.string.project_junjange_dev_contributions,
 //    ),
