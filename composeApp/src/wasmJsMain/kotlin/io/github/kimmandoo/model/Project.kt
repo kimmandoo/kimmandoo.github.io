@@ -1,10 +1,6 @@
 package io.github.kimmandoo.model
 
 import kimmandoo_porfolio.composeapp.generated.resources.Res
-import kimmandoo_porfolio.composeapp.generated.resources.github
-import kimmandoo_porfolio.composeapp.generated.resources.project_junjange_dev_contributions
-import kimmandoo_porfolio.composeapp.generated.resources.project_link_letter_techStack
-import kimmandoo_porfolio.composeapp.generated.resources.project_lucky_lottery
 import kimmandoo_porfolio.composeapp.generated.resources.*
 import org.jetbrains.compose.resources.DrawableResource
 import org.jetbrains.compose.resources.StringResource
@@ -20,34 +16,92 @@ enum class Project(
     val links: List<Link>,
     val contributionsRes: StringResource,
 ) {
-//    JUNJANGE_DEV(
-//        titleRes = Res.string.project_junjange_dev,
-//        subtitleRes = Res.string.project_junjange_dev_subtitle,
-//        graphicRes = drawable.ic_junjange_dev_graphic,
-//        periodRes = Res.string.project_junjange_dev_period,
-//        descriptionRes = Res.string.project_junjange_dev_description,
+    LINK_LETTER(
+        titleRes = Res.string.project_link_letter,
+        subtitleRes = Res.string.project_link_letter_subtitle,
+        graphicRes = Res.drawable.ic_android,
+        periodRes = Res.string.project_link_letter_period,
+        descriptionRes = Res.string.project_link_letter_description,
+        roleRes = Res.string.mobile_developer,
+        techStackRes = Res.string.project_link_letter_techStack,
+        links = listOf(),
+        contributionsRes = Res.string.project_link_letter_contributions,
+    ),
+//    LUCKY_LOTTERY(
+//        titleRes = Res.string.project_lucky_lottery,
+//        subtitleRes = Res.string.project_lucky_lottery_subtitle,
+//        graphicRes = Res.drawable.ic_android,
+//        periodRes = Res.string.project_lucky_lottery_period,
+//        descriptionRes = Res.string.project_lucky_lottery_description,
 //        roleRes = Res.string.android_developer,
-//        techStackRes = Res.string.project_junjange_dev_techStack,
-//        links =
-//            listOf(
-//                Res.string.f to "https://github.com/junjange/junjange.github.io",
-//            ),
-//        contributionsRes = Res.string.project_junjange_dev_contributions,
+//        techStackRes = Res.string.project_lucky_lottery_techStack,
+//        links = listOf(),
+//        contributionsRes = Res.string.project_lucky_lottery_contributions,
 //    ),
-//    CAMPING_TOUR(
-//        titleRes = Res.string.project_camping_tour,
-//        subtitleRes = Res.string.project_camping_tour_subtitle,
-//        graphicRes = drawable.ic_camping_tour_graphic,
-//        periodRes = Res.string.project_camping_tour_period,
-//        descriptionRes = Res.string.project_camping_tour_description,
+//    FRIENDOGLY(
+//        titleRes = Res.string.project_friendogly,
+//        subtitleRes = Res.string.project_friendogly_subtitle,
+//        graphicRes = Res.drawable.ic_android,
+//        periodRes = Res.string.project_friendogly_period,
+//        descriptionRes = Res.string.project_friendogly_description,
 //        roleRes = Res.string.android_developer,
-//        techStackRes = Res.string.project_camping_tour_techStack,
-//        links =
-//            listOf(
-//                Res.string.google_play_store to "https://play.google.com/store/apps/details?id=com.junjange.touring",
-//                Res.string.github to "https://github.com/junjange/camping-tour-android",
-//                Res.string.notion to "https://www.notion.so/c6cc6728e74c44d2bf2c1749fe0d7469",
-//            ),
-//        contributionsRes = Res.string.project_camping_tour_contributions,
+//        techStackRes = Res.string.project_friendogly_techStack,
+//        links = listOf(),
+//        contributionsRes = Res.string.project_friendogly_contributions,
+//    ),
+//    MOVE_MOVE(
+//        titleRes = Res.string.project_move_move,
+//        subtitleRes = Res.string.project_move_move_subtitle,
+//        graphicRes = Res.drawable.ic_android,
+//        periodRes = Res.string.project_move_move_period,
+//        descriptionRes = Res.string.project_move_move_description,
+//        roleRes = Res.string.android_developer,
+//        techStackRes = Res.string.project_move_move_techStack,
+//        links = listOf(),
+//        contributionsRes = Res.string.project_move_move_contributions,
+//    ),
+//    WHATNOW(
+//        titleRes = Res.string.project_whatnow,
+//        subtitleRes = Res.string.project_whatnow_subtitle,
+//        graphicRes = Res.drawable.ic_android,
+//        periodRes = Res.string.project_whatnow_period,
+//        descriptionRes = Res.string.project_whatnow_description,
+//        roleRes = Res.string.android_developer,
+//        techStackRes = Res.string.project_whatnow_techStack,
+//        links = listOf(),
+//        contributionsRes = Res.string.project_whatnow_contributions,
+//    ),
+//    OH_SOON_TAXI(
+//        titleRes = Res.string.project_oh_soon_taxi,
+//        subtitleRes = Res.string.project_oh_soon_taxi_subtitle,
+//        graphicRes = Res.drawable.ic_android,
+//        periodRes = Res.string.project_oh_soon_taxi_period,
+//        descriptionRes = Res.string.project_oh_soon_taxi_description,
+//        roleRes = Res.string.android_developer,
+//        techStackRes = Res.string.project_oh_soon_taxi_techStack,
+//        links = listOf(),
+//        contributionsRes = Res.string.project_oh_soon_taxi_contributions,
+//    ),
+//    KNOCKNOCK(
+//        titleRes = Res.string.project_knocknock,
+//        subtitleRes = Res.string.project_knocknock_subtitle,
+//        graphicRes = Res.drawable.ic_android,
+//        periodRes = Res.string.project_knocknock_period,
+//        descriptionRes = Res.string.project_knocknock_description,
+//        roleRes = Res.string.android_developer,
+//        techStackRes = Res.string.project_knocknock_techStack,
+//        links = listOf(),
+//        contributionsRes = Res.string.project_knocknock_contributions,
+//    ),
+//    KORDLE(
+//        titleRes = Res.string.project_kordle,
+//        subtitleRes = Res.string.project_kordle_subtitle,
+//        graphicRes = Res.drawable.ic_android,
+//        periodRes = Res.string.project_kordle_period,
+//        descriptionRes = Res.string.project_kordle_description,
+//        roleRes = Res.string.android_developer,
+//        techStackRes = Res.string.project_kordle_techStack,
+//        links = listOf(),
+//        contributionsRes = Res.string.project_kordle_contributions,
 //    ),
 }

@@ -35,10 +35,10 @@
     <string name="career_marusys_project1_title">일본향 셋톱박스(STB) 로그 분석 솔루션 유지 보수 및 기능 개선</string>
     <string name="career_marusys_project1_period">2025.04 - Current</string>
     <string name="career_marusys_project1_tech_stack">Android, Kotlin, Java, AWS, MQTT</string>
-    <string name="career_marusys_project1_contributions">- 솔루션 DB 마이그레이션 작업(SQLite → MySQL) 수행\n- MQTT프로토콜 기반 신규 기능 개발\n\t- MediaProjection을 활용한 원격 화면 제어 기능 개발\n\t- Web ADB shell 개발</string>
+    <string name="career_marusys_project1_contributions">- 솔루션 DB 마이그레이션 작업(SQLite → MySQL) 수행\n    -DB Index로 조건 검색 쿼리 성능 92.7% 향상(22초 -> 1.6초)\n- MQTT프로토콜 기반 신규 기능 개발\n    - MediaProjection을 활용한 원격 화면 제어 기능 개발\n    - Web ADB shell 개발</string>
 
-    <string name="career_marusys_project2_title">TV Input Framework 관련 유지 보수, PoC 개발</string>
-    <string name="career_marusys_project2_period">2025.08 - Current</string>
+    <string name="career_marusys_project2_title">TV Input Framework 관련 유지 보수, PoC 개발 참여</string>
+    <string name="career_marusys_project2_period">2025.08 - 2025.11</string>
     <string name="career_marusys_project2_tech_stack">Android, Java, C++, AOSP</string>
     <string name="career_marusys_project2_contributions">- AndroidTV 기반 TvInputFramework 유지 보수 및 개발\n\t- AmLogic 보드 기반 STB PoC 개발\n\t- Broadcom 보드 기반 STB 유지 보수 및 펌웨어 이슈 테스트</string>
 

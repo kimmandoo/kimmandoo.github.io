@@ -32,25 +32,31 @@ fun TimelineIndicator(
         verticalArrangement = Arrangement.Top,
         horizontalAlignment = Alignment.CenterHorizontally,
     ) {
+        // 상단 라인 - 첫 번째가 아닐 때만 표시
         Box(
             modifier =
                 Modifier
                     .width(2.dp)
                     .height(frontHeight)
                     .background(
-                        color = MaterialTheme.colorScheme.primary.copy(if (isFirst) 0f else 0.5f),
+                        color = if (isFirst) {
+                            MaterialTheme.colorScheme.primary.copy(alpha = 0f)
+                        } else {
+                            MaterialTheme.colorScheme.primary.copy(alpha = 0.5f)
+                        },
                         shape = CircleShape,
                     ),
         )
 
         Spacer(Modifier.height(8.dp))
 
+        // 중앙 점
         Box(
             modifier =
                 Modifier
                     .border(
                         width = 2.dp,
-                        color = MaterialTheme.colorScheme.primary.copy(0.5f),
+                        color = MaterialTheme.colorScheme.primary.copy(alpha = 0.5f),
                         shape = CircleShape,
                     ).size(dotSize),
             contentAlignment = Alignment.Center,
@@ -62,17 +68,20 @@ fun TimelineIndicator(
                         .size(6.dp),
             )
         }
-        Spacer(Modifier.height(8.dp))
 
-        Box(
-            modifier =
-                Modifier
-                    .width(2.dp)
-                    .fillMaxHeight()
-                    .background(
-                        color = MaterialTheme.colorScheme.primary.copy(0.5f),
-                        shape = CircleShape,
-                    ),
-        )
+        // 하단 라인 - 마지막이 아닐 때만 표시
+        if (!isLast) {
+            Spacer(Modifier.height(8.dp))
+            Box(
+                modifier =
+                    Modifier
+                        .width(2.dp)
+                        .fillMaxHeight()
+                        .background(
+                            color = MaterialTheme.colorScheme.primary.copy(alpha = 0.5f),
+                            shape = CircleShape,
+                        ),
+            )
+        }
     }
 }
