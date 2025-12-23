@@ -242,13 +242,13 @@ private fun ProjectCard(
 
     Card(
         modifier = modifier
+            .scale(scale)
             .shadow(
                 elevation = 8.dp,
                 shape = RoundedCornerShape(20.dp),
                 spotColor = Emerald.copy(alpha = 0.3f),
                 ambientColor = Emerald.copy(alpha = 0.1f),
             )
-            .scale(scale)
             .hoverable(interactionSource = interactionSource)
             .clickable(onClick = onClick),
         colors = CardDefaults.cardColors(

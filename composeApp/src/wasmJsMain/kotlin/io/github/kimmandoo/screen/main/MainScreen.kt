@@ -8,17 +8,15 @@ import androidx.compose.foundation.lazy.rememberLazyListState
 import androidx.compose.material3.*
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.CompositionLocalProvider
-import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
-import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalLayoutDirection
 import androidx.compose.ui.unit.LayoutDirection
 import io.github.kimmandoo.model.Project
 import io.github.kimmandoo.model.Section
+import io.github.kimmandoo.navigation.clearHashNavigation
+import io.github.kimmandoo.navigation.rememberNavigationState
 import io.github.kimmandoo.screen.about.AboutScreen
 import io.github.kimmandoo.screen.carex.CareerExperienceScreen
 import io.github.kimmandoo.screen.home.HomeScreen
@@ -39,14 +37,17 @@ fun MainScreen(
     val drawerState = rememberDrawerState(initialValue = DrawerValue.Closed)
     val scope = rememberCoroutineScope()
 
-    // 프로젝트 상세 페이지 상태
-    var selectedProject by remember { mutableStateOf<Project?>(null) }
+    // 브라우저 네비게이션 상태 (해시 기반)
+    val navigationState = rememberNavigationState()
 
     // 프로젝트 상세 페이지가 선택되었을 때
-    if (selectedProject != null) {
+    if (navigationState.selectedProject != null) {
         ProjectDetailScreen(
-            project = selectedProject!!,
-            onBackClick = { selectedProject = null },
+            project = navigationState.selectedProject!!,
+            onBackClick = { 
+                clearHashNavigation()
+                navigationState.clearSelection()
+            },
             modifier = modifier,
         )
         return
@@ -94,7 +95,7 @@ fun MainScreen(
                     }
                 },
                 onProjectClick = { project ->
-                    selectedProject = project
+                    navigationState.navigateToProject(project)
                 },
             )
         }
