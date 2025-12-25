@@ -2,7 +2,7 @@
     <!-- Section -->
     <string name="section_home">Home</string>
     <string name="section_about">About</string>
-    <string name="section_career">Career &amp; Experience</string>
+    <string name="section_career_experience">Career &amp; Experience</string>
     <string name="career">Career</string>
     <string name="section_experience">Experience</string>
     <string name="section_project">Project</string>
@@ -13,18 +13,21 @@
     <string name="intro">모든 선택에 근거를 제시합니다.\nKotlin으로 안드로이드 앱을 개발하며, 더 좋은 사용자 경험을 위해 고민합니다.</string>
     <string name="follow_github">Github</string>
     <string name="visit_blog">Medium</string>
+    <string name="visit_blog2">Blog</string>
 
     <!--About me-->
     <string name="about_me_title">제가 만든 서비스를 이용하는 사용자의 모습을 일상 속에서 보기 위해 끊임없이 노력합니다.</string>
-    <string name="about_me_title1">'왜?'라는 질문으로 더 나은 개발 환경을 만듭니다.</string>
-    <string name="about_me_description1">'왜 이 작업을 반복해야 할까?' 라는 작은 질문에서 시작하여 개발 프로세스 개선을 이끌었습니다. 멀티모듈의 반복적인 Gradle 설정을 해결하기 위해 촉박한 일정 속에서도 시간을 내어 build-logic을 도입했습니다. 그 결과, 팀원들로부터 '사용하기 편하다'는 긍정적인 피드백을 받으며 협업 효율을 성공적으로 높인 경험이 있습니다.</string>
+    <string name="about_me_title1">'왜?'라는 질문으로 더 나은 결과를 만듭니다.</string>
+    <string name="about_me_description1">작업 수행의 근거를 찾아 행동합니다.\n- '왜 이 작업을 반복해야 할까?' 라는 작은 질문에서 시작하여 개발 프로세스를 개선한 경험이 있습니다. 멀티 모듈 구조에서 생기는 gradle 보일러플레이트를 해결하기 위해 build-logic을 도입했습니다. 그 결과, 팀원들로부터 '사용하기 편하다'는 긍정적인 피드백을 받으며 협업 효율을 성공적으로 높인 경험이 있습니다.</string>
     <string name="about_me_title2">비즈니스 임팩트를 고려한 실용적인 개발을 추구합니다.</string>
-    <string name="about_me_description2">공연 관리 플랫폼의 Image2Text 추출 기능 구현 과정에서 발생할 수 있는 유료 API 비용 문제를 사전에 분석하고 해결했습니다. 실제 서비스 운영을 가정하여 이미지 사이즈, 해상도, 색상 프로필을 최적화하는 전처리 과정을 도입했고, 이는 30.69%의 토큰 소비량 감소라는 성과로 이어졌습니다. 기술적 결정이 비즈니스에 미치는 영향을 항상 고민하며 개발합니다.</string>
-    <string name="about_me_title3">기획부터 운영까지, 서비스 전체 생명주기를 경험했습니다.</string>
-    <string name="about_me_description3">대학 3학년 시절, 매일 점심 메뉴를 고르는 불편함을 해결하기 위해 직접 맛집 추천 앱을 기획하여 2년간 운영한 경험이 있습니다. 디자인부터 개발, 스토어 배포, 사용자 피드백을 통한 서비스 개선까지 서비스의 전체 생명주기를 직접 경험했습니다. 그 결과 약 500회의 다운로드와 200명의 활성 사용자를 얻으며, 사용자의 목소리에 귀 기울여 서비스를 개선하는 즐거움과 운영에 대한 책임감을 배웠습니다.</string>
+    <string name="about_me_description2">상용 서비스를 가정하여 안정성을 최우선으로 생각합니다.\n- OCR 기능 구현 과정에서 발생할 수 있는 유료 API 비용 문제를 해결했습니다. 이미지 사이즈, 해상도, 색상 프로필을 최적화하는 전처리 과정을 도입했고, 이는 30.69%의 토큰 소비량 감소라는 성과를 달성했습니다.\n- MediaProjection기반 원격 화면 기능 개발 당시 네트워크 안정성까지 고려하여 헬스체크, 재연결로직을 구성했고 실제로 일본 현지 사무실에 정전이 났을 때도 안정적으로 서비스를 유지할 수 있었습니다.</string>
+    <string name="about_me_title3">기획부터 1인 개발, 운영까지, 서비스 전체 생명주기를 경험했습니다.</string>
+    <string name="about_me_description3">대학 3학년 시절, 매일 점심 메뉴를 고르는 불편함을 해결하기 위해 직접 맛집 추천 앱을 기획하여 약 1년 6개월 간 운영한 경험이 있습니다. 기획, 디자인부터 개발, 운영, 사용자 피드백을 통한 서비스 개선까지 서비스의 전체 생명주기를 직접 경험했습니다. 그 결과 약 500회의 다운로드와 200명의 활성 사용자를 얻을 수 있었고 사용자의 목소리에 귀 기울여 서비스를 개선하는 즐거움과 운영에 대한 책임감을 배웠습니다.</string>
 
     <!--Career-->
     <string name="android_developer">Android Developer</string>
+    <string name="android_developer_leader">Android Lead Developer</string>
+    <string name="owner">Owner Developer</string>
     <string name="software_engineer">Software Engineer</string>
     <string name="mobile_developer">Mobile Developer</string>
 
@@ -40,7 +43,7 @@
     <string name="career_marusys_project2_title">TV Input Framework 관련 유지 보수, PoC 개발 참여</string>
     <string name="career_marusys_project2_period">2025.08 - 2025.11</string>
     <string name="career_marusys_project2_tech_stack">Android, Java, C++, AOSP</string>
-    <string name="career_marusys_project2_contributions">- AndroidTV 기반 TvInputFramework 유지 보수 및 개발\n\t- AmLogic 보드 기반 STB PoC 개발\n\t- Broadcom 보드 기반 STB 유지 보수 및 펌웨어 이슈 테스트</string>
+    <string name="career_marusys_project2_contributions">- AndroidTV 기반 TvInputFramework 유지 보수 및 개발\n    - AmLogic 보드 기반 STB PoC 개발\n    - Broadcom 보드 기반 STB 유지 보수 및 펌웨어 이슈 테스트</string>
 
     <!--Experience-->
     <string name="experience">Experience</string>
@@ -87,10 +90,38 @@
 
     <!--Project-->
     <string name="project">Project</string>
-    <string name="from_junjange">from JunJangE</string>
 
     <string name="project_more">프로젝트 더보기</string>
     <string name="project_collapse">프로젝트 접기</string>
+
+    <string name="project_bubbychat">버비챗 BubbyChat</string>
+    <string name="project_bubbychat_link_desc">버비챗 github</string>
+    <string name="project_bubbychat_subtitle">LLM 기반 법률 자문 AI 챗봇</string>
+    <string name="project_bubbychat_period">2024.10 – 2024.12</string>
+    <string name="project_bubbychat_techStack">Android, Jetpack Compose, Kotlin, Orbit(MVI), SSE, Room, Python</string>
+    <string name="project_bubbychat_description">'버비챗'은 일반인이 어렵게 느끼는 법률 정보를 쉽고 빠르게 접할 수 있도록 돕는 생성형 AI 기반 법률 자문 서비스입니다. 사용자의 질문에 대해 판례와 법령을 기반으로 답변을 제공하며, 채팅 형식을 통해 자연스러운 상담 경험을 제공합니다. 응답 지연 시간을 줄이기 위한 기술적 시도와 함께, 안정적인 상태 관리를 위해 MVI 아키텍처를 도입하여 개발했습니다.</string>
+    <string name="project_bubbychat_contributions">- Android 단독 개발 및 서비스 기획, 앱 디자인, 데이터 크롤링 수행\n- Server-Sent Events(SSE) 적용으로 실시간 스트리밍 UI 구현 및 첫 응답 속도 10배 개선(10s → 1s)\n- Orbit 라이브러리를 활용한 MVI 아키텍처 도입으로 단방향 데이터 흐름 구축\n- Room DB와 TypeConverter를 활용한 대화 기록 로컬 캐싱 및 관리\n- Python을 이용한 법률구조공단 QnA 데이터 크롤링 및 모델 학습 데이터 확보</string>
+
+    <string name="project_data">다타 DRTAA</string>
+    <string name="project_data_subtitle">MORAI Sim 기반 자율주행 스마트 투어 서비스</string>
+    <string name="project_data_period">2024.09 – 2024.10</string>
+    <string name="project_data_techStack">Android, Kotlin, MQTT, GitLab CI, Detekt, FCM(with CloudFunction), Multi-module</string>
+    <string name="project_data_description">'다타'는 자율주행 시뮬레이터 MORAI Sim과 연동하여 탑승객에게 스마트한 관광 경험을 제공하는 서비스입니다. 자율주행 차량의 위치와 상태를 실시간으로 앱에서 확인하고, 목적지까지 안전하게 이동하는 과정을 시각화하여 제공합니다. Android 팀장으로서 개발 환경 구축과 아키텍처 설계를 주도하며 팀의 개발 효율성을 높이는 데 집중했습니다.</string>
+    <string name="project_data_contributions">- Android 개발 팀장으로서 기술 선정, 아키텍처 설계 및 ROS 연동 기능 개발 주도\n- GitLab-CI 기반 CI/CD 구축 및 정적 분석 도구(Detekt) 도입으로 코드 품질 향상\n- Feature 단위 멀티 모듈 구조 적용 및 Build-logic 도입으로 Gradle 스크립트 중복 제거 및 빌드 효율화\n- MQTT 프로토콜(Pub/Sub)을 활용한 ROS 기반 자율주행 시스템과의 실시간 양방향 통신 구현\n- Firebase Cloud Functions를 활용하여 서버 독립적인 FCM 알림 시스템 구축</string>
+
+    <string name="project_colorful">컬러플</string>
+    <string name="project_colorful_subtitle">공연 정보 제공 및 리뷰 커뮤니티, 티켓 보관 통합 서비스</string>
+    <string name="project_colorful_period">2024.07 – 2024.08</string>
+    <string name="project_colorful_techStack">Android, Kotlin, MobileBert, OpenAI Vision API, Paging3</string>
+    <string name="project_colorful_description">'컬러플 - COLORFUL + PLAY'은 흩어져 있는 공연 정보를 한곳에 모으고, 관람 후기와 나만의 티켓을 기록할 수 있는 올인원 문화 생활 플랫폼입니다. 단순 정보 제공을 넘어 사용자 간의 소통을 위한 커뮤니티 기능을 강화했으며, AI 기술을 활용해 스포일러를 방지하고 티켓 정보를 자동으로 인식하는 등 사용자 편의성을 높이는 기능을 구현했습니다.</string>
+    <string name="project_colorful_contributions">- 와이어프레임 설계 및 구글 권장 아키텍처 기반 프로젝트 구성\n- MobileBert 모델을 연동하여 커뮤니티 게시글 내 스포일러 자동 탐지 기능 구현\n- 이미지 전처리 로직 최적화를 통해 OpenAI Vision API 요청 토큰 비용 30.69% 절감\n- Paging3 라이브러리를 활용하여 효율적인 리스트 페이지네이션 및 무한 스크롤 구현\n- Safe Api Call 패턴 적용으로 네트워크 예외 처리 표준화 및 앱 안정성 확보</string>
+
+    <string name="project_soochelin">수슐랭</string>
+    <string name="project_soochelin_subtitle">학교 근처 맛집 정보 제공 및 리뷰 앱</string>
+    <string name="project_soochelin_period">2022.06 – 2023.11</string>
+    <string name="project_soochelin_techStack">Android, Kotlin, Firebase, Jetpack Compose</string>
+    <string name="project_soochelin_description">'수슐랭'은 학교 주변의 맛집 정보를 한눈에 확인하고, 학우들의 솔직한 리뷰를 공유할 수 있는 맛집 커뮤니티 서비스입니다. 기획부터 디자인, 개발, 배포까지 1인 개발로 진행하여 구글 플레이스토어에 출시하였으며, 교내 학생들의 피드백을 반영하여 지속적으로 서비스를 개선했습니다. 500회 이상의 누적 다운로드와 200여 명의 활성 사용자를 확보하며 실제 운영 경험을 쌓았습니다.</string>
+    <string name="project_soochelin_contributions">- 기획, 디자인, 개발, 배포, 운영 전 과정을 단독 수행 (누적 다운로드 500+, MAU 200 달성)\n- Firebase Firestore, RealtimeDB를 활용해 리뷰 및 투표 데이터 실시간 동기화 구현\n- 사용자 피드백을 기반으로 지속적인 기능 개선 및 업데이트 진행\n- 기존 XML(View) 기반의 UI를 Jetpack Compose로 마이그레이션하며 코드 가독성 및 유지보수성 향상</string>
 
     <string name="project_link_letter">링크레터</string>
     <string name="project_link_letter_subtitle">Kotlin Multiplatform 블로그 구독 알림 서비스</string>
@@ -211,7 +242,7 @@
     <string name="contributions">주요 기여</string>
 
     <!--Contact Section-->
-    <string name="copyright">Copyright (c) 2025 JunJangE.All Rights Reserved</string>
+    <string name="copyright">Copyright (c) 2025 kimmandoo. All Rights Reserved</string>
 
 
 </resources>

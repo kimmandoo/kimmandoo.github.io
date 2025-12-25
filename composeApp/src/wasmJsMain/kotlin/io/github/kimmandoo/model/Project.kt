@@ -4,6 +4,7 @@ import kimmandoo_porfolio.composeapp.generated.resources.Res
 import kimmandoo_porfolio.composeapp.generated.resources.*
 import org.jetbrains.compose.resources.DrawableResource
 import org.jetbrains.compose.resources.StringResource
+import org.jetbrains.compose.resources.stringResource
 
 enum class Project(
     val titleRes: StringResource,
@@ -16,16 +17,56 @@ enum class Project(
     val links: List<Link>,
     val contributionsRes: StringResource,
 ) {
-    LINK_LETTER(
-        titleRes = Res.string.project_link_letter,
-        subtitleRes = Res.string.project_link_letter_subtitle,
-        graphicRes = Res.drawable.ic_android,
-        periodRes = Res.string.project_link_letter_period,
-        descriptionRes = Res.string.project_link_letter_description,
-        roleRes = Res.string.mobile_developer,
-        techStackRes = Res.string.project_link_letter_techStack,
-        links = listOf(),
-        contributionsRes = Res.string.project_link_letter_contributions,
+    BUBBY_CHAT(
+        titleRes = Res.string.project_bubbychat,
+        subtitleRes = Res.string.project_bubbychat_subtitle,
+        graphicRes = Res.drawable.ic_bubbychat,
+        periodRes = Res.string.project_bubbychat_period,
+        descriptionRes = Res.string.project_bubbychat_description,
+        roleRes = Res.string.android_developer,
+        techStackRes = Res.string.project_bubbychat_techStack,
+        links = listOf(Link(Res.string.github, "https://github.com/LAWGICAL-AI/BubbyChat", "github")),
+        contributionsRes = Res.string.project_bubbychat_contributions,
+    ),
+    DRTAA(
+        titleRes = Res.string.project_data,
+        subtitleRes = Res.string.project_data_subtitle,
+        graphicRes = Res.drawable.ic_drtaa,
+        periodRes = Res.string.project_data_period,
+        descriptionRes = Res.string.project_data_description,
+        roleRes = Res.string.android_developer_leader, // 'Android 개발 팀장'에 맞는 역할 리소스 적용
+        techStackRes = Res.string.project_data_techStack,
+        links = listOf(
+            Link(Res.string.github, "https://github.com/kimmandoo/DRTAA", "github") // GitHub URL 입력 필요
+        ),
+        contributionsRes = Res.string.project_data_contributions,
+    ),
+    COLORPL(
+        titleRes = Res.string.project_colorful,
+        subtitleRes = Res.string.project_colorful_subtitle,
+        graphicRes = Res.drawable.ic_colorpl, // 이미지 리소스명 확인 필요
+        periodRes = Res.string.project_colorful_period,
+        descriptionRes = Res.string.project_colorful_description,
+        roleRes = Res.string.android_developer,
+        techStackRes = Res.string.project_colorful_techStack,
+        links = listOf(
+            Link(Res.string.github, "https://github.com/kimmandoo/Colorpl", "github")
+        ),
+        contributionsRes = Res.string.project_colorful_contributions,
+    ),
+    SUCHELIN(
+        titleRes = Res.string.project_soochelin,
+        subtitleRes = Res.string.project_soochelin_subtitle,
+        graphicRes = Res.drawable.ic_suchelin, // 이미지 리소스명 확인 필요
+        periodRes = Res.string.project_soochelin_period,
+        descriptionRes = Res.string.project_soochelin_description,
+        roleRes = Res.string.owner, // '1인 개발'에 맞는 역할 리소스 적용
+        techStackRes = Res.string.project_soochelin_techStack,
+        links = listOf(
+            Link(Res.string.google_play_store, "https://play.google.com/store/apps/details?id=com.Guide.suchelin", "play"), // 플레이스토어 링크가 있다면 입력
+            Link(Res.string.github, "https://github.com/SuChelin/SuChelinV2", "github")
+        ),
+        contributionsRes = Res.string.project_soochelin_contributions,
     ),
 //    LUCKY_LOTTERY(
 //        titleRes = Res.string.project_lucky_lottery,

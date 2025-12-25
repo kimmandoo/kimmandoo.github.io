@@ -6,7 +6,6 @@ import androidx.compose.material3.*
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalUriHandler
 import androidx.compose.ui.text.AnnotatedString
 import androidx.compose.ui.text.SpanStyle
@@ -144,6 +143,7 @@ private fun HomeMobileSection(
                 verticalArrangement = Arrangement.spacedBy(8.dp),
             ) {
                 GithubButton(modifier = Modifier.fillMaxWidth())
+                MediumButton(modifier = Modifier.fillMaxWidth())
                 BlogButton(modifier = Modifier.fillMaxWidth())
             }
         }
@@ -207,6 +207,7 @@ private fun HomeTabletSection(
                 horizontalArrangement = Arrangement.spacedBy(8.dp),
             ) {
                 GithubButton()
+                MediumButton()
                 BlogButton()
             }
         }
@@ -257,6 +258,7 @@ private fun HomeDesktopSection(
                 horizontalArrangement = Arrangement.spacedBy(8.dp),
             ) {
                 GithubButton()
+                MediumButton()
                 BlogButton()
             }
         }
@@ -312,7 +314,7 @@ private fun GithubButton(modifier: Modifier = Modifier) {
 }
 
 @Composable
-private fun BlogButton(modifier: Modifier = Modifier) {
+private fun MediumButton(modifier: Modifier = Modifier) {
     val uriHandler = LocalUriHandler.current
     val blogUri = "https://kimmandoo.medium.com"
 
@@ -334,6 +336,35 @@ private fun BlogButton(modifier: Modifier = Modifier) {
         Spacer(Modifier.width(8.dp))
         Text(
             text = stringResource(Res.string.visit_blog),
+            fontWeight = FontWeight.SemiBold,
+            fontSize = 16.sp,
+        )
+    }
+}
+
+@Composable
+private fun BlogButton(modifier: Modifier = Modifier) {
+    val uriHandler = LocalUriHandler.current
+    val blogUri = "https://kimmandoo.vercel.app"
+
+    OutlinedButton(
+        onClick = { uriHandler.openUri(blogUri) },
+        modifier = modifier.then(Modifier.height(56.dp)),
+        colors =
+            ButtonDefaults.outlinedButtonColors(
+                containerColor = MaterialTheme.colorScheme.primaryContainer,
+                contentColor = MaterialTheme.colorScheme.onPrimaryContainer,
+            ),
+        contentPadding = PaddingValues(vertical = 12.dp, horizontal = 24.dp),
+    ) {
+        Icon(
+            painter = painterResource(Res.drawable.ic_blog),
+            contentDescription = null,
+            modifier = Modifier.size(24.dp),
+        )
+        Spacer(Modifier.width(8.dp))
+        Text(
+            text = stringResource(Res.string.visit_blog2),
             fontWeight = FontWeight.SemiBold,
             fontSize = 16.sp,
         )

@@ -7,11 +7,7 @@ import androidx.compose.animation.fadeIn
 import androidx.compose.animation.fadeOut
 import androidx.compose.animation.slideInVertically
 import androidx.compose.animation.slideOutVertically
-import androidx.compose.foundation.Image
-import androidx.compose.foundation.background
-import androidx.compose.foundation.border
-import androidx.compose.foundation.clickable
-import androidx.compose.foundation.hoverable
+import androidx.compose.foundation.*
 import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.foundation.interaction.collectIsHoveredAsState
 import androidx.compose.foundation.layout.Arrangement
@@ -26,10 +22,8 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.layout.widthIn
-import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.filled.ArrowBack
 import androidx.compose.material.icons.filled.CalendarMonth
@@ -54,6 +48,7 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.draw.scale
 import androidx.compose.ui.draw.shadow
 import androidx.compose.ui.graphics.Brush
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.platform.LocalUriHandler
 import androidx.compose.ui.text.font.FontWeight
@@ -65,10 +60,10 @@ import io.github.kimmandoo.ui.Emerald
 import io.github.kimmandoo.ui.adaptive.Device
 import io.github.kimmandoo.ui.adaptive.contentPadding
 import io.github.kimmandoo.ui.adaptive.rememberDeviceState
+import kimmandoo_porfolio.composeapp.generated.resources.*
 import kimmandoo_porfolio.composeapp.generated.resources.Res
 import kimmandoo_porfolio.composeapp.generated.resources.contributions
 import kimmandoo_porfolio.composeapp.generated.resources.project_intro
-import kimmandoo_porfolio.composeapp.generated.resources.role
 import kimmandoo_porfolio.composeapp.generated.resources.techStack
 import org.jetbrains.compose.resources.painterResource
 import org.jetbrains.compose.resources.stringResource
@@ -200,32 +195,15 @@ private fun ProjectDetailHeader(
             horizontalAlignment = Alignment.CenterHorizontally,
         ) {
             // 프로젝트 아이콘
-            Box(
-                modifier = Modifier
-                    .size(100.dp)
-                    .background(
-                        brush = Brush.radialGradient(
-                            colors = listOf(
-                                Emerald.copy(alpha = 0.2f),
-                                Emerald.copy(alpha = 0.05f),
-                                MaterialTheme.colorScheme.surface.copy(alpha = 0f)
-                            )
-                        ),
-                        shape = RoundedCornerShape(24.dp)
-                    )
-                    .border(
-                        width = 2.dp,
-                        color = Emerald.copy(alpha = 0.3f),
-                        shape = RoundedCornerShape(24.dp)
-                    ),
-                contentAlignment = Alignment.Center
-            ) {
-                Image(
-                    painter = painterResource(project.graphicRes),
-                    contentDescription = null,
-                    modifier = Modifier.size(64.dp)
-                )
-            }
+            Image(
+                painter = painterResource(project.graphicRes),
+                contentDescription = null,
+                modifier = Modifier.size(100.dp).clip(RoundedCornerShape(24.dp)).border(
+                    width = 4.dp,
+                    color = Emerald.copy(alpha = 0.3f),
+                    shape = RoundedCornerShape(24.dp)
+                ),
+            )
 
             Spacer(modifier = Modifier.height(20.dp))
 
@@ -531,7 +509,8 @@ private fun LinksSection(
                     LinkItem(
                         title = stringResource(link.title),
                         url = link.url,
-                        onClick = { uriHandler.openUri(link.url) }
+                        onClick = { uriHandler.openUri(link.url) },
+                        icon = link.icon
                     )
                 }
             }
@@ -543,6 +522,7 @@ private fun LinksSection(
 private fun LinkItem(
     title: String,
     url: String,
+    icon: String,
     onClick: () -> Unit,
     modifier: Modifier = Modifier,
 ) {
@@ -554,34 +534,58 @@ private fun LinkItem(
         animationSpec = tween(durationMillis = 200)
     )
 
-    Box(
+    Card(
         modifier = modifier
-            .fillMaxWidth()
             .scale(scale)
+            .shadow(
+                elevation = 8.dp,
+                shape = RoundedCornerShape(16.dp),
+                spotColor = Emerald.copy(alpha = 0.3f),
+                ambientColor = Emerald.copy(alpha = 0.1f),
+            )
             .hoverable(interactionSource = interactionSource)
-            .clickable(onClick = onClick)
-            .background(
-                color = if (isHovered) Emerald.copy(alpha = 0.1f) else MaterialTheme.colorScheme.surfaceVariant.copy(alpha = 0.5f),
-                shape = RoundedCornerShape(12.dp)
-            )
-            .border(
-                width = 1.dp,
-                color = if (isHovered) Emerald.copy(alpha = 0.5f) else MaterialTheme.colorScheme.outline.copy(alpha = 0.2f),
-                shape = RoundedCornerShape(12.dp)
-            )
-            .padding(16.dp)
+            .clickable(onClick = onClick),
+        colors = CardDefaults.cardColors(
+            containerColor = MaterialTheme.colorScheme.surface
+        ),
+        border = BorderStroke(width = 2.dp, color = Emerald.copy(0.3f)),
+        elevation = CardDefaults.cardElevation(defaultElevation = 4.dp),
+        shape = RoundedCornerShape(16.dp),
     ) {
         Row(
-            modifier = Modifier.fillMaxWidth(),
-            horizontalArrangement = Arrangement.SpaceBetween,
+            modifier = Modifier.fillMaxWidth().padding(16.dp),
             verticalAlignment = Alignment.CenterVertically,
         ) {
+            AnimatedVisibility(
+                visible = icon.isNotBlank()
+            ){
+                val iconSource = when(icon){
+                    "github" -> {
+                        painterResource(Res.drawable.ic_github)
+                    }
+                    "play" -> {
+                        painterResource(Res.drawable.ic_playstore)
+                    }
+                    else -> {
+                        painterResource(Res.drawable.ic_web)
+                    }
+                }
+                Icon(
+                    modifier = Modifier.size(24.dp),
+                    painter = iconSource,
+                    contentDescription = "icon",
+                    tint = Color.Unspecified // 안하면 틴트때문에 가려짐
+                // Icon 컴포넌트는 기본적으로 현재 테마의 텍스트 색상(LocalContentColor)으로 이미지를 덮어씌우는(Tint) 속성을 가지고 있음
+                )
+            }
+            Spacer(modifier = Modifier.width(8.dp))
             Text(
                 text = title,
                 fontSize = 14.sp,
                 color = if (isHovered) Emerald else MaterialTheme.colorScheme.onSurface,
                 fontWeight = FontWeight.Medium,
             )
+            Spacer(modifier = Modifier.weight(1f))
             Icon(
                 imageVector = Icons.Default.Link,
                 contentDescription = null,

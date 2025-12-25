@@ -269,31 +269,15 @@ private fun ProjectCard(
                 verticalAlignment = Alignment.Top,
             ) {
                 // 프로젝트 아이콘
-                Box(
-                    modifier = Modifier
-                        .size(64.dp)
-                        .background(
-                            brush = Brush.linearGradient(
-                                colors = listOf(
-                                    Emerald.copy(alpha = 0.2f),
-                                    Emerald.copy(alpha = 0.1f)
-                                )
-                            ),
-                            shape = RoundedCornerShape(16.dp)
-                        )
-                        .border(
-                            width = 1.dp,
-                            color = Emerald.copy(alpha = 0.3f),
-                            shape = RoundedCornerShape(16.dp)
-                        ),
-                    contentAlignment = Alignment.Center
-                ) {
-                    Image(
-                        painter = painterResource(project.graphicRes),
-                        contentDescription = null,
-                        modifier = Modifier.size(40.dp)
-                    )
-                }
+                Image(
+                    painter = painterResource(project.graphicRes),
+                    contentDescription = null,
+                    modifier = Modifier.size(64.dp).clip(RoundedCornerShape(16.dp)).border(
+                        width = 4.dp,
+                        color = Emerald.copy(alpha = 0.3f),
+                        shape = RoundedCornerShape(16.dp)
+                    ),
+                )
 
                 // 기간 뱃지
                 Box(

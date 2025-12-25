@@ -50,12 +50,11 @@ import io.github.kimmandoo.model.CareerProject
 import io.github.kimmandoo.model.Contribution
 import io.github.kimmandoo.model.Education
 import io.github.kimmandoo.model.EducationDetail
+import kimmandoo_porfolio.composeapp.generated.resources.*
 import kimmandoo_porfolio.composeapp.generated.resources.Res
 import kimmandoo_porfolio.composeapp.generated.resources.career
 import kimmandoo_porfolio.composeapp.generated.resources.experience_contribute
 import kimmandoo_porfolio.composeapp.generated.resources.experience_education
-import kimmandoo_porfolio.composeapp.generated.resources.section_career
-import kimmandoo_porfolio.composeapp.generated.resources.section_experience
 import org.jetbrains.compose.resources.stringResource
 
 @Composable
@@ -79,7 +78,7 @@ fun CareerExperienceScreen(modifier: Modifier = Modifier) {
                 .padding(horizontal = 16.dp, vertical = 8.dp)
         ) {
             Text(
-                stringResource(Res.string.section_career),
+                stringResource(Res.string.section_career_experience),
                 color = Emerald,
                 fontWeight = FontWeight.SemiBold,
                 fontSize = 18.sp,
