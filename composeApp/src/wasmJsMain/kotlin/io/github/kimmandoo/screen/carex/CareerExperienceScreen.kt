@@ -37,10 +37,14 @@ import androidx.compose.ui.draw.scale
 import androidx.compose.ui.draw.shadow
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.unit.Dp
+import androidx.compose.ui.unit.TextUnit
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import io.github.kimmandoo.DESKTOP_CONTENT_WIDTH
 import io.github.kimmandoo.ui.Emerald
 import io.github.kimmandoo.component.CardImage
+import io.github.kimmandoo.component.Loading
 import io.github.kimmandoo.component.TextWithLink
 import io.github.kimmandoo.ui.adaptive.contentPadding
 import io.github.kimmandoo.ui.adaptive.rememberDeviceState
@@ -50,6 +54,7 @@ import io.github.kimmandoo.model.CareerProject
 import io.github.kimmandoo.model.Contribution
 import io.github.kimmandoo.model.Education
 import io.github.kimmandoo.model.EducationDetail
+import io.github.kimmandoo.ui.adaptive.Device
 import kimmandoo_porfolio.composeapp.generated.resources.*
 import kimmandoo_porfolio.composeapp.generated.resources.Res
 import kimmandoo_porfolio.composeapp.generated.resources.career
@@ -57,18 +62,50 @@ import kimmandoo_porfolio.composeapp.generated.resources.experience_contribute
 import kimmandoo_porfolio.composeapp.generated.resources.experience_education
 import org.jetbrains.compose.resources.stringResource
 
+// 반응형 설정을 위한 데이터 클래스
+private data class ResponsiveConfig(
+    val logoSize: Dp,
+    val timelineGap: Dp,
+    val cardPadding: Dp,
+    val titleFontSize: TextUnit,
+    val descFontSize: TextUnit
+)
+
 @Composable
 fun CareerExperienceScreen(modifier: Modifier = Modifier) {
     val deviceState = rememberDeviceState()
+    val isMobile = deviceState.value == Device.MOBILE
+
+    // 디바이스에 따른 사이즈 설정
+    val config = if (isMobile) {
+        ResponsiveConfig(
+            logoSize = 60.dp,
+            timelineGap = 12.dp,
+            cardPadding = 16.dp,
+            titleFontSize = 18.sp,
+            descFontSize = 13.sp
+        )
+    } else {
+        ResponsiveConfig(
+            logoSize = 100.dp,
+            timelineGap = 24.dp,
+            cardPadding = 24.dp,
+            titleFontSize = 22.sp,
+            descFontSize = 14.sp
+        )
+    }
+
+    if (deviceState.value == Device.UNKNOWN) {
+        Box(modifier = modifier.fillMaxSize()) { Loading() }
+        return
+    }
 
     Column(
-        modifier =
-            modifier
-                .padding(deviceState.contentPadding()),
+        modifier = modifier
+            .fillMaxWidth()
+            .padding(deviceState.contentPadding()),
         horizontalAlignment = Alignment.CenterHorizontally,
-        verticalArrangement = Arrangement.Center,
     ) {
-        // 섹션 뱃지
         Box(
             modifier = Modifier
                 .background(
@@ -107,51 +144,43 @@ fun CareerExperienceScreen(modifier: Modifier = Modifier) {
 
         Spacer(modifier = Modifier.height(24.dp))
 
-        // Education 서브섹션
-        SubSectionHeader(
-            title = stringResource(Res.string.career),
-        )
-
+        // Career 서브섹션
+        SubSectionHeader(title = stringResource(Res.string.career))
         Spacer(modifier = Modifier.height(16.dp))
-
         Career.entries.forEachIndexed { index, career ->
             CareerContent(
                 career = career,
                 isFirst = index == 0,
                 isLast = index == Career.entries.lastIndex,
+                config = config
             )
         }
 
         Spacer(modifier = Modifier.height(32.dp))
 
         // Education 서브섹션
-        SubSectionHeader(
-            title = stringResource(Res.string.experience_education),
-        )
-
+        SubSectionHeader(title = stringResource(Res.string.experience_education))
         Spacer(modifier = Modifier.height(16.dp))
         Education.entries.forEachIndexed { index, exp ->
             EducationContent(
                 experience = exp,
                 isFirst = index == 0,
                 isLast = index == Education.entries.lastIndex,
+                config = config
             )
         }
 
         Spacer(modifier = Modifier.height(32.dp))
 
         // Contribution 서브섹션
-        SubSectionHeader(
-            title = stringResource(Res.string.experience_contribute),
-        )
-
+        SubSectionHeader(title = stringResource(Res.string.experience_contribute))
         Spacer(modifier = Modifier.height(16.dp))
-
         Contribution.entries.forEachIndexed { index, cont ->
             ContributionContent(
                 contribution = cont,
                 isFirst = index == 0,
                 isLast = index == Education.entries.lastIndex,
+                config = config
             )
         }
     }
@@ -162,6 +191,7 @@ private fun CareerContent(
     career: Career,
     isFirst: Boolean,
     isLast: Boolean,
+    config: ResponsiveConfig,
     modifier: Modifier = Modifier,
 ) {
     val interactionSource = remember { MutableInteractionSource() }
@@ -173,20 +203,20 @@ private fun CareerContent(
     )
 
     Row(
-        modifier =
-            modifier
-                .fillMaxWidth()
-                .height(IntrinsicSize.Min),
+        modifier = modifier
+            .fillMaxWidth()
+            .height(IntrinsicSize.Min),
         verticalAlignment = Alignment.Top,
     ) {
         TimelineIndicator(
             isFirst = isFirst,
             isLast = isLast,
-            frontHeight = ((CAREER_LOGO_SIZE - CAREER_DOT_SIZE) / 2) - 8.dp,
+            // 로고 사이즈에 맞춰서 타임라인 시작 높이 동적 계산
+            frontHeight = ((config.logoSize - CAREER_DOT_SIZE) / 2),
             dotSize = CAREER_DOT_SIZE,
         )
 
-        Spacer(Modifier.width(24.dp))
+        Spacer(Modifier.width(config.timelineGap))
 
         Card(
             modifier = Modifier
@@ -204,7 +234,7 @@ private fun CareerContent(
             shape = RoundedCornerShape(20.dp),
         ) {
             Column(
-                modifier = Modifier.padding(24.dp),
+                modifier = Modifier.padding(config.cardPadding),
                 verticalArrangement = Arrangement.Top,
                 horizontalAlignment = Alignment.Start,
             ) {
@@ -213,13 +243,13 @@ private fun CareerContent(
                 ) {
                     CardImage(
                         logo = career.logoRes,
-                        size = CAREER_LOGO_SIZE,
-                        cornerRadius = 28.dp,
+                        size = config.logoSize,
+                        cornerRadius = if (config.logoSize > 80.dp) 28.dp else 16.dp,
                         elevation = 4.dp,
                         contentPadding = PaddingValues(6.dp),
                     )
 
-                    Spacer(Modifier.width(20.dp))
+                    Spacer(Modifier.width(if (config.logoSize > 80.dp) 20.dp else 12.dp))
 
                     Column(
                         verticalArrangement = Arrangement.spacedBy(4.dp),
@@ -229,7 +259,7 @@ private fun CareerContent(
                             text = stringResource(career.nameRes),
                             color = MaterialTheme.colorScheme.onSurface,
                             fontWeight = FontWeight.Bold,
-                            fontSize = 22.sp,
+                            fontSize = config.titleFontSize,
                         )
                         Spacer(Modifier.height(4.dp))
                         InfoChip(
@@ -239,7 +269,7 @@ private fun CareerContent(
                             text = stringResource(career.teamRes),
                             color = MaterialTheme.colorScheme.onSurfaceVariant,
                             fontWeight = FontWeight.Medium,
-                            fontSize = 14.sp,
+                            fontSize = config.descFontSize,
                         )
                         Row(
                             verticalAlignment = Alignment.CenterVertically,
@@ -324,20 +354,11 @@ private fun CareerProjectItem(
 
             Spacer(Modifier.height(12.dp))
 
-            DetailRow(
-                label = "기간",
-                value = stringResource(careerProject.periodRes),
-            )
+            DetailRow(label = "기간", value = stringResource(careerProject.periodRes))
             Spacer(Modifier.height(6.dp))
-            DetailRow(
-                label = "기술",
-                value = stringResource(careerProject.techStackRes),
-            )
+            DetailRow(label = "기술", value = stringResource(careerProject.techStackRes))
             Spacer(Modifier.height(6.dp))
-            DetailRow(
-                label = "기여",
-                value = stringResource(careerProject.contributionsRes),
-            )
+            DetailRow(label = "기여", value = stringResource(careerProject.contributionsRes))
         }
     }
 }
@@ -347,31 +368,27 @@ private fun EducationContent(
     experience: Education,
     isFirst: Boolean,
     isLast: Boolean,
+    config: ResponsiveConfig,
     modifier: Modifier = Modifier,
 ) {
     val interactionSource = remember { MutableInteractionSource() }
     val isHovered by interactionSource.collectIsHoveredAsState()
-
-    val scale by animateFloatAsState(
-        targetValue = if (isHovered) 1.01f else 1f,
-        animationSpec = tween(durationMillis = 200)
-    )
+    val scale by animateFloatAsState(targetValue = if (isHovered) 1.01f else 1f)
 
     Row(
-        modifier =
-            modifier
-                .fillMaxWidth()
-                .height(IntrinsicSize.Min),
+        modifier = modifier
+            .fillMaxWidth()
+            .height(IntrinsicSize.Min),
         verticalAlignment = Alignment.Top,
     ) {
         TimelineIndicator(
             isFirst = isFirst,
             isLast = isLast,
-            frontHeight = ((CAREER_LOGO_SIZE - CAREER_DOT_SIZE) / 2) - 8.dp,
+            frontHeight = ((config.logoSize - CAREER_DOT_SIZE) / 2),
             dotSize = CAREER_DOT_SIZE,
         )
 
-        Spacer(Modifier.width(24.dp))
+        Spacer(Modifier.width(config.timelineGap))
 
         Card(
             modifier = Modifier
@@ -387,24 +404,22 @@ private fun EducationContent(
                 containerColor = MaterialTheme.colorScheme.surface
             ),
             shape = RoundedCornerShape(20.dp),
-        ) {
+        )  {
             Column(
-                modifier = Modifier.padding(24.dp),
+                modifier = Modifier.padding(config.cardPadding),
                 verticalArrangement = Arrangement.Top,
                 horizontalAlignment = Alignment.Start,
             ) {
-                Row(
-                    verticalAlignment = Alignment.CenterVertically,
-                ) {
+                Row(verticalAlignment = Alignment.CenterVertically) {
                     CardImage(
                         logo = experience.logoRes,
-                        size = CAREER_LOGO_SIZE,
-                        cornerRadius = 28.dp,
+                        size = config.logoSize,
+                        cornerRadius = if (config.logoSize > 80.dp) 28.dp else 16.dp,
                         elevation = 4.dp,
                         contentPadding = PaddingValues(6.dp),
                     )
 
-                    Spacer(Modifier.width(20.dp))
+                    Spacer(Modifier.width(if (config.logoSize > 80.dp) 20.dp else 12.dp))
 
                     Column(
                         verticalArrangement = Arrangement.spacedBy(4.dp),
@@ -414,27 +429,21 @@ private fun EducationContent(
                             text = stringResource(experience.nameRes),
                             color = MaterialTheme.colorScheme.onSurface,
                             fontWeight = FontWeight.Bold,
-                            fontSize = 22.sp,
+                            fontSize = config.titleFontSize,
                         )
                         Spacer(Modifier.height(4.dp))
-                        InfoChip(
-                            text = stringResource(experience.introRes),
-                        )
+                        InfoChip(text = stringResource(experience.introRes))
                         Text(
                             text = stringResource(experience.descRes),
                             color = MaterialTheme.colorScheme.onSurfaceVariant,
                             fontWeight = FontWeight.Medium,
-                            fontSize = 14.sp,
+                            fontSize = config.descFontSize,
                         )
                         Row(
                             verticalAlignment = Alignment.CenterVertically,
                             horizontalArrangement = Arrangement.spacedBy(6.dp)
                         ) {
-                            Box(
-                                modifier = Modifier
-                                    .size(6.dp)
-                                    .background(Emerald, CircleShape)
-                            )
+                            Box(modifier = Modifier.size(6.dp).background(Emerald, CircleShape))
                             Text(
                                 text = stringResource(experience.periodRes),
                                 color = Emerald,
@@ -487,9 +496,7 @@ private fun EducationItem(
                 horizontalArrangement = Arrangement.spacedBy(8.dp)
             ) {
                 Box(
-                    modifier = Modifier
-                        .size(24.dp)
-                        .background(Emerald, CircleShape),
+                    modifier = Modifier.size(24.dp).background(Emerald, CircleShape),
                     contentAlignment = Alignment.Center
                 ) {
                     Text(
@@ -509,32 +516,20 @@ private fun EducationItem(
 
             Spacer(Modifier.height(12.dp))
 
-            educationDetail.periodRes?.let { periodRes ->
-                DetailRow(
-                    label = "기간",
-                    value = stringResource(periodRes),
-                )
+            educationDetail.periodRes?.let {
+                DetailRow(label = "기간", value = stringResource(it))
                 Spacer(Modifier.height(6.dp))
             }
-            educationDetail.techStackRes?.let { techStackRes ->
-                DetailRow(
-                    label = "기술",
-                    value = stringResource(techStackRes),
-                )
+            educationDetail.techStackRes?.let {
+                DetailRow(label = "기술", value = stringResource(it))
                 Spacer(Modifier.height(6.dp))
             }
-            educationDetail.contributionsRes?.let { contributionsRes ->
-                DetailRow(
-                    label = "기여",
-                    value = stringResource(contributionsRes),
-                )
+            educationDetail.contributionsRes?.let {
+                DetailRow(label = "기여", value = stringResource(it))
                 Spacer(Modifier.height(6.dp))
             }
-            educationDetail.descriptionRes?.let { descriptionRes ->
-                DetailRow(
-                    label = "설명",
-                    value = stringResource(descriptionRes),
-                )
+            educationDetail.descriptionRes?.let {
+                DetailRow(label = "설명", value = stringResource(it))
             }
         }
     }
@@ -545,31 +540,27 @@ private fun ContributionContent(
     contribution: Contribution,
     isFirst: Boolean,
     isLast: Boolean,
+    config: ResponsiveConfig,
     modifier: Modifier = Modifier,
 ) {
     val interactionSource = remember { MutableInteractionSource() }
     val isHovered by interactionSource.collectIsHoveredAsState()
-
-    val scale by animateFloatAsState(
-        targetValue = if (isHovered) 1.01f else 1f,
-        animationSpec = tween(durationMillis = 200)
-    )
+    val scale by animateFloatAsState(targetValue = if (isHovered) 1.01f else 1f)
 
     Row(
-        modifier =
-            modifier
-                .fillMaxWidth()
-                .height(IntrinsicSize.Min),
+        modifier = modifier
+            .fillMaxWidth()
+            .height(IntrinsicSize.Min),
         verticalAlignment = Alignment.Top,
     ) {
         TimelineIndicator(
             isFirst = isFirst,
             isLast = isLast,
-            frontHeight = ((CAREER_LOGO_SIZE - CAREER_DOT_SIZE) / 2) - 8.dp,
+            frontHeight = ((config.logoSize - CAREER_DOT_SIZE) / 2),
             dotSize = CAREER_DOT_SIZE,
         )
 
-        Spacer(Modifier.width(24.dp))
+        Spacer(Modifier.width(config.timelineGap))
 
         Card(
             modifier = Modifier
@@ -585,24 +576,22 @@ private fun ContributionContent(
                 containerColor = MaterialTheme.colorScheme.surface
             ),
             shape = RoundedCornerShape(20.dp),
-        ) {
+        )  {
             Column(
-                modifier = Modifier.padding(24.dp),
+                modifier = Modifier.padding(config.cardPadding),
                 verticalArrangement = Arrangement.Top,
                 horizontalAlignment = Alignment.Start,
             ) {
-                Row(
-                    verticalAlignment = Alignment.CenterVertically,
-                ) {
+                Row(verticalAlignment = Alignment.CenterVertically) {
                     CardImage(
                         logo = contribution.logoRes,
-                        size = CAREER_LOGO_SIZE,
-                        cornerRadius = 28.dp,
+                        size = config.logoSize,
+                        cornerRadius = if (config.logoSize > 80.dp) 28.dp else 16.dp,
                         elevation = 4.dp,
                         contentPadding = PaddingValues(6.dp),
                     )
 
-                    Spacer(Modifier.width(20.dp))
+                    Spacer(Modifier.width(if (config.logoSize > 80.dp) 20.dp else 12.dp))
 
                     Column(
                         verticalArrangement = Arrangement.spacedBy(4.dp),
@@ -612,27 +601,21 @@ private fun ContributionContent(
                             text = stringResource(contribution.nameRes),
                             color = MaterialTheme.colorScheme.onSurface,
                             fontWeight = FontWeight.Bold,
-                            fontSize = 22.sp,
+                            fontSize = config.titleFontSize,
                         )
                         Spacer(Modifier.height(4.dp))
-                        InfoChip(
-                            text = stringResource(contribution.introRes),
-                        )
+                        InfoChip(text = stringResource(contribution.introRes))
                         Text(
                             text = stringResource(contribution.descRes),
                             color = MaterialTheme.colorScheme.onSurfaceVariant,
                             fontWeight = FontWeight.Medium,
-                            fontSize = 14.sp,
+                            fontSize = config.descFontSize,
                         )
                         Row(
                             verticalAlignment = Alignment.CenterVertically,
                             horizontalArrangement = Arrangement.spacedBy(6.dp)
                         ) {
-                            Box(
-                                modifier = Modifier
-                                    .size(6.dp)
-                                    .background(Emerald, CircleShape)
-                            )
+                            Box(modifier = Modifier.size(6.dp).background(Emerald, CircleShape))
                             Text(
                                 text = stringResource(contribution.periodRes),
                                 color = Emerald,
@@ -654,32 +637,6 @@ private fun ContributionContent(
 
     AnimatedVisibility(visible = !isLast) {
         Spacer(Modifier.height(24.dp))
-    }
-}
-
-@Composable
-private fun SectionHeader(
-    title: String,
-    modifier: Modifier = Modifier,
-) {
-    Column(
-        modifier = modifier.fillMaxWidth(),
-        horizontalAlignment = Alignment.CenterHorizontally,
-    ) {
-        Text(
-            text = title,
-            color = MaterialTheme.colorScheme.onPrimaryContainer,
-            fontWeight = FontWeight.ExtraBold,
-            fontSize = 32.sp,
-        )
-        Spacer(Modifier.height(8.dp))
-        Box(
-            modifier = Modifier
-                .width(40.dp)
-                .height(3.dp)
-                .clip(RoundedCornerShape(2.dp))
-                .background(Emerald)
-        )
     }
 }
 
@@ -760,4 +717,3 @@ private fun DetailRow(
 }
 
 private val CAREER_DOT_SIZE = 24.dp
-private val CAREER_LOGO_SIZE = 100.dp

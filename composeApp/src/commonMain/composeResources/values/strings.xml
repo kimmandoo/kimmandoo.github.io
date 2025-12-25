@@ -9,8 +9,8 @@
 
     <!--Home-->
     <string name="blue_chip">근거 주도 개발자, </string>
-    <string name="kimmingyu">김민규</string>
-    <string name="intro">모든 선택에 근거를 제시합니다.\nKotlin으로 안드로이드 앱을 개발하며, 더 좋은 사용자 경험을 위해 고민합니다.</string>
+    <string name="kimmingyu">\n김민규입니다</string>
+    <string name="intro">모든 선택에 근거를 제시합니다.\nKotlin으로 안드로이드 앱을 개발하며, 더 좋은 사용자 경험을 위해 고민합니다.\n이 페이지는 Kotlin/Wasm으로 만들어졌습니다.</string>
     <string name="follow_github">Github</string>
     <string name="visit_blog">Medium</string>
     <string name="visit_blog2">Blog</string>

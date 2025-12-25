@@ -8,6 +8,7 @@ import androidx.compose.foundation.lazy.rememberLazyListState
 import androidx.compose.material3.*
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.CompositionLocalProvider
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -22,6 +23,7 @@ import io.github.kimmandoo.screen.carex.CareerExperienceScreen
 import io.github.kimmandoo.screen.home.HomeScreen
 import io.github.kimmandoo.screen.project.ProjectDetailScreen
 import io.github.kimmandoo.screen.project.ProjectScreen
+import io.github.kimmandoo.ui.adaptive.Device
 import io.github.kimmandoo.ui.adaptive.DeviceState
 import io.github.kimmandoo.ui.adaptive.ThemeMode
 import io.github.kimmandoo.ui.adaptive.rememberDeviceState
@@ -39,6 +41,12 @@ fun MainScreen(
 
     // 브라우저 네비게이션 상태 (해시 기반)
     val navigationState = rememberNavigationState()
+
+    LaunchedEffect(deviceState.value) {
+        if (deviceState.value == Device.DESKTOP) {
+            drawerState.close()
+        }
+    }
 
     // 프로젝트 상세 페이지가 선택되었을 때
     if (navigationState.selectedProject != null) {
