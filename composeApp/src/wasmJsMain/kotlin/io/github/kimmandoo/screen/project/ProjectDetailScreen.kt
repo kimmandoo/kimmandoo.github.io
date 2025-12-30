@@ -50,6 +50,7 @@ import androidx.compose.ui.draw.shadow
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.vector.ImageVector
+import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalUriHandler
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
@@ -184,69 +185,95 @@ private fun ProjectDetailHeader(
                 spotColor = Emerald.copy(alpha = 0.15f)
             ),
         colors = CardDefaults.cardColors(
-            containerColor = MaterialTheme.colorScheme.surface
+            // 배경 이미지가 없으면 기본 surface 색상, 있으면 투명(이미지가 보이게)
+            containerColor = if (project.banner != null) Color.Transparent else MaterialTheme.colorScheme.surface
         ),
         shape = RoundedCornerShape(24.dp),
     ) {
-        Column(
-            modifier = Modifier
-                .fillMaxWidth()
-                .padding(32.dp),
-            horizontalAlignment = Alignment.CenterHorizontally,
+        Box(
+            modifier = Modifier.fillMaxWidth()
         ) {
-            // 프로젝트 아이콘
-            Image(
-                painter = painterResource(project.graphicRes),
-                contentDescription = null,
-                modifier = Modifier.size(100.dp).clip(RoundedCornerShape(24.dp)).border(
-                    width = 4.dp,
-                    color = Emerald.copy(alpha = 0.3f),
-                    shape = RoundedCornerShape(24.dp)
-                ),
-            )
+            if (project.banner != null) {
+                Image(
+                    painter = painterResource(project.banner),
+                    contentDescription = null,
+                    contentScale = ContentScale.Crop, // 꽉 차게 자르기
+                    modifier = Modifier.matchParentSize() // Box 크기에 맞춤
+                )
 
-            Spacer(modifier = Modifier.height(20.dp))
+                Box(
+                    modifier = Modifier
+                        .matchParentSize()
+                        .background(MaterialTheme.colorScheme.surface.copy(alpha = 0.6f))
+                )
+            }
 
-            // 프로젝트 제목
-            Text(
-                text = stringResource(project.titleRes),
-                fontWeight = FontWeight.ExtraBold,
-                fontSize = 32.sp,
-                color = MaterialTheme.colorScheme.onSurface,
-                textAlign = TextAlign.Center,
-            )
-
-            Spacer(modifier = Modifier.height(8.dp))
-
-            // 부제목
-            Text(
-                text = stringResource(project.subtitleRes),
-                fontSize = 16.sp,
-                color = MaterialTheme.colorScheme.onSurfaceVariant,
-                textAlign = TextAlign.Center,
-                lineHeight = 24.sp,
-            )
-
-            Spacer(modifier = Modifier.height(20.dp))
-
-            // 메타 정보 (역할, 기간)
-            Row(
-                horizontalArrangement = Arrangement.spacedBy(16.dp),
-                verticalAlignment = Alignment.CenterVertically,
+            // 4. 기존 내용 (Column)
+            Column(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(32.dp),
+                horizontalAlignment = Alignment.CenterHorizontally,
             ) {
-                // 역할 뱃지
-                MetaBadge(
-                    icon = Icons.Default.Person,
-                    text = stringResource(project.roleRes),
-                    isPrimary = true,
+                // 프로젝트 아이콘
+                Image(
+                    painter = painterResource(project.graphicRes),
+                    contentDescription = null,
+                    modifier = Modifier
+                        .size(100.dp)
+                        .clip(RoundedCornerShape(24.dp))
+                        .border(
+                            width = 4.dp,
+                            color = Emerald.copy(alpha = 0.3f),
+                            shape = RoundedCornerShape(24.dp)
+                        ),
                 )
 
-                // 기간 뱃지
-                MetaBadge(
-                    icon = Icons.Default.CalendarMonth,
-                    text = stringResource(project.periodRes),
-                    isPrimary = false,
+                Spacer(modifier = Modifier.height(20.dp))
+
+                // 프로젝트 제목
+                Text(
+                    text = stringResource(project.titleRes),
+                    fontWeight = FontWeight.ExtraBold,
+                    fontSize = 32.sp,
+                    // 배경 이미지 유무에 따라 글자색 변경 (이미지 위면 흰색 강제)
+                    color = MaterialTheme.colorScheme.onSurface,
+                    textAlign = TextAlign.Center,
                 )
+
+                Spacer(modifier = Modifier.height(8.dp))
+
+                // 부제목
+                Text(
+                    text = stringResource(project.subtitleRes),
+                    fontSize = 16.sp,
+                    // 배경 이미지 유무에 따라 글자색 변경
+                    color = MaterialTheme.colorScheme.onSurfaceVariant,
+                    textAlign = TextAlign.Center,
+                    lineHeight = 24.sp,
+                )
+
+                Spacer(modifier = Modifier.height(20.dp))
+
+                // 메타 정보
+                Row(
+                    horizontalArrangement = Arrangement.spacedBy(16.dp),
+                    verticalAlignment = Alignment.CenterVertically,
+                ) {
+                    MetaBadge(
+                        icon = Icons.Default.Person,
+                        text = stringResource(project.roleRes),
+                        isPrimary = true,
+                        isBannerOn = project.banner != null,
+                    )
+
+                    MetaBadge(
+                        icon = Icons.Default.CalendarMonth,
+                        text = stringResource(project.periodRes),
+                        isPrimary = false,
+                        isBannerOn = project.banner != null
+                    )
+                }
             }
         }
     }
@@ -257,12 +284,19 @@ private fun MetaBadge(
     icon: ImageVector,
     text: String,
     isPrimary: Boolean,
+    isBannerOn: Boolean,
     modifier: Modifier = Modifier,
 ) {
     Box(
         modifier = modifier
             .background(
-                color = if (isPrimary) Emerald.copy(alpha = 0.15f) else MaterialTheme.colorScheme.surfaceVariant,
+                color = if (isPrimary) {
+                    if (isBannerOn) {
+                        Emerald.copy(alpha = 0.60f)
+                    } else {
+                        Emerald.copy(alpha = 0.15f)
+                    }
+                } else MaterialTheme.colorScheme.surfaceVariant,
                 shape = RoundedCornerShape(12.dp)
             )
             .padding(horizontal = 14.dp, vertical = 8.dp)
@@ -275,12 +309,22 @@ private fun MetaBadge(
                 imageVector = icon,
                 contentDescription = null,
                 modifier = Modifier.size(16.dp),
-                tint = if (isPrimary) Emerald else MaterialTheme.colorScheme.onSurfaceVariant,
+                tint = if (isPrimary)  if(isBannerOn){
+                    MaterialTheme.colorScheme.onSurface
+                }else {
+                    Emerald
+                } else MaterialTheme.colorScheme.onSurfaceVariant,
             )
             Text(
                 text = text,
                 fontSize = 13.sp,
-                color = if (isPrimary) Emerald else MaterialTheme.colorScheme.onSurfaceVariant,
+                color = if (isPrimary) {
+                    if(isBannerOn){
+                        MaterialTheme.colorScheme.onSurface
+                    }else {
+                        Emerald
+                    }
+                } else MaterialTheme.colorScheme.onSurfaceVariant,
                 fontWeight = FontWeight.Medium,
             )
         }
@@ -357,9 +401,11 @@ private fun DetailSection(
                 isChipStyle -> {
                     TechStackChips(content)
                 }
+
                 isBulletList -> {
                     BulletList(content)
                 }
+
                 else -> {
                     Text(
                         text = content,
@@ -558,14 +604,16 @@ private fun LinkItem(
         ) {
             AnimatedVisibility(
                 visible = icon.isNotBlank()
-            ){
-                val iconSource = when(icon){
+            ) {
+                val iconSource = when (icon) {
                     "github" -> {
                         painterResource(Res.drawable.ic_github)
                     }
+
                     "play" -> {
                         painterResource(Res.drawable.ic_playstore)
                     }
+
                     else -> {
                         painterResource(Res.drawable.ic_web)
                     }
@@ -575,7 +623,7 @@ private fun LinkItem(
                     painter = iconSource,
                     contentDescription = "icon",
                     tint = Color.Unspecified // 안하면 틴트때문에 가려짐
-                // Icon 컴포넌트는 기본적으로 현재 테마의 텍스트 색상(LocalContentColor)으로 이미지를 덮어씌우는(Tint) 속성을 가지고 있음
+                    // Icon 컴포넌트는 기본적으로 현재 테마의 텍스트 색상(LocalContentColor)으로 이미지를 덮어씌우는(Tint) 속성을 가지고 있음
                 )
             }
             Spacer(modifier = Modifier.width(8.dp))

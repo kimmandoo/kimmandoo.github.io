@@ -123,6 +123,13 @@
     <string name="project_soochelin_description">'수슐랭'은 학교 주변의 맛집 정보를 한눈에 확인하고, 학우들의 솔직한 리뷰를 공유할 수 있는 맛집 커뮤니티 서비스입니다. 기획부터 디자인, 개발, 배포까지 1인 개발로 진행하여 구글 플레이스토어에 출시하였으며, 교내 학생들의 피드백을 반영하여 지속적으로 서비스를 개선했습니다. 500회 이상의 누적 다운로드와 200여 명의 활성 사용자를 확보하며 실제 운영 경험을 쌓았습니다.</string>
     <string name="project_soochelin_contributions">- 기획, 디자인, 개발, 배포, 운영 전 과정을 단독 수행 (누적 다운로드 500+, MAU 200 달성)\n- Firebase Firestore, RealtimeDB를 활용해 리뷰 및 투표 데이터 실시간 동기화 구현\n- 사용자 피드백을 기반으로 지속적인 기능 개선 및 업데이트 진행\n- 기존 XML(View) 기반의 UI를 Jetpack Compose로 마이그레이션하며 코드 가독성 및 유지보수성 향상</string>
 
+    <string name="project_kkok">꼭 kkok</string>
+    <string name="project_kkok_subtitle">언제 어디서나 쉽게 메모하기</string>
+    <string name="project_kkok_period">2025.11 – 2025.12</string>
+    <string name="project_kkok_techStack">Android, Kotlin, Jetpack Compose, Room, GoogleDrive, </string>
+    <string name="project_kkok_description">당신의 소중한 순간을 '꼭' 담아두세요. 좋아하는 사진을 배경으로, 다채로운 글씨로 꾸미는 나만의 특별한 기록 공간입니다.</string>
+    <string name="project_kkok_contributions">- MVI 아키텍처 및 Jetpack Compose 기반 설계 및 구현\n- Rich Text Editor 기능 개발 (bold, italic, 취소선)\n- GoogleDrive 백업 기능 \n- 다크모드 완벽 지원\n- imagePicker 및 ContentResolver를 활용한 이미지 URI 영구 권한 처리 및 최적화 \n- 개발중(위젯, 이미지 첨부, RichTextEditor 향상)</string>
+
     <string name="project_link_letter">링크레터</string>
     <string name="project_link_letter_subtitle">Kotlin Multiplatform 블로그 구독 알림 서비스</string>
     <string name="project_link_letter_period">2025.06 – 2025.07</string>

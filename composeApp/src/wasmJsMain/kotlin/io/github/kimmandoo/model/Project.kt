@@ -16,6 +16,7 @@ enum class Project(
     val techStackRes: StringResource,
     val links: List<Link>,
     val contributionsRes: StringResource,
+    val banner: DrawableResource? = null
 ) {
     BUBBY_CHAT(
         titleRes = Res.string.project_bubbychat,
@@ -67,6 +68,21 @@ enum class Project(
             Link(Res.string.github, "https://github.com/SuChelin/SuChelinV2", "github")
         ),
         contributionsRes = Res.string.project_soochelin_contributions,
+    ),
+    KKOK(
+        titleRes = Res.string.project_kkok,
+        subtitleRes = Res.string.project_kkok_subtitle,
+        graphicRes = Res.drawable.ic_kkok, // 이미지 리소스명 확인 필요
+        periodRes = Res.string.project_kkok_period,
+        descriptionRes = Res.string.project_kkok_description,
+        roleRes = Res.string.owner, // '1인 개발'에 맞는 역할 리소스 적용
+        techStackRes = Res.string.project_kkok_techStack,
+        links = listOf(
+            Link(Res.string.google_play_store, "https://play.google.com/store/apps/details?id=com.kkok.app", "play"), // 플레이스토어 링크가 있다면 입력
+            Link(Res.string.github, "https://github.com/kimmandoo/kkok", "github")
+        ),
+        contributionsRes = Res.string.project_kkok_contributions,
+        banner = Res.drawable.banner_kkok
     ),
 //    LUCKY_LOTTERY(
 //        titleRes = Res.string.project_lucky_lottery,
