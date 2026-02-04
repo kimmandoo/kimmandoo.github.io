@@ -84,6 +84,29 @@ enum class Project(
         contributionsRes = Res.string.project_kkok_contributions,
         banner = Res.drawable.banner_kkok
     ),
+    EARTH_PUSH(
+        titleRes = Res.string.project_earthpush,
+        subtitleRes = Res.string.project_earthpush_subtitle,
+        graphicRes = Res.drawable.ic_earthpush, // 아이콘 리소스 확인 필요
+        periodRes = Res.string.project_earthpush_period,
+        descriptionRes = Res.string.project_earthpush_description,
+        roleRes = Res.string.owner,
+        techStackRes = Res.string.project_earthpush_techStack,
+        links = listOf(
+            Link(
+                Res.string.google_play_store,
+                "https://play.google.com/store/apps/details?id=com.earthpush.app",
+                "play"
+            ),
+            Link(
+                Res.string.github,
+                "https://github.com/kimmandoo/earth-push", // 실제 리포지토리 주소로 확인 필요
+                "github"
+            )
+        ),
+        contributionsRes = Res.string.project_earthpush_contributions,
+        banner = Res.drawable.banner_earthpush
+    ),
 //    LUCKY_LOTTERY(
 //        titleRes = Res.string.project_lucky_lottery,
 //        subtitleRes = Res.string.project_lucky_lottery_subtitle,
