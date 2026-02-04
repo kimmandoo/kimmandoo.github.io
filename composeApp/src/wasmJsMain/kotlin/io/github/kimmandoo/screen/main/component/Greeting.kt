@@ -30,44 +30,69 @@ fun GreetingAnimation(contentAlignment: Alignment = Alignment.Center) {
     }
 
     var currentGreetingIndex by remember { mutableStateOf(0) }
-    var visible by remember { mutableStateOf(false) }
+    var displayedText by remember { mutableStateOf("") }
+    var isTyping by remember { mutableStateOf(true) }
+    var showCursor by remember { mutableStateOf(true) }
 
-    // 1. visible 상태가 바뀔 때마다 alpha 값을 애니메이션으로 변경합니다.
-    val animatedAlpha by animateFloatAsState(
-        targetValue = if (visible) 1f else 0f,
-        animationSpec = tween(durationMillis = 1000) // 나타나거나 사라지는 데 1초
-    )
+    // 커서 깜빡임
+    LaunchedEffect(Unit) {
+        while (true) {
+            delay(530)
+            showCursor = !showCursor
+        }
+    }
 
-    // 2. currentGreetingIndex가 바뀔 때마다 LaunchedEffect를 다시 실행하여 루프를 만듭니다.
+    // 타이핑 효과
     LaunchedEffect(currentGreetingIndex) {
-        // Step 1: 글자 나타나기 (Fade In)
-        visible = true
-        delay(5000)
-
-        // Step 2: 글자 사라지기 (Fade Out)
-        visible = false
-        delay(1000) // 글자가 완전히 사라질 때까지 1초 대기 (애니메이션 시간과 동일)
-
-        // Step 3: 다음 인사말로 변경
+        val currentText = greetings[currentGreetingIndex]
+        displayedText = ""
+        isTyping = true
+        
+        // 타이핑 효과 (한 글자씩 나타남)
+        currentText.forEachIndexed { index, _ ->
+            delay(100)
+            displayedText = currentText.substring(0, index + 1)
+        }
+        
+        isTyping = false
+        delay(3000) // 3초간 유지
+        
+        // 삭제 효과 (한 글자씩 사라짐)
+        for (i in currentText.length downTo 0) {
+            delay(50)
+            displayedText = currentText.substring(0, i)
+        }
+        
+        delay(300)
+        
+        // 다음 인사말로 변경
         currentGreetingIndex = (currentGreetingIndex + 1) % greetings.size
     }
 
     Box(
-        contentAlignment = contentAlignment // 2. 내용물(Text)을 중앙에 정렬합니다.
+        contentAlignment = contentAlignment
     ){
+        // 줄어듬 방지용 투명 텍스트
         Column(modifier = Modifier.alpha(0f)) {
             Text(
-                text = greetings.last(),
+                text = greetings.maxByOrNull { it.length } ?: greetings.first(),
                 fontSize = deviceState.titleFontSize(),
                 fontWeight = FontWeight.Bold,
             )
         }
-        Text(
-            text = greetings[currentGreetingIndex],
-            fontSize = deviceState.titleFontSize(),
-            fontWeight = FontWeight.Bold,
-            modifier = Modifier
-                .alpha(animatedAlpha) // 애니메이션이 적용된 alpha 값 사용
-        )
+        Row {
+            Text(
+                text = displayedText,
+                fontSize = deviceState.titleFontSize(),
+                fontWeight = FontWeight.Bold,
+            )
+            // 커서
+            Text(
+                text = "|",
+                fontSize = deviceState.titleFontSize(),
+                fontWeight = FontWeight.Light,
+                modifier = Modifier.alpha(if (showCursor) 1f else 0f)
+            )
+        }
     }
 }
